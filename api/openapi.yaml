@@ -13,7 +13,7 @@ tags:
   name: oauth
 paths:
   /platform/oauth/connect:
-    post:
+    get:
       description: 获取授权码(code)
       operationId: connect
       parameters:
