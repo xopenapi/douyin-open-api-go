@@ -12,16 +12,47 @@ tags:
 - description: oauth
   name: oauth
 paths:
-  /connect:
+  /platform/oauth/connect:
     post:
       description: 获取授权码(code)
       operationId: connect
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ConnectReq'
+      parameters:
+      - description: 应用唯一标识
+        in: query
+        name: client_key
         required: true
+        schema:
+          type: string
+      - description: 填写code
+        in: query
+        name: response_type
+        required: true
+        schema:
+          type: string
+      - description: 应用授权作用域,多个授权作用域以英文逗号（,）分隔
+        in: query
+        name: scope
+        required: true
+        schema:
+          type: string
+      - description: 应用授权可选作用域,多个授权作用域以英文逗号（,）分隔，每一个授权作用域后需要加上一个是否默认勾选的参数，1为默认勾选，0为默认不勾选
+        in: query
+        name: optionalScope
+        required: true
+        schema:
+          type: string
+      - description: 授权成功后的回调地址，必须以http/https开头。域名必须对应申请应用时填写的域名，如不清楚请联系应用申请人。
+        in: query
+        name: redirect_uri
+        required: true
+        schema:
+          type: string
+      - description: 用于保持请求和回调的状态
+        in: query
+        name: state
+        required: true
+        schema:
+          type: string
       responses:
         "200":
           content:
@@ -32,37 +63,8 @@ paths:
       summary: 获取授权码(code)
       tags:
       - oauth
-      x-codegen-request-body-name: body
 components:
   schemas:
-    ConnectReq:
-      example:
-        client_key: client_key
-        scope: scope
-        response_type: response_type
-        optionalScope: optionalScope
-        redirect_uri: redirect_uri
-        state: state
-      properties:
-        client_key:
-          description: 应用唯一标识
-          type: string
-        response_type:
-          description: 填写code
-          type: string
-        scope:
-          description: 应用授权作用域,多个授权作用域以英文逗号（,）分隔
-          type: string
-        optionalScope:
-          description: 应用授权可选作用域,多个授权作用域以英文逗号（,）分隔，每一个授权作用域后需要加上一个是否默认勾选的参数，1为默认勾选，0为默认不勾选
-          type: string
-        redirect_uri:
-          description: 授权成功后的回调地址，必须以http/https开头。域名必须对应申请应用时填写的域名，如不清楚请联系应用申请人。
-          type: string
-        state:
-          description: 用于保持请求和回调的状态
-          type: string
-      type: object
     APIResponse:
       description: ""
       example:

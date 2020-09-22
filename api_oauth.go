@@ -28,10 +28,15 @@ type OauthApiService service
 Connect 获取授权码(code)
 获取授权码(code)
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body
+ * @param clientKey 应用唯一标识
+ * @param responseType 填写code
+ * @param scope 应用授权作用域,多个授权作用域以英文逗号（,）分隔
+ * @param optionalScope 应用授权可选作用域,多个授权作用域以英文逗号（,）分隔，每一个授权作用域后需要加上一个是否默认勾选的参数，1为默认勾选，0为默认不勾选
+ * @param redirectUri 授权成功后的回调地址，必须以http/https开头。域名必须对应申请应用时填写的域名，如不清楚请联系应用申请人。
+ * @param state 用于保持请求和回调的状态
 @return ApiResponse
 */
-func (a *OauthApiService) Connect(ctx _context.Context, body ConnectReq) (ApiResponse, *_nethttp.Response, error) {
+func (a *OauthApiService) Connect(ctx _context.Context, clientKey string, responseType string, scope string, optionalScope string, redirectUri string, state string) (ApiResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -42,13 +47,19 @@ func (a *OauthApiService) Connect(ctx _context.Context, body ConnectReq) (ApiRes
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/connect"
+	localVarPath := a.client.cfg.BasePath + "/platform/oauth/connect"
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	localVarQueryParams.Add("client_key", parameterToString(clientKey, ""))
+	localVarQueryParams.Add("response_type", parameterToString(responseType, ""))
+	localVarQueryParams.Add("scope", parameterToString(scope, ""))
+	localVarQueryParams.Add("optionalScope", parameterToString(optionalScope, ""))
+	localVarQueryParams.Add("redirect_uri", parameterToString(redirectUri, ""))
+	localVarQueryParams.Add("state", parameterToString(state, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -64,8 +75,6 @@ func (a *OauthApiService) Connect(ctx _context.Context, body ConnectReq) (ApiRes
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

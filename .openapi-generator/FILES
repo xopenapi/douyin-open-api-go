@@ -8,7 +8,6 @@ configuration.go
 docs/ApiResponse.md
 docs/ApiResponseData.md
 docs/ApiResponseExtra.md
-docs/ConnectReq.md
 docs/OauthApi.md
 git_push.sh
 go.mod
@@ -16,5 +15,4 @@ go.sum
 model_api_response.go
 model_api_response_data.go
 model_api_response_extra.go
-model_connect_req.go
 response.go
