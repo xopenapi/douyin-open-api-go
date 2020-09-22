@@ -1,4 +1,4 @@
-# Go API client for github.com/xopenapi/douyin-open-api-go/douyin
+# Go API client for https://github.com/xopenapi/douyin-open-api-go/douyin
 
 douyin open api
 
@@ -23,7 +23,7 @@ go get github.com/antihax/optional
 Put the package under your project folder and add the following in import:
 
 ```golang
-import "./github.com/xopenapi/douyin-open-api-go/douyin"
+import "./https://github.com/xopenapi/douyin-open-api-go/douyin"
 ```
 
 ## Documentation for API Endpoints
