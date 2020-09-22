@@ -38,7 +38,7 @@ Connect 获取授权码(code)
 */
 func (a *OauthApiService) Connect(ctx _context.Context, clientKey string, responseType string, scope string, optionalScope string, redirectUri string, state string) (ApiResponse, *_nethttp.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string

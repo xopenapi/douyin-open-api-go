@@ -32,7 +32,7 @@ All URIs are relative to *https://open.douyin.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*OauthApi* | [**Connect**](docs/OauthApi.md#connect) | **Post** /platform/oauth/connect | 获取授权码(code)
+*OauthApi* | [**Connect**](docs/OauthApi.md#connect) | **Get** /platform/oauth/connect | 获取授权码(code)
 
 
 ## Documentation For Models

@@ -4,7 +4,7 @@ All URIs are relative to *https://open.douyin.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Connect**](OauthApi.md#Connect) | **Post** /platform/oauth/connect | 获取授权码(code)
+[**Connect**](OauthApi.md#Connect) | **Get** /platform/oauth/connect | 获取授权码(code)
 
 
 
