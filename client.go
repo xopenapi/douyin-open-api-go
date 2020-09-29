@@ -48,7 +48,59 @@ type APIClient struct {
 
 	// API Services
 
+	CommentApi *CommentApiService
+
+	DataApi *DataApiService
+
+	DataPoiApi *DataPoiApiService
+
+	DevtoolApi *DevtoolApiService
+
+	EnterpriseApi *EnterpriseApiService
+
+	EnterpriseGrouponApi *EnterpriseGrouponApiService
+
+	EnterpriseImApi *EnterpriseImApiService
+
+	EnterpriseImCardApi *EnterpriseImCardApiService
+
+	GrouponCodeApi *GrouponCodeApiService
+
+	GrouponOrderApi *GrouponOrderApiService
+
+	HotsearchApi *HotsearchApiService
+
+	ImApi *ImApiService
+
+	ImageApi *ImageApiService
+
+	JsApi *JsApiService
+
+	MediaApi *MediaApiService
+
 	OauthApi *OauthApiService
+
+	PayApi *PayApiService
+
+	PoiApi *PoiApiService
+
+	PoiOrderApi *PoiOrderApiService
+
+	RankApi *RankApiService
+
+	SandboxApi *SandboxApiService
+
+	SkuApi *SkuApiService
+
+	SpuApi *SpuApiService
+
+	StarApi *StarApiService
+
+	UserinfoApi *UserinfoApiService
+
+	VideoApi *VideoApiService
+
+	VideoSearchApi *VideoSearchApiService
 }
 
 type service struct {
@@ -67,7 +119,33 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.common.client = c
 
 	// API Services
+	c.CommentApi = (*CommentApiService)(&c.common)
+	c.DataApi = (*DataApiService)(&c.common)
+	c.DataPoiApi = (*DataPoiApiService)(&c.common)
+	c.DevtoolApi = (*DevtoolApiService)(&c.common)
+	c.EnterpriseApi = (*EnterpriseApiService)(&c.common)
+	c.EnterpriseGrouponApi = (*EnterpriseGrouponApiService)(&c.common)
+	c.EnterpriseImApi = (*EnterpriseImApiService)(&c.common)
+	c.EnterpriseImCardApi = (*EnterpriseImCardApiService)(&c.common)
+	c.GrouponCodeApi = (*GrouponCodeApiService)(&c.common)
+	c.GrouponOrderApi = (*GrouponOrderApiService)(&c.common)
+	c.HotsearchApi = (*HotsearchApiService)(&c.common)
+	c.ImApi = (*ImApiService)(&c.common)
+	c.ImageApi = (*ImageApiService)(&c.common)
+	c.JsApi = (*JsApiService)(&c.common)
+	c.MediaApi = (*MediaApiService)(&c.common)
 	c.OauthApi = (*OauthApiService)(&c.common)
+	c.PayApi = (*PayApiService)(&c.common)
+	c.PoiApi = (*PoiApiService)(&c.common)
+	c.PoiOrderApi = (*PoiOrderApiService)(&c.common)
+	c.RankApi = (*RankApiService)(&c.common)
+	c.SandboxApi = (*SandboxApiService)(&c.common)
+	c.SkuApi = (*SkuApiService)(&c.common)
+	c.SpuApi = (*SpuApiService)(&c.common)
+	c.StarApi = (*StarApiService)(&c.common)
+	c.UserinfoApi = (*UserinfoApiService)(&c.common)
+	c.VideoApi = (*VideoApiService)(&c.common)
+	c.VideoSearchApi = (*VideoSearchApiService)(&c.common)
 
 	return c
 }
@@ -157,13 +235,12 @@ func parameterToJson(obj interface{}) (string, error) {
 	return string(jsonBuf), err
 }
 
-
 // callAPI do the request.
 func (c *APIClient) callAPI(request *http.Request) (*http.Response, error) {
 	if c.cfg.Debug {
-	        dump, err := httputil.DumpRequestOut(request, true)
+		dump, err := httputil.DumpRequestOut(request, true)
 		if err != nil {
-		        return nil, err
+			return nil, err
 		}
 		log.Printf("\n%s\n", string(dump))
 	}

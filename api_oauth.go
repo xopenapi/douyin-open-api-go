@@ -11,6 +11,7 @@ package douyin
 
 import (
 	_context "context"
+	"github.com/antihax/optional"
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
@@ -25,25 +26,382 @@ var (
 type OauthApiService service
 
 /*
-Connect 获取授权码(code)
-获取授权码(code)
+AccessToken 获取access_token
+获取access_token
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param clientKey 应用唯一标识
- * @param responseType 填写code
- * @param scope 应用授权作用域,多个授权作用域以英文逗号（,）分隔
- * @param optionalScope 应用授权可选作用域,多个授权作用域以英文逗号（,）分隔，每一个授权作用域后需要加上一个是否默认勾选的参数，1为默认勾选，0为默认不勾选
- * @param redirectUri 授权成功后的回调地址，必须以http/https开头。域名必须对应申请应用时填写的域名，如不清楚请联系应用申请人。
- * @param state 用于保持请求和回调的状态
-@return ApiResponse
+ * @param clientSecret 应用唯一标识对应的密钥
+ * @param code 授权码
+ * @param grantType 写死\"authorization_code\"即可
+@return AccessTokenRsp
 */
-func (a *OauthApiService) Connect(ctx _context.Context, clientKey string, responseType string, scope string, optionalScope string, redirectUri string, state string) (ApiResponse, *_nethttp.Response, error) {
+func (a *OauthApiService) AccessToken(ctx _context.Context, clientKey string, clientSecret string, code string, grantType string) (AccessTokenRsp, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  ApiResponse
+		localVarReturnValue  AccessTokenRsp
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/oauth/access_token"
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	localVarQueryParams.Add("client_key", parameterToString(clientKey, ""))
+	localVarQueryParams.Add("client_secret", parameterToString(clientSecret, ""))
+	localVarQueryParams.Add("code", parameterToString(code, ""))
+	localVarQueryParams.Add("grant_type", parameterToString(grantType, ""))
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+// AuthorizeOpts Optional parameters for the method 'Authorize'
+type AuthorizeOpts struct {
+	State optional.String
+}
+
+/*
+Authorize 头条获取授权码(code)
+头条获取授权码(code)
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param clientKey 应用唯一标识
+ * @param responseType 填写code
+ * @param scope 应用授权作用域,多个授权作用域以英文逗号（,）分隔
+ * @param redirectUri 授权成功后的回调地址，必须以http/https开头。域名必须对应申请应用时填写的域名，如不清楚请联系应用申请人。
+ * @param optional nil or *AuthorizeOpts - Optional Parameters:
+ * @param "State" (optional.String) -  用于保持请求和回调的状态
+@return AuthorizeRsp
+*/
+func (a *OauthApiService) Authorize(ctx _context.Context, clientKey string, responseType string, scope string, redirectUri string, localVarOptionals *AuthorizeOpts) (AuthorizeRsp, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  AuthorizeRsp
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/oauth/authorize"
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	localVarQueryParams.Add("client_key", parameterToString(clientKey, ""))
+	localVarQueryParams.Add("response_type", parameterToString(responseType, ""))
+	localVarQueryParams.Add("scope", parameterToString(scope, ""))
+	localVarQueryParams.Add("redirect_uri", parameterToString(redirectUri, ""))
+	if localVarOptionals != nil && localVarOptionals.State.IsSet() {
+		localVarQueryParams.Add("state", parameterToString(localVarOptionals.State.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+// AuthorizeV2Opts Optional parameters for the method 'AuthorizeV2'
+type AuthorizeV2Opts struct {
+	State optional.String
+}
+
+/*
+AuthorizeV2 抖音静默获取授权码(code)
+抖音静默获取授权码(code)
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param clientKey 应用唯一标识
+ * @param responseType 填写code
+ * @param scope 填login_id
+ * @param redirectUri 授权成功后的回调地址，必须以http/https开头。域名要跟申请应用时填写的授权回调域一致。用于调用https://open.douyin.com/oauth/access_token/换token。
+ * @param optional nil or *AuthorizeV2Opts - Optional Parameters:
+ * @param "State" (optional.String) -  用于保持请求和回调状态，授权请求后会原样返回给接入方,如果是App则不用传该参数
+@return AuthorizeV2Rsp
+*/
+func (a *OauthApiService) AuthorizeV2(ctx _context.Context, clientKey string, responseType string, scope string, redirectUri string, localVarOptionals *AuthorizeV2Opts) (AuthorizeV2Rsp, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  AuthorizeV2Rsp
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/oauth/authorize/v2"
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	localVarQueryParams.Add("client_key", parameterToString(clientKey, ""))
+	localVarQueryParams.Add("response_type", parameterToString(responseType, ""))
+	localVarQueryParams.Add("scope", parameterToString(scope, ""))
+	localVarQueryParams.Add("redirect_uri", parameterToString(redirectUri, ""))
+	if localVarOptionals != nil && localVarOptionals.State.IsSet() {
+		localVarQueryParams.Add("state", parameterToString(localVarOptionals.State.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+/*
+ClientToken 生成client_token
+生成client_token
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param clientKey 应用唯一标识
+ * @param clientSecret 应用唯一标识对应的密钥
+ * @param grantType 传client_credential
+@return ClientTokenRsp
+*/
+func (a *OauthApiService) ClientToken(ctx _context.Context, clientKey string, clientSecret string, grantType string) (ClientTokenRsp, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  ClientTokenRsp
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/oauth/client_token"
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	localVarQueryParams.Add("client_key", parameterToString(clientKey, ""))
+	localVarQueryParams.Add("client_secret", parameterToString(clientSecret, ""))
+	localVarQueryParams.Add("grant_type", parameterToString(grantType, ""))
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+// ConnectOpts Optional parameters for the method 'Connect'
+type ConnectOpts struct {
+	OptionalScope optional.String
+	State         optional.String
+}
+
+/*
+Connect 抖音获取授权码(code)
+抖音获取授权码(code)
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param clientKey 应用唯一标识
+ * @param responseType 填写code
+ * @param scope 应用授权作用域,多个授权作用域以英文逗号（,）分隔
+ * @param redirectUri 授权成功后的回调地址，必须以http/https开头。域名必须对应申请应用时填写的域名，如不清楚请联系应用申请人。
+ * @param optional nil or *ConnectOpts - Optional Parameters:
+ * @param "OptionalScope" (optional.String) -  应用授权可选作用域,多个授权作用域以英文逗号（,）分隔，每一个授权作用域后需要加上一个是否默认勾选的参数，1为默认勾选，0为默认不勾选
+ * @param "State" (optional.String) -  用于保持请求和回调的状态
+@return ConnectRsp
+*/
+func (a *OauthApiService) Connect(ctx _context.Context, clientKey string, responseType string, scope string, redirectUri string, localVarOptionals *ConnectOpts) (ConnectRsp, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  ConnectRsp
 	)
 
 	// create path and map variables
@@ -55,9 +413,173 @@ func (a *OauthApiService) Connect(ctx _context.Context, clientKey string, respon
 	localVarQueryParams.Add("client_key", parameterToString(clientKey, ""))
 	localVarQueryParams.Add("response_type", parameterToString(responseType, ""))
 	localVarQueryParams.Add("scope", parameterToString(scope, ""))
-	localVarQueryParams.Add("optionalScope", parameterToString(optionalScope, ""))
+	if localVarOptionals != nil && localVarOptionals.OptionalScope.IsSet() {
+		localVarQueryParams.Add("optionalScope", parameterToString(localVarOptionals.OptionalScope.Value(), ""))
+	}
 	localVarQueryParams.Add("redirect_uri", parameterToString(redirectUri, ""))
-	localVarQueryParams.Add("state", parameterToString(state, ""))
+	if localVarOptionals != nil && localVarOptionals.State.IsSet() {
+		localVarQueryParams.Add("state", parameterToString(localVarOptionals.State.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+/*
+RefreshToken 刷新access_token
+刷新access_token
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param clientKey 应用唯一标识
+ * @param refreshToken 填写通过access_token获取到的refresh_token参数
+ * @param grantType 填refresh_token
+@return RefreshTokenRsp
+*/
+func (a *OauthApiService) RefreshToken(ctx _context.Context, clientKey string, refreshToken string, grantType string) (RefreshTokenRsp, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  RefreshTokenRsp
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/oauth/refresh_token"
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	localVarQueryParams.Add("client_key", parameterToString(clientKey, ""))
+	localVarQueryParams.Add("refresh_token", parameterToString(refreshToken, ""))
+	localVarQueryParams.Add("grant_type", parameterToString(grantType, ""))
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+/*
+RenewRefreshToken 刷新refresh_token
+刷新refresh_token
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param clientKey 应用唯一标识
+ * @param refreshToken 填写通过access_token获取到的refresh_token参数
+@return RenewRefreshTokenRsp
+*/
+func (a *OauthApiService) RenewRefreshToken(ctx _context.Context, clientKey string, refreshToken string) (RenewRefreshTokenRsp, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  RenewRefreshTokenRsp
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/oauth/renew_refresh_token"
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	localVarQueryParams.Add("client_key", parameterToString(clientKey, ""))
+	localVarQueryParams.Add("refresh_token", parameterToString(refreshToken, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
