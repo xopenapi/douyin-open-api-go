@@ -13,4 +13,6 @@ package douyin
 type InlineObject21 struct {
 	// 客服id
 	PersonaId string `json:"persona_id,omitempty"`
+	// 会话对方的open_id
+	ToUserId string `json:"to_user_id,omitempty"`
 }

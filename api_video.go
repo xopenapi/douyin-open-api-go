@@ -896,9 +896,7 @@ func (a *VideoApiService) DouyinVideoUpload(ctx _context.Context, openId string,
 
 // ToutiaoVideoCreateOpts Optional parameters for the method 'ToutiaoVideoCreate'
 type ToutiaoVideoCreateOpts struct {
-	Text    optional.String
-	VideoId optional.String
-	Extra   optional.Interface
+	Body optional.Interface
 }
 
 /*
@@ -908,9 +906,7 @@ ToutiaoVideoCreate 创建头条视频
  * @param openId 通过/oauth/access_token/获取，用户唯一标志
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
  * @param optional nil or *ToutiaoVideoCreateOpts - Optional Parameters:
- * @param "Text" (optional.String) -  视频标题不要超过30个字符
- * @param "VideoId" (optional.String) -  video_id, 通过/toutiao/video/upload/接口得到
- * @param "Extra" (optional.Interface of ToutiaoVideoCreateExtra) -
+ * @param "Body" (optional.Interface of InlineObject3) -
 @return TouTiaoVideoCreateRsp
 */
 func (a *VideoApiService) ToutiaoVideoCreate(ctx _context.Context, openId string, accessToken string, localVarOptionals *ToutiaoVideoCreateOpts) (TouTiaoVideoCreateRsp, *_nethttp.Response, error) {
@@ -932,7 +928,7 @@ func (a *VideoApiService) ToutiaoVideoCreate(ctx _context.Context, openId string
 	localVarQueryParams.Add("open_id", parameterToString(openId, ""))
 	localVarQueryParams.Add("access_token", parameterToString(accessToken, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"multipart/form-data"}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -948,19 +944,15 @@ func (a *VideoApiService) ToutiaoVideoCreate(ctx _context.Context, openId string
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if localVarOptionals != nil && localVarOptionals.Text.IsSet() {
-		localVarFormParams.Add("text", parameterToString(localVarOptionals.Text.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.VideoId.IsSet() {
-		localVarFormParams.Add("video_id", parameterToString(localVarOptionals.VideoId.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Extra.IsSet() {
-		paramJson, err := parameterToJson(localVarOptionals.Extra.Value())
-		if err != nil {
-			return localVarReturnValue, nil, err
+	// body params
+	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
+		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(InlineObject3)
+		if !localVarOptionalBodyok {
+			return localVarReturnValue, nil, reportError("body should be InlineObject3")
 		}
-		localVarFormParams.Add("extra", paramJson)
+		localVarPostBody = &localVarOptionalBody
 	}
+
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -999,7 +991,7 @@ func (a *VideoApiService) ToutiaoVideoCreate(ctx _context.Context, openId string
 
 // ToutiaoVideoDataOpts Optional parameters for the method 'ToutiaoVideoData'
 type ToutiaoVideoDataOpts struct {
-	ItemIds optional.Interface
+	Body optional.Interface
 }
 
 /*
@@ -1009,7 +1001,7 @@ ToutiaoVideoData 查询头条指定视频数据
  * @param openId 通过/oauth/access_token/获取，用户唯一标志
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
  * @param optional nil or *ToutiaoVideoDataOpts - Optional Parameters:
- * @param "ItemIds" (optional.Interface of []string) -
+ * @param "Body" (optional.Interface of InlineObject4) -
 @return TouTiaoVideoData
 */
 func (a *VideoApiService) ToutiaoVideoData(ctx _context.Context, openId string, accessToken string, localVarOptionals *ToutiaoVideoDataOpts) (TouTiaoVideoData, *_nethttp.Response, error) {
@@ -1031,7 +1023,7 @@ func (a *VideoApiService) ToutiaoVideoData(ctx _context.Context, openId string, 
 	localVarQueryParams.Add("open_id", parameterToString(openId, ""))
 	localVarQueryParams.Add("access_token", parameterToString(accessToken, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"multipart/form-data"}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -1047,9 +1039,15 @@ func (a *VideoApiService) ToutiaoVideoData(ctx _context.Context, openId string, 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if localVarOptionals != nil && localVarOptionals.ItemIds.IsSet() {
-		localVarFormParams.Add("item_ids", parameterToString(localVarOptionals.ItemIds.Value(), "csv"))
+	// body params
+	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
+		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(InlineObject4)
+		if !localVarOptionalBodyok {
+			return localVarReturnValue, nil, reportError("body should be InlineObject4")
+		}
+		localVarPostBody = &localVarOptionalBody
 	}
+
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1337,11 +1335,6 @@ func (a *VideoApiService) ToutiaoVideoPartInit(ctx _context.Context, openId stri
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-// ToutiaoVideoPartUploadOpts Optional parameters for the method 'ToutiaoVideoPartUpload'
-type ToutiaoVideoPartUploadOpts struct {
-	Video optional.Interface
-}
-
 /*
 ToutiaoVideoPartUpload 上传视频分片到文件服务器
 上传视频分片到文件服务器
@@ -1350,11 +1343,10 @@ ToutiaoVideoPartUpload 上传视频分片到文件服务器
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
  * @param uploadId 分片上传的标记。有限时间为2小时
  * @param partNumber 第几个分片，从1开始
- * @param optional nil or *ToutiaoVideoPartUploadOpts - Optional Parameters:
- * @param "Video" (optional.Interface of []string) -
+ * @param video
 @return TouTiaoVideoPartUploadRsp
 */
-func (a *VideoApiService) ToutiaoVideoPartUpload(ctx _context.Context, openId string, accessToken string, uploadId string, partNumber int64, localVarOptionals *ToutiaoVideoPartUploadOpts) (TouTiaoVideoPartUploadRsp, *_nethttp.Response, error) {
+func (a *VideoApiService) ToutiaoVideoPartUpload(ctx _context.Context, openId string, accessToken string, uploadId string, partNumber int64, video *os.File) (TouTiaoVideoPartUploadRsp, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -1391,8 +1383,13 @@ func (a *VideoApiService) ToutiaoVideoPartUpload(ctx _context.Context, openId st
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if localVarOptionals != nil && localVarOptionals.Video.IsSet() {
-		localVarFormParams.Add("video", parameterToString(localVarOptionals.Video.Value(), "csv"))
+	localVarFormFileName = "video"
+	localVarFile := video
+	if localVarFile != nil {
+		fbs, _ := _ioutil.ReadAll(localVarFile)
+		localVarFileBytes = fbs
+		localVarFileName = localVarFile.Name()
+		localVarFile.Close()
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
@@ -1430,22 +1427,16 @@ func (a *VideoApiService) ToutiaoVideoPartUpload(ctx _context.Context, openId st
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-// ToutiaoVideoUploadOpts Optional parameters for the method 'ToutiaoVideoUpload'
-type ToutiaoVideoUploadOpts struct {
-	Video optional.Interface
-}
-
 /*
 ToutiaoVideoUpload 头条上传视频到文件服务器
 头条上传视频到文件服务器
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param openId 通过/oauth/access_token/获取，用户唯一标志
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
- * @param optional nil or *ToutiaoVideoUploadOpts - Optional Parameters:
- * @param "Video" (optional.Interface of []string) -
+ * @param video
 @return ToutiaoVideoUploadRsp
 */
-func (a *VideoApiService) ToutiaoVideoUpload(ctx _context.Context, openId string, accessToken string, localVarOptionals *ToutiaoVideoUploadOpts) (ToutiaoVideoUploadRsp, *_nethttp.Response, error) {
+func (a *VideoApiService) ToutiaoVideoUpload(ctx _context.Context, openId string, accessToken string, video *os.File) (ToutiaoVideoUploadRsp, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -1480,8 +1471,13 @@ func (a *VideoApiService) ToutiaoVideoUpload(ctx _context.Context, openId string
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if localVarOptionals != nil && localVarOptionals.Video.IsSet() {
-		localVarFormParams.Add("video", parameterToString(localVarOptionals.Video.Value(), "csv"))
+	localVarFormFileName = "video"
+	localVarFile := video
+	if localVarFile != nil {
+		fbs, _ := _ioutil.ReadAll(localVarFile)
+		localVarFileBytes = fbs
+		localVarFileName = localVarFile.Name()
+		localVarFile.Close()
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {

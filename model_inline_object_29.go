@@ -11,10 +11,7 @@ package douyin
 
 // InlineObject29 struct for InlineObject29
 type InlineObject29 struct {
-	// 卡片id，创建时不传；更新时必传。同一个用户的卡片id不可重复
-	CardId string `json:"card_id,omitempty"`
-	// 卡片类型 `question_list` - 问题列表
-	CardType string `json:"card_type,omitempty"`
-	// 卡片内容字段 json序列化成string， { \"question_list\" { \"text\" \"有什么疑问呢\", \"questions\" [{ \"name\" \"问题1\", \"text\" \"关键词1\" }, { \"name\" \"问题2\", \"text\" \"关键词2\" } ] } }
-	Content string `json:"content,omitempty"`
+	// 匹配类型，0-离线匹配 1-实时匹配。离线匹配，不会实时返回结果，最大上传1w个数据，通过/poi/supplier/match/query/接口查询匹配结果； 在线匹配，实时返回结果，最大上传100个数据，需要申请授权。
+	MatchType     int64                           `json:"match_type,omitempty"`
+	MatchDataList []PoiSupplierMatchMatchDataList `json:"match_data_list,omitempty"`
 }

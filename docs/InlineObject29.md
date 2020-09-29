@@ -4,9 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CardId** | **string** | 卡片id，创建时不传；更新时必传。同一个用户的卡片id不可重复 | [optional] 
-**CardType** | **string** | 卡片类型 &#x60;question_list&#x60; - 问题列表 | [optional] 
-**Content** | **string** | 卡片内容字段 json序列化成string， { \&quot;question_list\&quot; { \&quot;text\&quot; \&quot;有什么疑问呢\&quot;, \&quot;questions\&quot; [{ \&quot;name\&quot; \&quot;问题1\&quot;, \&quot;text\&quot; \&quot;关键词1\&quot; }, { \&quot;name\&quot; \&quot;问题2\&quot;, \&quot;text\&quot; \&quot;关键词2\&quot; } ] } } | [optional] 
+**MatchType** | **int64** | 匹配类型，0-离线匹配 1-实时匹配。离线匹配，不会实时返回结果，最大上传1w个数据，通过/poi/supplier/match/query/接口查询匹配结果； 在线匹配，实时返回结果，最大上传100个数据，需要申请授权。 | [optional] 
+**MatchDataList** | [**[]PoiSupplierMatchMatchDataList**](_poi_supplier_match_match_data_list.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

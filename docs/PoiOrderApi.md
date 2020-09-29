@@ -233,7 +233,7 @@ Optional parameters are passed through a pointer to a PoiOrderSyncOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **body** | [**optional.Interface of InlineObject40**](InlineObject40.md)|  | 
+ **body** | [**optional.Interface of InlineObject38**](InlineObject38.md)|  | 
 
 ### Return type
 

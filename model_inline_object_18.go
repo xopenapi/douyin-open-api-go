@@ -11,6 +11,8 @@ package douyin
 
 // InlineObject18 struct for InlineObject18
 type InlineObject18 struct {
-	// 标签id
-	TagId int64 `json:"tag_id,omitempty"`
+	// 角色名（暂未开放）
+	RoleName string `json:"role_name,omitempty"`
+	// 昵称
+	Nickname string `json:"nickname,omitempty"`
 }

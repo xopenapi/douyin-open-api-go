@@ -11,5 +11,10 @@ package douyin
 
 // InlineObject10 struct for InlineObject10
 type InlineObject10 struct {
-	ItemIds []string `json:"item_ids,omitempty"`
+	// 需要回复的评论id
+	CommentId string `json:"comment_id,omitempty"`
+	// 评论内容
+	Content string `json:"content,omitempty"`
+	// 视频id
+	ItemId string `json:"item_id,omitempty"`
 }

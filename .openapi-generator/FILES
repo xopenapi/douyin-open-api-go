@@ -275,8 +275,6 @@ docs/InlineObject4.md
 docs/InlineObject40.md
 docs/InlineObject41.md
 docs/InlineObject42.md
-docs/InlineObject43.md
-docs/InlineObject44.md
 docs/InlineObject5.md
 docs/InlineObject6.md
 docs/InlineObject7.md
@@ -645,8 +643,6 @@ model_inline_object_4.go
 model_inline_object_40.go
 model_inline_object_41.go
 model_inline_object_42.go
-model_inline_object_43.go
-model_inline_object_44.go
 model_inline_object_5.go
 model_inline_object_6.go
 model_inline_object_7.go

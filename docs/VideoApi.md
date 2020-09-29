@@ -458,9 +458,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **text** | **optional.String**| 视频标题不要超过30个字符 | 
- **videoId** | **optional.String**| video_id, 通过/toutiao/video/upload/接口得到 | 
- **extra** | [**optional.Interface of ToutiaoVideoCreateExtra**](_toutiao_video_create_extra.md)|  | 
+ **body** | [**optional.Interface of InlineObject3**](InlineObject3.md)|  | 
 
 ### Return type
 
@@ -472,7 +470,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: multipart/form-data
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -507,7 +505,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **itemIds** | [**optional.Interface of []string**](string.md)|  | 
+ **body** | [**optional.Interface of InlineObject4**](InlineObject4.md)|  | 
 
 ### Return type
 
@@ -519,7 +517,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: multipart/form-data
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -649,7 +647,7 @@ No authorization required
 
 ## ToutiaoVideoPartUpload
 
-> TouTiaoVideoPartUploadRsp ToutiaoVideoPartUpload(ctx, openId, accessToken, uploadId, partNumber, optional)
+> TouTiaoVideoPartUploadRsp ToutiaoVideoPartUpload(ctx, openId, accessToken, uploadId, partNumber, video)
 
 上传视频分片到文件服务器
 
@@ -665,20 +663,7 @@ Name | Type | Description  | Notes
 **accessToken** | **string**| 调用/oauth/access_token/生成的token，此token需要用户授权。 | 
 **uploadId** | **string**| 分片上传的标记。有限时间为2小时 | 
 **partNumber** | **int64**| 第几个分片，从1开始 | 
- **optional** | ***ToutiaoVideoPartUploadOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-
-Optional parameters are passed through a pointer to a ToutiaoVideoPartUploadOpts struct
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-
- **video** | [**optional.Interface of []string**](string.md)|  | 
+**video** | ***os.File*****os.File**|  | 
 
 ### Return type
 
@@ -700,7 +685,7 @@ No authorization required
 
 ## ToutiaoVideoUpload
 
-> ToutiaoVideoUploadRsp ToutiaoVideoUpload(ctx, openId, accessToken, optional)
+> ToutiaoVideoUploadRsp ToutiaoVideoUpload(ctx, openId, accessToken, video)
 
 头条上传视频到文件服务器
 
@@ -714,18 +699,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **openId** | **string**| 通过/oauth/access_token/获取，用户唯一标志 | 
 **accessToken** | **string**| 调用/oauth/access_token/生成的token，此token需要用户授权。 | 
- **optional** | ***ToutiaoVideoUploadOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-
-Optional parameters are passed through a pointer to a ToutiaoVideoUploadOpts struct
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **video** | [**optional.Interface of []string**](string.md)|  | 
+**video** | ***os.File*****os.File**|  | 
 
 ### Return type
 

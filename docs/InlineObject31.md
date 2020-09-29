@@ -4,8 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**MatchType** | **int64** | 匹配类型，0-离线匹配 1-实时匹配。离线匹配，不会实时返回结果，最大上传1w个数据，通过/poi/supplier/match/query/接口查询匹配结果； 在线匹配，实时返回结果，最大上传100个数据，需要申请授权。 | [optional] 
-**MatchDataList** | [**[]PoiSupplierMatchMatchDataList**](_poi_supplier_match_match_data_list.md) |  | [optional] 
+**Description** | **string** | SPU描述 | [optional] 
+**Name** | **string** | SPU名称 | [optional] 
+**Order** | **int64** | SPU展示顺序,降序 | [optional] 
+**SpuExtId** | **string** | 接入方SPU ID | [optional] 
+**SpuType** | **int64** | spu类型号，1-酒店民宿房型，90-景区门票，91-团购券 20 电商实体商品 21 电商虚拟商品 | [optional] 
+**Status** | **int64** | 在线状态 1 - 在线; 2 - 下线 | [optional] 
+**SupplierExtId** | **string** | 接入方店铺ID | [optional] 
+**Attributes** | [**PoiSupplier**](PoiSupplier.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

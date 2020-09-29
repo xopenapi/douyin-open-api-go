@@ -11,19 +11,20 @@ package douyin
 
 // InlineObject33 struct for InlineObject33
 type InlineObject33 struct {
-	// SPU描述
-	Description string `json:"description,omitempty"`
-	// SPU名称
-	Name string `json:"name,omitempty"`
-	// SPU展示顺序,降序
-	Order int64 `json:"order,omitempty"`
-	// 接入方SPU ID
-	SpuExtId string `json:"spu_ext_id,omitempty"`
-	// spu类型号，1-酒店民宿房型，90-景区门票，91-团购券 20 电商实体商品 21 电商虚拟商品
-	SpuType int64 `json:"spu_type,omitempty"`
-	// 在线状态 1 - 在线; 2 - 下线
-	Status int64 `json:"status,omitempty"`
-	// 接入方店铺ID
-	SupplierExtId string      `json:"supplier_ext_id,omitempty"`
-	Attributes    PoiSupplier `json:"attributes,omitempty"`
+	// 交易场景码，SEND_MONEY_REDPACKET 红包转账 SEND_VCOIN_REDPACKET 抖币转账
+	TransCode string `json:"trans_code,omitempty"`
+	// 数目
+	Amount int64 `json:"amount,omitempty"`
+	// 外部订单号，由调用方生成，长度小于64
+	BizOrderNo string `json:"biz_order_no,omitempty"`
+	// 业务id
+	LiveId int64 `json:"live_id,omitempty"`
+	// 商户id
+	MerchantId int64 `json:"merchant_id,omitempty"`
+	// 订单描述，长度小于256
+	OrderDesc string `json:"order_desc,omitempty"`
+	// 订单名称，长度小于64
+	OrderName string `json:"order_name,omitempty"`
+	// 标记，长度小于512
+	Remark string `json:"remark,omitempty"`
 }

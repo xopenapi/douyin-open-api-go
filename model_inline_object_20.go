@@ -11,8 +11,8 @@ package douyin
 
 // InlineObject20 struct for InlineObject20
 type InlineObject20 struct {
-	// 角色名（暂未开放）
-	RoleName string `json:"role_name,omitempty"`
-	// 昵称
-	Nickname string `json:"nickname,omitempty"`
+	// 客服id
+	PersonaId string `json:"persona_id,omitempty"`
+	// 会话对方的open_id
+	ToUserId string `json:"to_user_id,omitempty"`
 }

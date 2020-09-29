@@ -11,5 +11,6 @@ package douyin
 
 // InlineObject41 struct for InlineObject41
 type InlineObject41 struct {
-	Media []string `json:"media,omitempty"`
+	// 素材id
+	MediaId string `json:"media_id,omitempty"`
 }

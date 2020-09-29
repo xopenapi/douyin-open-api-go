@@ -504,7 +504,7 @@ PoiOrderSync 订单同步
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
  * @param optional nil or *PoiOrderSyncOpts - Optional Parameters:
- * @param "Body" (optional.Interface of InlineObject40) -
+ * @param "Body" (optional.Interface of InlineObject38) -
 @return PoiOrderSyncRsp
 */
 func (a *PoiOrderApiService) PoiOrderSync(ctx _context.Context, accessToken string, localVarOptionals *PoiOrderSyncOpts) (PoiOrderSyncRsp, *_nethttp.Response, error) {
@@ -543,9 +543,9 @@ func (a *PoiOrderApiService) PoiOrderSync(ctx _context.Context, accessToken stri
 	}
 	// body params
 	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
-		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(InlineObject40)
+		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(InlineObject38)
 		if !localVarOptionalBodyok {
-			return localVarReturnValue, nil, reportError("body should be InlineObject40")
+			return localVarReturnValue, nil, reportError("body should be InlineObject38")
 		}
 		localVarPostBody = &localVarOptionalBody
 	}

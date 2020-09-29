@@ -4,7 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**SupplierExtIds** | **[]string** |  | [optional] 
+**SpuExtId** | **string** | 外部平台SPU ID | [optional] 
+**Skus** | [**[]PoiSkuSyncSkus**](_poi_sku_sync_skus.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

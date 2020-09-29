@@ -11,5 +11,7 @@ package douyin
 
 // InlineObject32 struct for InlineObject32
 type InlineObject32 struct {
-	SupplierExtIds []string `json:"supplier_ext_ids,omitempty"`
+	// 外部平台SPU ID
+	SpuExtId string           `json:"spu_ext_id,omitempty"`
+	Skus     []PoiSkuSyncSkus `json:"skus,omitempty"`
 }

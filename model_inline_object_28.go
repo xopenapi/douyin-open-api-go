@@ -11,8 +11,5 @@ package douyin
 
 // InlineObject28 struct for InlineObject28
 type InlineObject28 struct {
-	// 券码的列表
-	Code []string `json:"code,omitempty"`
-	// 团购活动的Id
-	GrouponId string `json:"groupon_id,omitempty"`
+	CardId string `json:"card_id,omitempty"`
 }

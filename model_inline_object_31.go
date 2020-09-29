@@ -11,7 +11,19 @@ package douyin
 
 // InlineObject31 struct for InlineObject31
 type InlineObject31 struct {
-	// 匹配类型，0-离线匹配 1-实时匹配。离线匹配，不会实时返回结果，最大上传1w个数据，通过/poi/supplier/match/query/接口查询匹配结果； 在线匹配，实时返回结果，最大上传100个数据，需要申请授权。
-	MatchType     int64                           `json:"match_type,omitempty"`
-	MatchDataList []PoiSupplierMatchMatchDataList `json:"match_data_list,omitempty"`
+	// SPU描述
+	Description string `json:"description,omitempty"`
+	// SPU名称
+	Name string `json:"name,omitempty"`
+	// SPU展示顺序,降序
+	Order int64 `json:"order,omitempty"`
+	// 接入方SPU ID
+	SpuExtId string `json:"spu_ext_id,omitempty"`
+	// spu类型号，1-酒店民宿房型，90-景区门票，91-团购券 20 电商实体商品 21 电商虚拟商品
+	SpuType int64 `json:"spu_type,omitempty"`
+	// 在线状态 1 - 在线; 2 - 下线
+	Status int64 `json:"status,omitempty"`
+	// 接入方店铺ID
+	SupplierExtId string      `json:"supplier_ext_id,omitempty"`
+	Attributes    PoiSupplier `json:"attributes,omitempty"`
 }

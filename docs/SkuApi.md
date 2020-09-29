@@ -70,7 +70,7 @@ Optional parameters are passed through a pointer to a PoiSkuSyncOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **body** | [**optional.Interface of InlineObject34**](InlineObject34.md)|  | 
+ **body** | [**optional.Interface of InlineObject32**](InlineObject32.md)|  | 
 
 ### Return type
 

@@ -11,5 +11,5 @@ package douyin
 
 // InlineObject8 struct for InlineObject8
 type InlineObject8 struct {
-	Video []string `json:"video,omitempty"`
+	ItemIds []string `json:"item_ids,omitempty"`
 }

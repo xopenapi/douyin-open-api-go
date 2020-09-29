@@ -11,26 +11,13 @@ package douyin
 
 // InlineObject37 struct for InlineObject37
 type InlineObject37 struct {
-	// 订单支付状态。0 - 未支付, 1 - 已支付
-	Status int64 `json:"status,omitempty"`
-	// 入住时间 yyyyMMdd
-	CheckIn string `json:"check_in,omitempty"`
-	// 离店时间 yyyyMMdd
-	CheckOut string `json:"check_out,omitempty"`
-	// 预订人姓名
-	CustomerName string `json:"customer_name,omitempty"`
-	// 预订人电话
-	CustomerPhone int64 `json:"customer_phone,omitempty"`
 	// 抖音订单号
 	OrderId string `json:"order_id,omitempty"`
-	// 备注
-	Remark string `json:"remark,omitempty"`
-	// 总价, 单位人民币分
-	TotalPrice int64 `json:"total_price,omitempty"`
-	// 预定数量
-	ReserveAmount int64 `json:"reserve_amount,omitempty"`
-	// 接入方房型ID
-	SpuExtId     string                               `json:"spu_ext_id,omitempty"`
-	DatePrice    []PoiExtHotelOrderCommitDatePrice    `json:"date_price,omitempty"`
-	CustomerList []PoiExtHotelOrderCommitCustomerList `json:"customer_list,omitempty"`
+	// 订单状态。0 - 未支付, 1 - 已支付
+	OrderStatus int64 `json:"order_status,omitempty"`
+	// 接入方商铺ID
+	SupplierExtId string `json:"supplier_ext_id,omitempty"`
+	// 接入方订单号
+	OrderExtId string                            `json:"order_ext_id,omitempty"`
+	DatePrice  []PoiExtHotelOrderCommitDatePrice `json:"date_price,omitempty"`
 }

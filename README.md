@@ -395,8 +395,6 @@ Class | Method | HTTP request | Description
  - [InlineObject40](docs/InlineObject40.md)
  - [InlineObject41](docs/InlineObject41.md)
  - [InlineObject42](docs/InlineObject42.md)
- - [InlineObject43](docs/InlineObject43.md)
- - [InlineObject44](docs/InlineObject44.md)
  - [InlineObject5](docs/InlineObject5.md)
  - [InlineObject6](docs/InlineObject6.md)
  - [InlineObject7](docs/InlineObject7.md)

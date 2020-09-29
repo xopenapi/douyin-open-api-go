@@ -11,16 +11,7 @@ package douyin
 
 // InlineObject9 struct for InlineObject9
 type InlineObject9 struct {
-	// 视频简介，400字以内
-	Abstract string `json:"abstract,omitempty"`
-	// 是否声明原创（授权账号需要在西瓜视频端内开通「实名认证」）
-	ClaimOrigin string `json:"claim_origin,omitempty"`
-	// 从视频中截取封面的时间，用该帧作为封面（单位为毫秒）
-	CoverTsp string `json:"cover_tsp,omitempty"`
-	// 是否给视频开通可以赞赏的入口（授权账号需要在西瓜视频端内开通「实名认证」）
-	Praise string `json:"praise,omitempty"`
-	// 标题长度应该在5-30字之间
-	Text string `json:"text,omitempty"`
-	// video_id, 通过/xigua/video/upload/接口得到
-	VideoId string `json:"video_id,omitempty"`
+	CommentId string `json:"comment_id,omitempty"`
+	Content   string `json:"content,omitempty"`
+	ItemId    string `json:"item_id,omitempty"`
 }

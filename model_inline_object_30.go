@@ -11,5 +11,5 @@ package douyin
 
 // InlineObject30 struct for InlineObject30
 type InlineObject30 struct {
-	CardId string `json:"card_id,omitempty"`
+	SupplierExtIds []string `json:"supplier_ext_ids,omitempty"`
 }
