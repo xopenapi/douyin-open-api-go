@@ -11,8 +11,7 @@ package douyin
 
 // InlineObject25 struct for InlineObject25
 type InlineObject25 struct {
-	// 券码的列表
-	Code string `json:"code,omitempty"`
-	// 团购活动的Id
-	GrouponId string `json:"groupon_id,omitempty"`
+	// 匹配类型，0-离线匹配 1-实时匹配。离线匹配，不会实时返回结果，最大上传1w个数据，通过/poi/supplier/match/query/接口查询匹配结果； 在线匹配，实时返回结果，最大上传100个数据，需要申请授权。
+	MatchType     int64                           `json:"match_type,omitempty"`
+	MatchDataList []PoiSupplierMatchMatchDataList `json:"match_data_list,omitempty"`
 }

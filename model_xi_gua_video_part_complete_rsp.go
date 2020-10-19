@@ -11,6 +11,6 @@ package douyin
 
 // XiGuaVideoPartCompleteRsp
 type XiGuaVideoPartCompleteRsp struct {
-	Data  TouTiaoVideoPartCompleteRspData `json:"data,omitempty"`
-	Extra FollowingListRspDataExtra       `json:"extra,omitempty"`
+	Data  XiGuaVideoPartCompleteRspData `json:"data,omitempty"`
+	Extra FollowingListRspDataExtra     `json:"extra,omitempty"`
 }

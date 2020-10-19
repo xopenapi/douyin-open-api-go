@@ -11,10 +11,10 @@ package douyin
 
 // InlineObject13 struct for InlineObject13
 type InlineObject13 struct {
-	// 视频搜索接口返回的加密的视频id
-	SecItemId string `json:"sec_item_id,omitempty"`
-	// 需要回复的评论id（如果需要回复的是视频不传此字段）
-	CommentId string `json:"comment_id,omitempty"`
-	// 评论内容
-	Content string `json:"content,omitempty"`
+	// 是否绑定
+	Bind bool `json:"bind,omitempty"`
+	// 标签id
+	TagId int64 `json:"tag_id,omitempty"`
+	// 用户openid
+	UserId string `json:"user_id,omitempty"`
 }

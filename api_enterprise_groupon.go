@@ -212,7 +212,7 @@ func (a *EnterpriseGrouponApiService) EnterpriseGrouponList(ctx _context.Context
 
 // EnterpriseGrouponOfflineOpts Optional parameters for the method 'EnterpriseGrouponOffline'
 type EnterpriseGrouponOfflineOpts struct {
-	GrouponId optional.String
+	Body optional.Interface
 }
 
 /*
@@ -222,7 +222,7 @@ EnterpriseGrouponOffline 团购活动下线
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
  * @param openId 通过/oauth/access_token/获取，用户唯一标志
  * @param optional nil or *EnterpriseGrouponOfflineOpts - Optional Parameters:
- * @param "GrouponId" (optional.String) -  团购活动Id
+ * @param "Body" (optional.Interface of EnterpriseGrouponOfflineReq) -
 @return EnterpriseGrouponOfflineRsp
 */
 func (a *EnterpriseGrouponApiService) EnterpriseGrouponOffline(ctx _context.Context, accessToken string, openId string, localVarOptionals *EnterpriseGrouponOfflineOpts) (EnterpriseGrouponOfflineRsp, *_nethttp.Response, error) {
@@ -244,7 +244,7 @@ func (a *EnterpriseGrouponApiService) EnterpriseGrouponOffline(ctx _context.Cont
 	localVarQueryParams.Add("access_token", parameterToString(accessToken, ""))
 	localVarQueryParams.Add("open_id", parameterToString(openId, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"multipart/form-data"}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -260,9 +260,15 @@ func (a *EnterpriseGrouponApiService) EnterpriseGrouponOffline(ctx _context.Cont
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if localVarOptionals != nil && localVarOptionals.GrouponId.IsSet() {
-		localVarFormParams.Add("groupon_id", parameterToString(localVarOptionals.GrouponId.Value(), ""))
+	// body params
+	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
+		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(EnterpriseGrouponOfflineReq)
+		if !localVarOptionalBodyok {
+			return localVarReturnValue, nil, reportError("body should be EnterpriseGrouponOfflineReq")
+		}
+		localVarPostBody = &localVarOptionalBody
 	}
+
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -301,26 +307,7 @@ func (a *EnterpriseGrouponApiService) EnterpriseGrouponOffline(ctx _context.Cont
 
 // EnterpriseGrouponSaveOpts Optional parameters for the method 'EnterpriseGrouponSave'
 type EnterpriseGrouponSaveOpts struct {
-	ActualAmount   optional.Int64
-	CodeType       optional.Int64
-	H5Url          optional.String
-	OrderLimit     optional.Int64
-	AuditMsg       optional.String
-	GrouponId      optional.String
-	StartTime      optional.Int64
-	Stock          optional.Int64
-	Title          optional.String
-	EndTime        optional.Int64
-	MerchantName   optional.String
-	ServiceNumber  optional.String
-	Status         optional.Int64
-	Notification   optional.String
-	OriginalAmount optional.Int64
-	SoldCount      optional.Int64
-	UseType        optional.Int64
-	GrouponGoods   optional.Interface
-	CoverImages    optional.Interface
-	PoiIds         optional.Interface
+	Body optional.Interface
 }
 
 /*
@@ -330,26 +317,7 @@ EnterpriseGrouponSave 创建团购活动
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
  * @param openId 通过/oauth/access_token/获取，用户唯一标志
  * @param optional nil or *EnterpriseGrouponSaveOpts - Optional Parameters:
- * @param "ActualAmount" (optional.Int64) -  实际金额(单位分)
- * @param "CodeType" (optional.Int64) -  0券码生成的方式;1系统生成;2自定义上传
- * @param "H5Url" (optional.String) -  团购活动详情页链接
- * @param "OrderLimit" (optional.Int64) -  单用户购买数量上限
- * @param "AuditMsg" (optional.String) -  审核失败原因
- * @param "GrouponId" (optional.String) -  团购活动Id，审核失败修改用
- * @param "StartTime" (optional.Int64) -  活动开始时间 unix time
- * @param "Stock" (optional.Int64) -  团购活动库存总数
- * @param "Title" (optional.String) -  卡券标题
- * @param "EndTime" (optional.Int64) -  活动截止时间 unix time
- * @param "MerchantName" (optional.String) -  商户名称
- * @param "ServiceNumber" (optional.String) -  联系电话
- * @param "Status" (optional.Int64) -  活动状态 创建时可以忽略 1有效 2审核中 3审核失败 4中止
- * @param "Notification" (optional.String) -  团购须知
- * @param "OriginalAmount" (optional.Int64) -  原价(单位分)
- * @param "SoldCount" (optional.Int64) -  已售出数量
- * @param "UseType" (optional.Int64) -  团购使用方式 1 到店核销
- * @param "GrouponGoods" (optional.Interface of []EnterpriseGrouponSaveGrouponGoods) -  团购商品
- * @param "CoverImages" (optional.Interface of []string) -  封面图
- * @param "PoiIds" (optional.Interface of []string) -  绑定的POI 列表 默认展示全部门店
+ * @param "Body" (optional.Interface of EnterpriseGrouponSaveReq) -
 @return EnterpriseGrouponSaveRsp
 */
 func (a *EnterpriseGrouponApiService) EnterpriseGrouponSave(ctx _context.Context, accessToken string, openId string, localVarOptionals *EnterpriseGrouponSaveOpts) (EnterpriseGrouponSaveRsp, *_nethttp.Response, error) {
@@ -371,7 +339,7 @@ func (a *EnterpriseGrouponApiService) EnterpriseGrouponSave(ctx _context.Context
 	localVarQueryParams.Add("access_token", parameterToString(accessToken, ""))
 	localVarQueryParams.Add("open_id", parameterToString(openId, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"multipart/form-data"}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -387,70 +355,15 @@ func (a *EnterpriseGrouponApiService) EnterpriseGrouponSave(ctx _context.Context
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if localVarOptionals != nil && localVarOptionals.ActualAmount.IsSet() {
-		localVarFormParams.Add("actual_amount", parameterToString(localVarOptionals.ActualAmount.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.CodeType.IsSet() {
-		localVarFormParams.Add("code_type", parameterToString(localVarOptionals.CodeType.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.H5Url.IsSet() {
-		localVarFormParams.Add("h5_url", parameterToString(localVarOptionals.H5Url.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.OrderLimit.IsSet() {
-		localVarFormParams.Add("order_limit", parameterToString(localVarOptionals.OrderLimit.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.AuditMsg.IsSet() {
-		localVarFormParams.Add("audit_msg", parameterToString(localVarOptionals.AuditMsg.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.GrouponId.IsSet() {
-		localVarFormParams.Add("groupon_id", parameterToString(localVarOptionals.GrouponId.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.StartTime.IsSet() {
-		localVarFormParams.Add("start_time", parameterToString(localVarOptionals.StartTime.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Stock.IsSet() {
-		localVarFormParams.Add("stock", parameterToString(localVarOptionals.Stock.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Title.IsSet() {
-		localVarFormParams.Add("title", parameterToString(localVarOptionals.Title.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.EndTime.IsSet() {
-		localVarFormParams.Add("end_time", parameterToString(localVarOptionals.EndTime.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.MerchantName.IsSet() {
-		localVarFormParams.Add("merchant_name", parameterToString(localVarOptionals.MerchantName.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.ServiceNumber.IsSet() {
-		localVarFormParams.Add("service_number", parameterToString(localVarOptionals.ServiceNumber.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Status.IsSet() {
-		localVarFormParams.Add("status", parameterToString(localVarOptionals.Status.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Notification.IsSet() {
-		localVarFormParams.Add("notification", parameterToString(localVarOptionals.Notification.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.OriginalAmount.IsSet() {
-		localVarFormParams.Add("original_amount", parameterToString(localVarOptionals.OriginalAmount.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.SoldCount.IsSet() {
-		localVarFormParams.Add("sold_count", parameterToString(localVarOptionals.SoldCount.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.UseType.IsSet() {
-		localVarFormParams.Add("use_type", parameterToString(localVarOptionals.UseType.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.GrouponGoods.IsSet() {
-		paramJson, err := parameterToJson(localVarOptionals.GrouponGoods.Value())
-		if err != nil {
-			return localVarReturnValue, nil, err
+	// body params
+	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
+		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(EnterpriseGrouponSaveReq)
+		if !localVarOptionalBodyok {
+			return localVarReturnValue, nil, reportError("body should be EnterpriseGrouponSaveReq")
 		}
-		localVarFormParams.Add("groupon_goods", paramJson)
+		localVarPostBody = &localVarOptionalBody
 	}
-	if localVarOptionals != nil && localVarOptionals.CoverImages.IsSet() {
-		localVarFormParams.Add("cover_images", parameterToString(localVarOptionals.CoverImages.Value(), "csv"))
-	}
-	if localVarOptionals != nil && localVarOptionals.PoiIds.IsSet() {
-		localVarFormParams.Add("poi_ids", parameterToString(localVarOptionals.PoiIds.Value(), "csv"))
-	}
+
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

@@ -11,7 +11,6 @@ package douyin
 
 import (
 	_context "context"
-	"github.com/antihax/optional"
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
@@ -25,30 +24,16 @@ var (
 // ImApiService ImApi service
 type ImApiService service
 
-// EnterpriseImMessageSendOpts Optional parameters for the method 'EnterpriseImMessageSend'
-type EnterpriseImMessageSendOpts struct {
-	PersonaId   optional.String
-	ToUserId    optional.String
-	ClientMsgId optional.String
-	Content     optional.String
-	MessageType optional.String
-}
-
 /*
 EnterpriseImMessageSend (企业号)发送私信给用户
 (企业号)发送私信给用户
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param openId 通过/oauth/access_token/获取，用户唯一标志
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
- * @param optional nil or *EnterpriseImMessageSendOpts - Optional Parameters:
- * @param "PersonaId" (optional.String) -  客服id，传则走客服会话，否则为普通会话
- * @param "ToUserId" (optional.String) -  消息的接收方openid
- * @param "ClientMsgId" (optional.String) -  内部使用
- * @param "Content" (optional.String) -  消息体见下方schema
- * @param "MessageType" (optional.String) -  消息内容格式 `text` - 文本消息 `image` - 图片消息 `video` - 视频消息 `card` - 卡片消息
+ * @param body
 @return EnterpriseImMessageSendRsp
 */
-func (a *ImApiService) EnterpriseImMessageSend(ctx _context.Context, openId string, accessToken string, localVarOptionals *EnterpriseImMessageSendOpts) (EnterpriseImMessageSendRsp, *_nethttp.Response, error) {
+func (a *ImApiService) EnterpriseImMessageSend(ctx _context.Context, openId string, accessToken string, body EnterpriseImMessageSendReq) (EnterpriseImMessageSendRsp, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -67,7 +52,7 @@ func (a *ImApiService) EnterpriseImMessageSend(ctx _context.Context, openId stri
 	localVarQueryParams.Add("open_id", parameterToString(openId, ""))
 	localVarQueryParams.Add("access_token", parameterToString(accessToken, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"multipart/form-data"}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -83,21 +68,8 @@ func (a *ImApiService) EnterpriseImMessageSend(ctx _context.Context, openId stri
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if localVarOptionals != nil && localVarOptionals.PersonaId.IsSet() {
-		localVarFormParams.Add("persona_id", parameterToString(localVarOptionals.PersonaId.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.ToUserId.IsSet() {
-		localVarFormParams.Add("to_user_id", parameterToString(localVarOptionals.ToUserId.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.ClientMsgId.IsSet() {
-		localVarFormParams.Add("client_msg_id", parameterToString(localVarOptionals.ClientMsgId.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Content.IsSet() {
-		localVarFormParams.Add("content", parameterToString(localVarOptionals.Content.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.MessageType.IsSet() {
-		localVarFormParams.Add("message_type", parameterToString(localVarOptionals.MessageType.Value(), ""))
-	}
+	// body params
+	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

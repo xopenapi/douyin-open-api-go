@@ -106,43 +106,23 @@ func (a *PayApiService) DouyinPayAccountQuery(ctx _context.Context, accessToken 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-// DouyinPayAccountTransOpts Optional parameters for the method 'DouyinPayAccountTrans'
-type DouyinPayAccountTransOpts struct {
-	TransCode  optional.String
-	Amount     optional.Int64
-	BizOrderNo optional.String
-	LiveId     optional.Int64
-	MerchantId optional.Int64
-	OrderDesc  optional.String
-	OrderName  optional.String
-	Remark     optional.String
-}
-
 /*
 DouyinPayAccountTrans 商户向用户转账
 商户向用户转账
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param openId 通过/oauth/access_token/获取，用户唯一标志。
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
- * @param optional nil or *DouyinPayAccountTransOpts - Optional Parameters:
- * @param "TransCode" (optional.String) -  交易场景码，SEND_MONEY_REDPACKET 红包转账 SEND_VCOIN_REDPACKET 抖币转账
- * @param "Amount" (optional.Int64) -  数目
- * @param "BizOrderNo" (optional.String) -  外部订单号，由调用方生成，长度小于64
- * @param "LiveId" (optional.Int64) -  业务id
- * @param "MerchantId" (optional.Int64) -  商户id
- * @param "OrderDesc" (optional.String) -  订单描述，长度小于256
- * @param "OrderName" (optional.String) -  订单名称，长度小于64
- * @param "Remark" (optional.String) -  标记，长度小于512
-@return DouyinPayAccountTrans
+ * @param body
+@return DouyinPayAccountTransRsp
 */
-func (a *PayApiService) DouyinPayAccountTrans(ctx _context.Context, openId string, accessToken string, localVarOptionals *DouyinPayAccountTransOpts) (DouyinPayAccountTrans, *_nethttp.Response, error) {
+func (a *PayApiService) DouyinPayAccountTrans(ctx _context.Context, openId string, accessToken string, body DouyinPayAccountTransReq) (DouyinPayAccountTransRsp, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  DouyinPayAccountTrans
+		localVarReturnValue  DouyinPayAccountTransRsp
 	)
 
 	// create path and map variables
@@ -154,7 +134,7 @@ func (a *PayApiService) DouyinPayAccountTrans(ctx _context.Context, openId strin
 	localVarQueryParams.Add("open_id", parameterToString(openId, ""))
 	localVarQueryParams.Add("access_token", parameterToString(accessToken, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"multipart/form-data"}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -170,30 +150,8 @@ func (a *PayApiService) DouyinPayAccountTrans(ctx _context.Context, openId strin
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if localVarOptionals != nil && localVarOptionals.TransCode.IsSet() {
-		localVarFormParams.Add("trans_code", parameterToString(localVarOptionals.TransCode.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Amount.IsSet() {
-		localVarFormParams.Add("amount", parameterToString(localVarOptionals.Amount.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.BizOrderNo.IsSet() {
-		localVarFormParams.Add("biz_order_no", parameterToString(localVarOptionals.BizOrderNo.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.LiveId.IsSet() {
-		localVarFormParams.Add("live_id", parameterToString(localVarOptionals.LiveId.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.MerchantId.IsSet() {
-		localVarFormParams.Add("merchant_id", parameterToString(localVarOptionals.MerchantId.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.OrderDesc.IsSet() {
-		localVarFormParams.Add("order_desc", parameterToString(localVarOptionals.OrderDesc.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.OrderName.IsSet() {
-		localVarFormParams.Add("order_name", parameterToString(localVarOptionals.OrderName.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Remark.IsSet() {
-		localVarFormParams.Add("remark", parameterToString(localVarOptionals.Remark.Value(), ""))
-	}
+	// body params
+	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

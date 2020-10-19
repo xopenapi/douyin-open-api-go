@@ -113,7 +113,7 @@ No authorization required
 
 ## VideoSearchCommentReply
 
-> VideoSearchCommentReplyRsp VideoSearchCommentReply(ctx, accessToken, openId, optional)
+> VideoSearchCommentReplyRsp VideoSearchCommentReply(ctx, accessToken, openId, body)
 
 关键词视频评论回复
 
@@ -127,20 +127,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **accessToken** | **string**| 调用/oauth/access_token/生成的token，此token需要用户授权。 | 
 **openId** | **string**| 通过/oauth/access_token/获取，用户唯一标志。 | 
- **optional** | ***VideoSearchCommentReplyOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-
-Optional parameters are passed through a pointer to a VideoSearchCommentReplyOpts struct
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **secItemId** | **optional.String**| 视频搜索接口返回的加密的视频id | 
- **commentId** | **optional.String**| 需要回复的评论id（如果需要回复的是视频不传此字段） | 
- **content** | **optional.String**| 评论内容 | 
+**body** | [**VideoSearchCommentReplyReq**](VideoSearchCommentReplyReq.md)|  | 
 
 ### Return type
 
@@ -152,7 +139,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: multipart/form-data
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

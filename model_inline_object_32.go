@@ -11,7 +11,13 @@ package douyin
 
 // InlineObject32 struct for InlineObject32
 type InlineObject32 struct {
-	// 外部平台SPU ID
-	SpuExtId string           `json:"spu_ext_id,omitempty"`
-	Skus     []PoiSkuSyncSkus `json:"skus,omitempty"`
+	// 订单支付状态。0 - 未支付, 1 - 已支付
+	Status int64 `json:"status,omitempty"`
+	// 抖音订单号
+	OrderId string `json:"order_id,omitempty"`
+	// 接入方商铺ID
+	SupplierExtId string `json:"supplier_ext_id,omitempty"`
+	// 接入方订单号
+	OrderExtId string                            `json:"order_ext_id,omitempty"`
+	DatePrice  []PoiExtHotelOrderCommitDatePrice `json:"date_price,omitempty"`
 }

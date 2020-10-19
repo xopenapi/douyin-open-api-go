@@ -48,7 +48,7 @@ No authorization required
 
 ## DouyinPayAccountTrans
 
-> DouyinPayAccountTrans DouyinPayAccountTrans(ctx, openId, accessToken, optional)
+> DouyinPayAccountTransRsp DouyinPayAccountTrans(ctx, openId, accessToken, body)
 
 商户向用户转账
 
@@ -62,29 +62,11 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **openId** | **string**| 通过/oauth/access_token/获取，用户唯一标志。 | 
 **accessToken** | **string**| 调用/oauth/access_token/生成的token，此token需要用户授权。 | 
- **optional** | ***DouyinPayAccountTransOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-
-Optional parameters are passed through a pointer to a DouyinPayAccountTransOpts struct
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **transCode** | **optional.String**| 交易场景码，SEND_MONEY_REDPACKET 红包转账 SEND_VCOIN_REDPACKET 抖币转账 | 
- **amount** | **optional.Int64**| 数目 | 
- **bizOrderNo** | **optional.String**| 外部订单号，由调用方生成，长度小于64 | 
- **liveId** | **optional.Int64**| 业务id | 
- **merchantId** | **optional.Int64**| 商户id | 
- **orderDesc** | **optional.String**| 订单描述，长度小于256 | 
- **orderName** | **optional.String**| 订单名称，长度小于64 | 
- **remark** | **optional.String**| 标记，长度小于512 | 
+**body** | [**DouyinPayAccountTransReq**](DouyinPayAccountTransReq.md)|  | 
 
 ### Return type
 
-[**DouyinPayAccountTrans**](DouyinPayAccountTrans.md)
+[**DouyinPayAccountTransRsp**](DouyinPayAccountTransRsp.md)
 
 ### Authorization
 
@@ -92,7 +74,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: multipart/form-data
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

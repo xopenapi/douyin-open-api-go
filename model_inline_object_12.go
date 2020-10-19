@@ -11,14 +11,6 @@ package douyin
 
 // InlineObject12 struct for InlineObject12
 type InlineObject12 struct {
-	// 客服id，传则走客服会话，否则为普通会话
-	PersonaId string `json:"persona_id,omitempty"`
-	// 消息的接收方openid
-	ToUserId string `json:"to_user_id,omitempty"`
-	// 内部使用
-	ClientMsgId string `json:"client_msg_id,omitempty"`
-	// 消息体见下方schema
-	Content string `json:"content,omitempty"`
-	// 消息内容格式 `text` - 文本消息 `image` - 图片消息 `video` - 视频消息 `card` - 卡片消息
-	MessageType string `json:"message_type,omitempty"`
+	// 标签id
+	TagId int64 `json:"tag_id,omitempty"`
 }

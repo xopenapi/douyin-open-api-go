@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 ## EnterpriseMediaDelete
 
-> EnterpriseMediaDeleteRsp EnterpriseMediaDelete(ctx, accessToken, openId, optional)
+> EnterpriseMediaDeleteRsp EnterpriseMediaDelete(ctx, accessToken, openId, body)
 
 删除永久素材
 
@@ -27,18 +27,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **accessToken** | **string**| 调用/oauth/client_token/生成的token，此token不需要用户授权 | 
 **openId** | **string**| 通过/oauth/access_token/获取，用户唯一标志 | 
- **optional** | ***EnterpriseMediaDeleteOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-
-Optional parameters are passed through a pointer to a EnterpriseMediaDeleteOpts struct
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **mediaId** | **optional.String**| 素材id | 
+**body** | [**EnterpriseMediaDeleteReq**](EnterpriseMediaDeleteReq.md)|  | 
 
 ### Return type
 
@@ -50,7 +39,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: multipart/form-data
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -109,7 +98,7 @@ No authorization required
 
 ## EnterpriseMediaTempUpload
 
-> EnterpriseMediaTempUploadRsp EnterpriseMediaTempUpload(ctx, accessToken, openId, optional)
+> EnterpriseMediaTempUploadRsp EnterpriseMediaTempUpload(ctx, accessToken, openId, media)
 
 上传临时素材
 
@@ -123,18 +112,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **accessToken** | **string**| 调用/oauth/client_token/生成的token，此token不需要用户授权 | 
 **openId** | **string**| 通过/oauth/access_token/获取，用户唯一标志 | 
- **optional** | ***EnterpriseMediaTempUploadOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-
-Optional parameters are passed through a pointer to a EnterpriseMediaTempUploadOpts struct
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **media** | [**optional.Interface of []string**](string.md)|  | 
+**media** | [**[]string**](string.md)|  | 
 
 ### Return type
 
@@ -156,7 +134,7 @@ No authorization required
 
 ## EnterpriseMediaUpload
 
-> EnterpriseMediaUploadRsp EnterpriseMediaUpload(ctx, accessToken, openId, optional)
+> EnterpriseMediaUploadRsp EnterpriseMediaUpload(ctx, accessToken, openId, media)
 
 上传素材
 
@@ -170,18 +148,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **accessToken** | **string**| 调用/oauth/client_token/生成的token，此token不需要用户授权 | 
 **openId** | **string**| 通过/oauth/access_token/获取，用户唯一标志 | 
- **optional** | ***EnterpriseMediaUploadOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-
-Optional parameters are passed through a pointer to a EnterpriseMediaUploadOpts struct
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **media** | [**optional.Interface of []string**](string.md)|  | 
+**media** | [**[]string**](string.md)|  | 
 
 ### Return type
 

@@ -894,22 +894,16 @@ func (a *VideoApiService) DouyinVideoUpload(ctx _context.Context, openId string,
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-// ToutiaoVideoCreateOpts Optional parameters for the method 'ToutiaoVideoCreate'
-type ToutiaoVideoCreateOpts struct {
-	Body optional.Interface
-}
-
 /*
 ToutiaoVideoCreate 创建头条视频
 创建头条视频
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param openId 通过/oauth/access_token/获取，用户唯一标志
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
- * @param optional nil or *ToutiaoVideoCreateOpts - Optional Parameters:
- * @param "Body" (optional.Interface of InlineObject3) -
+ * @param body
 @return TouTiaoVideoCreateRsp
 */
-func (a *VideoApiService) ToutiaoVideoCreate(ctx _context.Context, openId string, accessToken string, localVarOptionals *ToutiaoVideoCreateOpts) (TouTiaoVideoCreateRsp, *_nethttp.Response, error) {
+func (a *VideoApiService) ToutiaoVideoCreate(ctx _context.Context, openId string, accessToken string, body DouyinVideoCreateReq) (TouTiaoVideoCreateRsp, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -945,14 +939,7 @@ func (a *VideoApiService) ToutiaoVideoCreate(ctx _context.Context, openId string
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
-		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(InlineObject3)
-		if !localVarOptionalBodyok {
-			return localVarReturnValue, nil, reportError("body should be InlineObject3")
-		}
-		localVarPostBody = &localVarOptionalBody
-	}
-
+	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1001,7 +988,7 @@ ToutiaoVideoData 查询头条指定视频数据
  * @param openId 通过/oauth/access_token/获取，用户唯一标志
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
  * @param optional nil or *ToutiaoVideoDataOpts - Optional Parameters:
- * @param "Body" (optional.Interface of InlineObject4) -
+ * @param "Body" (optional.Interface of InlineObject3) -
 @return TouTiaoVideoData
 */
 func (a *VideoApiService) ToutiaoVideoData(ctx _context.Context, openId string, accessToken string, localVarOptionals *ToutiaoVideoDataOpts) (TouTiaoVideoData, *_nethttp.Response, error) {
@@ -1041,9 +1028,9 @@ func (a *VideoApiService) ToutiaoVideoData(ctx _context.Context, openId string, 
 	}
 	// body params
 	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
-		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(InlineObject4)
+		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(InlineObject3)
 		if !localVarOptionalBodyok {
-			return localVarReturnValue, nil, reportError("body should be InlineObject4")
+			return localVarReturnValue, nil, reportError("body should be InlineObject3")
 		}
 		localVarPostBody = &localVarOptionalBody
 	}

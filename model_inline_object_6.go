@@ -11,5 +11,5 @@ package douyin
 
 // InlineObject6 struct for InlineObject6
 type InlineObject6 struct {
-	Video []string `json:"video,omitempty"`
+	ItemIds []string `json:"item_ids,omitempty"`
 }

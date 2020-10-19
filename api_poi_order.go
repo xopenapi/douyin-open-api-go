@@ -25,28 +25,14 @@ var (
 // PoiOrderApiService PoiOrderApi service
 type PoiOrderApiService service
 
-// PoiExtHotelOrderCancelOpts Optional parameters for the method 'PoiExtHotelOrderCancel'
-type PoiExtHotelOrderCancelOpts struct {
-	OrderId       optional.String
-	OrderStatus   optional.Int64
-	SupplierExtId optional.String
-	OrderExtId    optional.String
-	DatePrice     optional.Interface
-}
-
 /*
 PoiExtHotelOrderCancel 取消订单(该接口由接入方实现)
 取消订单(该接口由接入方实现)
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *PoiExtHotelOrderCancelOpts - Optional Parameters:
- * @param "OrderId" (optional.String) -  抖音订单号
- * @param "OrderStatus" (optional.Int64) -  订单状态。0 - 未支付, 1 - 已支付
- * @param "SupplierExtId" (optional.String) -  接入方商铺ID
- * @param "OrderExtId" (optional.String) -  接入方订单号
- * @param "DatePrice" (optional.Interface of []PoiExtHotelOrderCommitDatePrice) -
+ * @param body
 @return PoiExtHotelOrderCancelRsp
 */
-func (a *PoiOrderApiService) PoiExtHotelOrderCancel(ctx _context.Context, localVarOptionals *PoiExtHotelOrderCancelOpts) (PoiExtHotelOrderCancelRsp, *_nethttp.Response, error) {
+func (a *PoiOrderApiService) PoiExtHotelOrderCancel(ctx _context.Context, body PoiExtHotelOrderCancelReq) (PoiExtHotelOrderCancelRsp, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -63,7 +49,7 @@ func (a *PoiOrderApiService) PoiExtHotelOrderCancel(ctx _context.Context, localV
 	localVarFormParams := _neturl.Values{}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"multipart/form-data"}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -79,25 +65,8 @@ func (a *PoiOrderApiService) PoiExtHotelOrderCancel(ctx _context.Context, localV
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if localVarOptionals != nil && localVarOptionals.OrderId.IsSet() {
-		localVarFormParams.Add("order_id", parameterToString(localVarOptionals.OrderId.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.OrderStatus.IsSet() {
-		localVarFormParams.Add("order_status", parameterToString(localVarOptionals.OrderStatus.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.SupplierExtId.IsSet() {
-		localVarFormParams.Add("supplier_ext_id", parameterToString(localVarOptionals.SupplierExtId.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.OrderExtId.IsSet() {
-		localVarFormParams.Add("order_ext_id", parameterToString(localVarOptionals.OrderExtId.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.DatePrice.IsSet() {
-		paramJson, err := parameterToJson(localVarOptionals.DatePrice.Value())
-		if err != nil {
-			return localVarReturnValue, nil, err
-		}
-		localVarFormParams.Add("date_price", paramJson)
-	}
+	// body params
+	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -134,42 +103,14 @@ func (a *PoiOrderApiService) PoiExtHotelOrderCancel(ctx _context.Context, localV
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-// PoiExtHotelOrderCommitOpts Optional parameters for the method 'PoiExtHotelOrderCommit'
-type PoiExtHotelOrderCommitOpts struct {
-	Status        optional.Int64
-	CheckIn       optional.String
-	CheckOut      optional.String
-	CustomerName  optional.String
-	CustomerPhone optional.Int64
-	OrderId       optional.String
-	Remark        optional.String
-	TotalPrice    optional.Int64
-	ReserveAmount optional.Int64
-	SpuExtId      optional.String
-	DatePrice     optional.Interface
-	CustomerList  optional.Interface
-}
-
 /*
 PoiExtHotelOrderCommit 下单接口(该接口由接入方实现)
 下单接口(该接口由接入方实现)
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *PoiExtHotelOrderCommitOpts - Optional Parameters:
- * @param "Status" (optional.Int64) -  订单支付状态。0 - 未支付, 1 - 已支付
- * @param "CheckIn" (optional.String) -  入住时间 yyyyMMdd
- * @param "CheckOut" (optional.String) -  离店时间 yyyyMMdd
- * @param "CustomerName" (optional.String) -  预订人姓名
- * @param "CustomerPhone" (optional.Int64) -  预订人电话
- * @param "OrderId" (optional.String) -  抖音订单号
- * @param "Remark" (optional.String) -  备注
- * @param "TotalPrice" (optional.Int64) -  总价, 单位人民币分
- * @param "ReserveAmount" (optional.Int64) -  预定数量
- * @param "SpuExtId" (optional.String) -  接入方房型ID
- * @param "DatePrice" (optional.Interface of []PoiExtHotelOrderCommitDatePrice) -
- * @param "CustomerList" (optional.Interface of []PoiExtHotelOrderCommitCustomerList) -
+ * @param body
 @return PoiExtHotelOrderCommitRsp
 */
-func (a *PoiOrderApiService) PoiExtHotelOrderCommit(ctx _context.Context, localVarOptionals *PoiExtHotelOrderCommitOpts) (PoiExtHotelOrderCommitRsp, *_nethttp.Response, error) {
+func (a *PoiOrderApiService) PoiExtHotelOrderCommit(ctx _context.Context, body PoiExtHotelOrderCommitReq) (PoiExtHotelOrderCommitRsp, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -186,7 +127,7 @@ func (a *PoiOrderApiService) PoiExtHotelOrderCommit(ctx _context.Context, localV
 	localVarFormParams := _neturl.Values{}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"multipart/form-data"}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -202,50 +143,8 @@ func (a *PoiOrderApiService) PoiExtHotelOrderCommit(ctx _context.Context, localV
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if localVarOptionals != nil && localVarOptionals.Status.IsSet() {
-		localVarFormParams.Add("status", parameterToString(localVarOptionals.Status.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.CheckIn.IsSet() {
-		localVarFormParams.Add("check_in", parameterToString(localVarOptionals.CheckIn.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.CheckOut.IsSet() {
-		localVarFormParams.Add("check_out", parameterToString(localVarOptionals.CheckOut.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.CustomerName.IsSet() {
-		localVarFormParams.Add("customer_name", parameterToString(localVarOptionals.CustomerName.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.CustomerPhone.IsSet() {
-		localVarFormParams.Add("customer_phone", parameterToString(localVarOptionals.CustomerPhone.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.OrderId.IsSet() {
-		localVarFormParams.Add("order_id", parameterToString(localVarOptionals.OrderId.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Remark.IsSet() {
-		localVarFormParams.Add("remark", parameterToString(localVarOptionals.Remark.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.TotalPrice.IsSet() {
-		localVarFormParams.Add("total_price", parameterToString(localVarOptionals.TotalPrice.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.ReserveAmount.IsSet() {
-		localVarFormParams.Add("reserve_amount", parameterToString(localVarOptionals.ReserveAmount.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.SpuExtId.IsSet() {
-		localVarFormParams.Add("spu_ext_id", parameterToString(localVarOptionals.SpuExtId.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.DatePrice.IsSet() {
-		paramJson, err := parameterToJson(localVarOptionals.DatePrice.Value())
-		if err != nil {
-			return localVarReturnValue, nil, err
-		}
-		localVarFormParams.Add("date_price", paramJson)
-	}
-	if localVarOptionals != nil && localVarOptionals.CustomerList.IsSet() {
-		paramJson, err := parameterToJson(localVarOptionals.CustomerList.Value())
-		if err != nil {
-			return localVarReturnValue, nil, err
-		}
-		localVarFormParams.Add("customer_list", paramJson)
-	}
+	// body params
+	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -282,28 +181,14 @@ func (a *PoiOrderApiService) PoiExtHotelOrderCommit(ctx _context.Context, localV
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-// PoiExtHotelOrderStatusOpts Optional parameters for the method 'PoiExtHotelOrderStatus'
-type PoiExtHotelOrderStatusOpts struct {
-	Status        optional.Int64
-	OrderId       optional.String
-	SupplierExtId optional.String
-	OrderExtId    optional.String
-	DatePrice     optional.Interface
-}
-
 /*
 PoiExtHotelOrderStatus 支付状态通知(该接口由接入方实现)
 支付状态通知(该接口由接入方实现)
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *PoiExtHotelOrderStatusOpts - Optional Parameters:
- * @param "Status" (optional.Int64) -  订单支付状态。0 - 未支付, 1 - 已支付
- * @param "OrderId" (optional.String) -  抖音订单号
- * @param "SupplierExtId" (optional.String) -  接入方商铺ID
- * @param "OrderExtId" (optional.String) -  接入方订单号
- * @param "DatePrice" (optional.Interface of []PoiExtHotelOrderCommitDatePrice) -
+ * @param body
 @return PoiExtHotelOrderStatusRsp
 */
-func (a *PoiOrderApiService) PoiExtHotelOrderStatus(ctx _context.Context, localVarOptionals *PoiExtHotelOrderStatusOpts) (PoiExtHotelOrderStatusRsp, *_nethttp.Response, error) {
+func (a *PoiOrderApiService) PoiExtHotelOrderStatus(ctx _context.Context, body PoiExtHotelOrderStatusReq) (PoiExtHotelOrderStatusRsp, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -320,7 +205,7 @@ func (a *PoiOrderApiService) PoiExtHotelOrderStatus(ctx _context.Context, localV
 	localVarFormParams := _neturl.Values{}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"multipart/form-data"}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -336,25 +221,8 @@ func (a *PoiOrderApiService) PoiExtHotelOrderStatus(ctx _context.Context, localV
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if localVarOptionals != nil && localVarOptionals.Status.IsSet() {
-		localVarFormParams.Add("status", parameterToString(localVarOptionals.Status.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.OrderId.IsSet() {
-		localVarFormParams.Add("order_id", parameterToString(localVarOptionals.OrderId.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.SupplierExtId.IsSet() {
-		localVarFormParams.Add("supplier_ext_id", parameterToString(localVarOptionals.SupplierExtId.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.OrderExtId.IsSet() {
-		localVarFormParams.Add("order_ext_id", parameterToString(localVarOptionals.OrderExtId.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.DatePrice.IsSet() {
-		paramJson, err := parameterToJson(localVarOptionals.DatePrice.Value())
-		if err != nil {
-			return localVarReturnValue, nil, err
-		}
-		localVarFormParams.Add("date_price", paramJson)
-	}
+	// body params
+	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -391,34 +259,22 @@ func (a *PoiOrderApiService) PoiExtHotelOrderStatus(ctx _context.Context, localV
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-// PoiOrderStatusOpts Optional parameters for the method 'PoiOrderStatus'
-type PoiOrderStatusOpts struct {
-	OrderId       optional.String
-	Status        optional.Int64
-	SupplierExtId optional.String
-	OrderExtId    optional.String
-}
-
 /*
 PoiOrderStatus 订单状态同步接口
 订单状态同步接口
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param accessToken 通过/oauth/access_token/获取，用户唯一标志。
- * @param optional nil or *PoiOrderStatusOpts - Optional Parameters:
- * @param "OrderId" (optional.String) -  抖音订单号
- * @param "Status" (optional.Int64) -  订单确认状态。0 - 订单确认, 1 - 价格变动, 2 - 库存不足, 3 - 确认中
- * @param "SupplierExtId" (optional.String) -  接入方商铺ID
- * @param "OrderExtId" (optional.String) -  接入方订单号
-@return PoiOrderStatus
+ * @param body
+@return PoiOrderStatusRsp
 */
-func (a *PoiOrderApiService) PoiOrderStatus(ctx _context.Context, accessToken string, localVarOptionals *PoiOrderStatusOpts) (PoiOrderStatus, *_nethttp.Response, error) {
+func (a *PoiOrderApiService) PoiOrderStatus(ctx _context.Context, accessToken string, body PoiOrderStatusReq) (PoiOrderStatusRsp, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  PoiOrderStatus
+		localVarReturnValue  PoiOrderStatusRsp
 	)
 
 	// create path and map variables
@@ -429,7 +285,7 @@ func (a *PoiOrderApiService) PoiOrderStatus(ctx _context.Context, accessToken st
 
 	localVarQueryParams.Add("access_token", parameterToString(accessToken, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"multipart/form-data"}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -445,18 +301,8 @@ func (a *PoiOrderApiService) PoiOrderStatus(ctx _context.Context, accessToken st
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if localVarOptionals != nil && localVarOptionals.OrderId.IsSet() {
-		localVarFormParams.Add("order_id", parameterToString(localVarOptionals.OrderId.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Status.IsSet() {
-		localVarFormParams.Add("status", parameterToString(localVarOptionals.Status.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.SupplierExtId.IsSet() {
-		localVarFormParams.Add("supplier_ext_id", parameterToString(localVarOptionals.SupplierExtId.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.OrderExtId.IsSet() {
-		localVarFormParams.Add("order_ext_id", parameterToString(localVarOptionals.OrderExtId.Value(), ""))
-	}
+	// body params
+	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -504,7 +350,7 @@ PoiOrderSync 订单同步
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
  * @param optional nil or *PoiOrderSyncOpts - Optional Parameters:
- * @param "Body" (optional.Interface of InlineObject38) -
+ * @param "Body" (optional.Interface of PoiOrderSyncReq) -
 @return PoiOrderSyncRsp
 */
 func (a *PoiOrderApiService) PoiOrderSync(ctx _context.Context, accessToken string, localVarOptionals *PoiOrderSyncOpts) (PoiOrderSyncRsp, *_nethttp.Response, error) {
@@ -543,9 +389,9 @@ func (a *PoiOrderApiService) PoiOrderSync(ctx _context.Context, accessToken stri
 	}
 	// body params
 	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
-		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(InlineObject38)
+		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(PoiOrderSyncReq)
 		if !localVarOptionalBodyok {
-			return localVarReturnValue, nil, reportError("body should be InlineObject38")
+			return localVarReturnValue, nil, reportError("body should be PoiOrderSyncReq")
 		}
 		localVarPostBody = &localVarOptionalBody
 	}

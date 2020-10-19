@@ -39,8 +39,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **personaId** | **optional.String**| 客服id | 
- **toUserId** | **optional.String**| 会话对方的open_id | 
+ **body** | [**optional.Interface of EnterpriseImPersonConversationCreateReq**](EnterpriseImPersonConversationCreateReq.md)|  | 
 
 ### Return type
 
@@ -52,7 +51,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: multipart/form-data
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -87,8 +86,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **personaId** | **optional.String**| 客服id | 
- **toUserId** | **optional.String**| 会话对方的open_id | 
+ **body** | [**optional.Interface of EnterpriseImPersonConversationDeleteReq**](EnterpriseImPersonConversationDeleteReq.md)|  | 
 
 ### Return type
 
@@ -100,7 +98,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: multipart/form-data
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -135,8 +133,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **roleName** | **optional.String**| 角色名（暂未开放） | 
- **nickname** | **optional.String**| 昵称 | 
+ **body** | [**optional.Interface of EnterpriseImPersonCreateReq**](EnterpriseImPersonCreateReq.md)|  | 
 
 ### Return type
 
@@ -148,7 +145,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: multipart/form-data
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -183,7 +180,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **personaId** | **optional.String**| 客服id | 
+ **body** | [**optional.Interface of EnterpriseImPersonDeleteReq**](EnterpriseImPersonDeleteReq.md)|  | 
 
 ### Return type
 
@@ -195,7 +192,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: multipart/form-data
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

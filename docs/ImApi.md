@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## EnterpriseImMessageSend
 
-> EnterpriseImMessageSendRsp EnterpriseImMessageSend(ctx, openId, accessToken, optional)
+> EnterpriseImMessageSendRsp EnterpriseImMessageSend(ctx, openId, accessToken, body)
 
 (企业号)发送私信给用户
 
@@ -24,22 +24,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **openId** | **string**| 通过/oauth/access_token/获取，用户唯一标志 | 
 **accessToken** | **string**| 调用/oauth/access_token/生成的token，此token需要用户授权。 | 
- **optional** | ***EnterpriseImMessageSendOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-
-Optional parameters are passed through a pointer to a EnterpriseImMessageSendOpts struct
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **personaId** | **optional.String**| 客服id，传则走客服会话，否则为普通会话 | 
- **toUserId** | **optional.String**| 消息的接收方openid | 
- **clientMsgId** | **optional.String**| 内部使用 | 
- **content** | **optional.String**| 消息体见下方schema | 
- **messageType** | **optional.String**| 消息内容格式 &#x60;text&#x60; - 文本消息 &#x60;image&#x60; - 图片消息 &#x60;video&#x60; - 视频消息 &#x60;card&#x60; - 卡片消息 | 
+**body** | [**EnterpriseImMessageSendReq**](EnterpriseImMessageSendReq.md)|  | 
 
 ### Return type
 
@@ -51,7 +36,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: multipart/form-data
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

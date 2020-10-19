@@ -27,7 +27,7 @@ type EnterpriseImCardApiService service
 
 // EnterpriseImCardDeleteOpts Optional parameters for the method 'EnterpriseImCardDelete'
 type EnterpriseImCardDeleteOpts struct {
-	CardId optional.String
+	Body optional.Interface
 }
 
 /*
@@ -37,7 +37,7 @@ EnterpriseImCardDelete 删除消息卡片
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
  * @param openId 通过/oauth/access_token/获取，用户唯一标志
  * @param optional nil or *EnterpriseImCardDeleteOpts - Optional Parameters:
- * @param "CardId" (optional.String) -
+ * @param "Body" (optional.Interface of EnterpriseImCardDeleteReq) -
 @return EnterpriseImCardDeleteRsp
 */
 func (a *EnterpriseImCardApiService) EnterpriseImCardDelete(ctx _context.Context, accessToken string, openId string, localVarOptionals *EnterpriseImCardDeleteOpts) (EnterpriseImCardDeleteRsp, *_nethttp.Response, error) {
@@ -59,7 +59,7 @@ func (a *EnterpriseImCardApiService) EnterpriseImCardDelete(ctx _context.Context
 	localVarQueryParams.Add("access_token", parameterToString(accessToken, ""))
 	localVarQueryParams.Add("open_id", parameterToString(openId, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"multipart/form-data"}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -75,9 +75,15 @@ func (a *EnterpriseImCardApiService) EnterpriseImCardDelete(ctx _context.Context
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if localVarOptionals != nil && localVarOptionals.CardId.IsSet() {
-		localVarFormParams.Add("card_id", parameterToString(localVarOptionals.CardId.Value(), ""))
+	// body params
+	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
+		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(EnterpriseImCardDeleteReq)
+		if !localVarOptionalBodyok {
+			return localVarReturnValue, nil, reportError("body should be EnterpriseImCardDeleteReq")
+		}
+		localVarPostBody = &localVarOptionalBody
 	}
+
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -199,9 +205,7 @@ func (a *EnterpriseImCardApiService) EnterpriseImCardList(ctx _context.Context, 
 
 // EnterpriseImCardSaveOpts Optional parameters for the method 'EnterpriseImCardSave'
 type EnterpriseImCardSaveOpts struct {
-	CardId   optional.String
-	CardType optional.String
-	Content  optional.String
+	Body optional.Interface
 }
 
 /*
@@ -211,9 +215,7 @@ EnterpriseImCardSave 创建/更新消息卡片
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
  * @param openId 通过/oauth/access_token/获取，用户唯一标志
  * @param optional nil or *EnterpriseImCardSaveOpts - Optional Parameters:
- * @param "CardId" (optional.String) -  卡片id，创建时不传；更新时必传。同一个用户的卡片id不可重复
- * @param "CardType" (optional.String) -  卡片类型 `question_list` - 问题列表
- * @param "Content" (optional.String) -  卡片内容字段 json序列化成string， { \\\"question_list\\\" { \\\"text\\\" \\\"有什么疑问呢\\\", \\\"questions\\\" [{ \\\"name\\\" \\\"问题1\\\", \\\"text\\\" \\\"关键词1\\\" }, { \\\"name\\\" \\\"问题2\\\", \\\"text\\\" \\\"关键词2\\\" } ] } }
+ * @param "Body" (optional.Interface of EnterpriseImCardSaveReq) -
 @return EnterpriseImCardSaveRsp
 */
 func (a *EnterpriseImCardApiService) EnterpriseImCardSave(ctx _context.Context, accessToken string, openId string, localVarOptionals *EnterpriseImCardSaveOpts) (EnterpriseImCardSaveRsp, *_nethttp.Response, error) {
@@ -235,7 +237,7 @@ func (a *EnterpriseImCardApiService) EnterpriseImCardSave(ctx _context.Context, 
 	localVarQueryParams.Add("access_token", parameterToString(accessToken, ""))
 	localVarQueryParams.Add("open_id", parameterToString(openId, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"multipart/form-data"}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -251,15 +253,15 @@ func (a *EnterpriseImCardApiService) EnterpriseImCardSave(ctx _context.Context, 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if localVarOptionals != nil && localVarOptionals.CardId.IsSet() {
-		localVarFormParams.Add("card_id", parameterToString(localVarOptionals.CardId.Value(), ""))
+	// body params
+	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
+		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(EnterpriseImCardSaveReq)
+		if !localVarOptionalBodyok {
+			return localVarReturnValue, nil, reportError("body should be EnterpriseImCardSaveReq")
+		}
+		localVarPostBody = &localVarOptionalBody
 	}
-	if localVarOptionals != nil && localVarOptionals.CardType.IsSet() {
-		localVarFormParams.Add("card_type", parameterToString(localVarOptionals.CardType.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Content.IsSet() {
-		localVarFormParams.Add("content", parameterToString(localVarOptionals.Content.Value(), ""))
-	}
+
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

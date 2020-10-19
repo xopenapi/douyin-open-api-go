@@ -118,26 +118,16 @@ func (a *CommentApiService) ItemCommentList(ctx _context.Context, openId string,
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-// ItemCommentReplyOpts Optional parameters for the method 'ItemCommentReply'
-type ItemCommentReplyOpts struct {
-	CommentId optional.String
-	Content   optional.String
-	ItemId    optional.String
-}
-
 /*
 ItemCommentReply 评论回复列表
 评论回复列表
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param openId 通过/oauth/access_token/获取，用户唯一标志
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
- * @param optional nil or *ItemCommentReplyOpts - Optional Parameters:
- * @param "CommentId" (optional.String) -
- * @param "Content" (optional.String) -
- * @param "ItemId" (optional.String) -
+ * @param body
 @return ItemCommentReplyRsp
 */
-func (a *CommentApiService) ItemCommentReply(ctx _context.Context, openId string, accessToken string, localVarOptionals *ItemCommentReplyOpts) (ItemCommentReplyRsp, *_nethttp.Response, error) {
+func (a *CommentApiService) ItemCommentReply(ctx _context.Context, openId string, accessToken string, body ItemCommentReplyReq) (ItemCommentReplyRsp, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -156,7 +146,7 @@ func (a *CommentApiService) ItemCommentReply(ctx _context.Context, openId string
 	localVarQueryParams.Add("open_id", parameterToString(openId, ""))
 	localVarQueryParams.Add("access_token", parameterToString(accessToken, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"multipart/form-data"}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -172,15 +162,8 @@ func (a *CommentApiService) ItemCommentReply(ctx _context.Context, openId string
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if localVarOptionals != nil && localVarOptionals.CommentId.IsSet() {
-		localVarFormParams.Add("comment_id", parameterToString(localVarOptionals.CommentId.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Content.IsSet() {
-		localVarFormParams.Add("content", parameterToString(localVarOptionals.Content.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.ItemId.IsSet() {
-		localVarFormParams.Add("item_id", parameterToString(localVarOptionals.ItemId.Value(), ""))
-	}
+	// body params
+	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -405,26 +388,16 @@ func (a *CommentApiService) VideoCommentList(ctx _context.Context, openId string
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-// VideoCommentReplyOpts Optional parameters for the method 'VideoCommentReply'
-type VideoCommentReplyOpts struct {
-	CommentId optional.String
-	Content   optional.String
-	ItemId    optional.String
-}
-
 /*
 VideoCommentReply (企业号)回复视频评论
 (企业号)回复视频评论
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param openId 通过/oauth/access_token/获取，用户唯一标志
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
- * @param optional nil or *VideoCommentReplyOpts - Optional Parameters:
- * @param "CommentId" (optional.String) -  需要回复的评论id
- * @param "Content" (optional.String) -  评论内容
- * @param "ItemId" (optional.String) -  视频id
+ * @param body
 @return VideoCommentReplyRsp
 */
-func (a *CommentApiService) VideoCommentReply(ctx _context.Context, openId string, accessToken string, localVarOptionals *VideoCommentReplyOpts) (VideoCommentReplyRsp, *_nethttp.Response, error) {
+func (a *CommentApiService) VideoCommentReply(ctx _context.Context, openId string, accessToken string, body VideoCommentReplyReq) (VideoCommentReplyRsp, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -443,7 +416,7 @@ func (a *CommentApiService) VideoCommentReply(ctx _context.Context, openId strin
 	localVarQueryParams.Add("open_id", parameterToString(openId, ""))
 	localVarQueryParams.Add("access_token", parameterToString(accessToken, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"multipart/form-data"}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -459,15 +432,8 @@ func (a *CommentApiService) VideoCommentReply(ctx _context.Context, openId strin
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if localVarOptionals != nil && localVarOptionals.CommentId.IsSet() {
-		localVarFormParams.Add("comment_id", parameterToString(localVarOptionals.CommentId.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Content.IsSet() {
-		localVarFormParams.Add("content", parameterToString(localVarOptionals.Content.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.ItemId.IsSet() {
-		localVarFormParams.Add("item_id", parameterToString(localVarOptionals.ItemId.Value(), ""))
-	}
+	// body params
+	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -599,26 +565,16 @@ func (a *CommentApiService) VideoCommentReplyList(ctx _context.Context, openId s
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-// VideoCommentTopOpts Optional parameters for the method 'VideoCommentTop'
-type VideoCommentTopOpts struct {
-	Top       optional.Bool
-	CommentId optional.String
-	ItemId    optional.String
-}
-
 /*
 VideoCommentTop (企业号)置顶视频评论
 (企业号)置顶视频评论
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param openId 通过/oauth/access_token/获取，用户唯一标志
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
- * @param optional nil or *VideoCommentTopOpts - Optional Parameters:
- * @param "Top" (optional.Bool) -  true置顶, false取消置顶
- * @param "CommentId" (optional.String) -  需要回复的评论id
- * @param "ItemId" (optional.String) -  视频id
+ * @param body
 @return VideoCommentTopRsp
 */
-func (a *CommentApiService) VideoCommentTop(ctx _context.Context, openId string, accessToken string, localVarOptionals *VideoCommentTopOpts) (VideoCommentTopRsp, *_nethttp.Response, error) {
+func (a *CommentApiService) VideoCommentTop(ctx _context.Context, openId string, accessToken string, body VideoCommentTopReq) (VideoCommentTopRsp, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -637,7 +593,7 @@ func (a *CommentApiService) VideoCommentTop(ctx _context.Context, openId string,
 	localVarQueryParams.Add("open_id", parameterToString(openId, ""))
 	localVarQueryParams.Add("access_token", parameterToString(accessToken, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"multipart/form-data"}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -653,15 +609,8 @@ func (a *CommentApiService) VideoCommentTop(ctx _context.Context, openId string,
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if localVarOptionals != nil && localVarOptionals.Top.IsSet() {
-		localVarFormParams.Add("top", parameterToString(localVarOptionals.Top.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.CommentId.IsSet() {
-		localVarFormParams.Add("comment_id", parameterToString(localVarOptionals.CommentId.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.ItemId.IsSet() {
-		localVarFormParams.Add("item_id", parameterToString(localVarOptionals.ItemId.Value(), ""))
-	}
+	// body params
+	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

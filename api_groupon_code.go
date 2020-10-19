@@ -27,8 +27,7 @@ type GrouponCodeApiService service
 
 // EnterpriseGrouponCodeStatusOpts Optional parameters for the method 'EnterpriseGrouponCodeStatus'
 type EnterpriseGrouponCodeStatusOpts struct {
-	Code      optional.Interface
-	GrouponId optional.String
+	Body optional.Interface
 }
 
 /*
@@ -38,8 +37,7 @@ EnterpriseGrouponCodeStatus 查看券码状态
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
  * @param openId 通过/oauth/access_token/获取，用户唯一标志
  * @param optional nil or *EnterpriseGrouponCodeStatusOpts - Optional Parameters:
- * @param "Code" (optional.Interface of []string) -  券码的列表
- * @param "GrouponId" (optional.String) -  团购活动的Id
+ * @param "Body" (optional.Interface of EnterpriseGrouponCodeStatusReq) -
 @return EnterpriseGrouponCodeStatusRsp
 */
 func (a *GrouponCodeApiService) EnterpriseGrouponCodeStatus(ctx _context.Context, accessToken string, openId string, localVarOptionals *EnterpriseGrouponCodeStatusOpts) (EnterpriseGrouponCodeStatusRsp, *_nethttp.Response, error) {
@@ -61,7 +59,7 @@ func (a *GrouponCodeApiService) EnterpriseGrouponCodeStatus(ctx _context.Context
 	localVarQueryParams.Add("access_token", parameterToString(accessToken, ""))
 	localVarQueryParams.Add("open_id", parameterToString(openId, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"multipart/form-data"}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -77,12 +75,15 @@ func (a *GrouponCodeApiService) EnterpriseGrouponCodeStatus(ctx _context.Context
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if localVarOptionals != nil && localVarOptionals.Code.IsSet() {
-		localVarFormParams.Add("code", parameterToString(localVarOptionals.Code.Value(), "csv"))
+	// body params
+	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
+		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(EnterpriseGrouponCodeStatusReq)
+		if !localVarOptionalBodyok {
+			return localVarReturnValue, nil, reportError("body should be EnterpriseGrouponCodeStatusReq")
+		}
+		localVarPostBody = &localVarOptionalBody
 	}
-	if localVarOptionals != nil && localVarOptionals.GrouponId.IsSet() {
-		localVarFormParams.Add("groupon_id", parameterToString(localVarOptionals.GrouponId.Value(), ""))
-	}
+
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -121,8 +122,7 @@ func (a *GrouponCodeApiService) EnterpriseGrouponCodeStatus(ctx _context.Context
 
 // EnterpriseGrouponCodeVerificationOpts Optional parameters for the method 'EnterpriseGrouponCodeVerification'
 type EnterpriseGrouponCodeVerificationOpts struct {
-	Code      optional.String
-	GrouponId optional.String
+	Body optional.Interface
 }
 
 /*
@@ -132,8 +132,7 @@ EnterpriseGrouponCodeVerification 券码核销
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
  * @param openId 通过/oauth/access_token/获取，用户唯一标志
  * @param optional nil or *EnterpriseGrouponCodeVerificationOpts - Optional Parameters:
- * @param "Code" (optional.String) -  券码的列表
- * @param "GrouponId" (optional.String) -  团购活动的Id
+ * @param "Body" (optional.Interface of EnterpriseGrouponCodeVerificationReq) -
 @return EnterpriseGrouponCodeVerificationRsp
 */
 func (a *GrouponCodeApiService) EnterpriseGrouponCodeVerification(ctx _context.Context, accessToken string, openId string, localVarOptionals *EnterpriseGrouponCodeVerificationOpts) (EnterpriseGrouponCodeVerificationRsp, *_nethttp.Response, error) {
@@ -155,7 +154,7 @@ func (a *GrouponCodeApiService) EnterpriseGrouponCodeVerification(ctx _context.C
 	localVarQueryParams.Add("access_token", parameterToString(accessToken, ""))
 	localVarQueryParams.Add("open_id", parameterToString(openId, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"multipart/form-data"}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -171,12 +170,15 @@ func (a *GrouponCodeApiService) EnterpriseGrouponCodeVerification(ctx _context.C
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if localVarOptionals != nil && localVarOptionals.Code.IsSet() {
-		localVarFormParams.Add("code", parameterToString(localVarOptionals.Code.Value(), ""))
+	// body params
+	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
+		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(EnterpriseGrouponCodeVerificationReq)
+		if !localVarOptionalBodyok {
+			return localVarReturnValue, nil, reportError("body should be EnterpriseGrouponCodeVerificationReq")
+		}
+		localVarPostBody = &localVarOptionalBody
 	}
-	if localVarOptionals != nil && localVarOptionals.GrouponId.IsSet() {
-		localVarFormParams.Add("groupon_id", parameterToString(localVarOptionals.GrouponId.Value(), ""))
-	}
+
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

@@ -135,7 +135,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **grouponId** | **optional.String**| 团购活动Id | 
+ **body** | [**optional.Interface of EnterpriseGrouponOfflineReq**](EnterpriseGrouponOfflineReq.md)|  | 
 
 ### Return type
 
@@ -147,7 +147,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: multipart/form-data
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -182,26 +182,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **actualAmount** | **optional.Int64**| 实际金额(单位分) | 
- **codeType** | **optional.Int64**| 0券码生成的方式;1系统生成;2自定义上传 | 
- **h5Url** | **optional.String**| 团购活动详情页链接 | 
- **orderLimit** | **optional.Int64**| 单用户购买数量上限 | 
- **auditMsg** | **optional.String**| 审核失败原因 | 
- **grouponId** | **optional.String**| 团购活动Id，审核失败修改用 | 
- **startTime** | **optional.Int64**| 活动开始时间 unix time | 
- **stock** | **optional.Int64**| 团购活动库存总数 | 
- **title** | **optional.String**| 卡券标题 | 
- **endTime** | **optional.Int64**| 活动截止时间 unix time | 
- **merchantName** | **optional.String**| 商户名称 | 
- **serviceNumber** | **optional.String**| 联系电话 | 
- **status** | **optional.Int64**| 活动状态 创建时可以忽略 1有效 2审核中 3审核失败 4中止 | 
- **notification** | **optional.String**| 团购须知 | 
- **originalAmount** | **optional.Int64**| 原价(单位分) | 
- **soldCount** | **optional.Int64**| 已售出数量 | 
- **useType** | **optional.Int64**| 团购使用方式 1 到店核销 | 
- **grouponGoods** | [**optional.Interface of []EnterpriseGrouponSaveGrouponGoods**](EnterpriseGrouponSaveGrouponGoods.md)| 团购商品 | 
- **coverImages** | [**optional.Interface of []string**](string.md)| 封面图 | 
- **poiIds** | [**optional.Interface of []string**](string.md)| 绑定的POI 列表 默认展示全部门店 | 
+ **body** | [**optional.Interface of EnterpriseGrouponSaveReq**](EnterpriseGrouponSaveReq.md)|  | 
 
 ### Return type
 
@@ -213,7 +194,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: multipart/form-data
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

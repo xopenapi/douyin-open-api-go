@@ -106,14 +106,7 @@ func (a *SpuApiService) PoiSpuQuery(ctx _context.Context, accessToken string, sp
 
 // PoiSpuSyncOpts Optional parameters for the method 'PoiSpuSync'
 type PoiSpuSyncOpts struct {
-	Description   optional.String
-	Name          optional.String
-	Order         optional.Int64
-	SpuExtId      optional.String
-	SpuType       optional.Int64
-	Status        optional.Int64
-	SupplierExtId optional.String
-	Attributes    optional.Interface
+	Body optional.Interface
 }
 
 /*
@@ -122,14 +115,7 @@ SPU同步
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
  * @param optional nil or *PoiSpuSyncOpts - Optional Parameters:
- * @param "Description" (optional.String) -  SPU描述
- * @param "Name" (optional.String) -  SPU名称
- * @param "Order" (optional.Int64) -  SPU展示顺序,降序
- * @param "SpuExtId" (optional.String) -  接入方SPU ID
- * @param "SpuType" (optional.Int64) -  spu类型号，1-酒店民宿房型，90-景区门票，91-团购券 20 电商实体商品 21 电商虚拟商品
- * @param "Status" (optional.Int64) -  在线状态 1 - 在线; 2 - 下线
- * @param "SupplierExtId" (optional.String) -  接入方店铺ID
- * @param "Attributes" (optional.Interface of PoiSupplier) -
+ * @param "Body" (optional.Interface of PoiSpuSyncReq) -
 @return PoiSpuSyncRsp
 */
 func (a *SpuApiService) PoiSpuSync(ctx _context.Context, accessToken string, localVarOptionals *PoiSpuSyncOpts) (PoiSpuSyncRsp, *_nethttp.Response, error) {
@@ -150,7 +136,7 @@ func (a *SpuApiService) PoiSpuSync(ctx _context.Context, accessToken string, loc
 
 	localVarQueryParams.Add("access_token", parameterToString(accessToken, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"multipart/form-data"}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -166,34 +152,15 @@ func (a *SpuApiService) PoiSpuSync(ctx _context.Context, accessToken string, loc
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if localVarOptionals != nil && localVarOptionals.Description.IsSet() {
-		localVarFormParams.Add("description", parameterToString(localVarOptionals.Description.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Name.IsSet() {
-		localVarFormParams.Add("name", parameterToString(localVarOptionals.Name.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Order.IsSet() {
-		localVarFormParams.Add("order", parameterToString(localVarOptionals.Order.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.SpuExtId.IsSet() {
-		localVarFormParams.Add("spu_ext_id", parameterToString(localVarOptionals.SpuExtId.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.SpuType.IsSet() {
-		localVarFormParams.Add("spu_type", parameterToString(localVarOptionals.SpuType.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Status.IsSet() {
-		localVarFormParams.Add("status", parameterToString(localVarOptionals.Status.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.SupplierExtId.IsSet() {
-		localVarFormParams.Add("supplier_ext_id", parameterToString(localVarOptionals.SupplierExtId.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Attributes.IsSet() {
-		paramJson, err := parameterToJson(localVarOptionals.Attributes.Value())
-		if err != nil {
-			return localVarReturnValue, nil, err
+	// body params
+	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
+		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(PoiSpuSyncReq)
+		if !localVarOptionalBodyok {
+			return localVarReturnValue, nil, reportError("body should be PoiSpuSyncReq")
 		}
-		localVarFormParams.Add("attributes", paramJson)
+		localVarPostBody = &localVarOptionalBody
 	}
+
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

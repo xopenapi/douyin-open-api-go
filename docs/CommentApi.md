@@ -67,7 +67,7 @@ No authorization required
 
 ## ItemCommentReply
 
-> ItemCommentReplyRsp ItemCommentReply(ctx, openId, accessToken, optional)
+> ItemCommentReplyRsp ItemCommentReply(ctx, openId, accessToken, body)
 
 评论回复列表
 
@@ -81,20 +81,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **openId** | **string**| 通过/oauth/access_token/获取，用户唯一标志 | 
 **accessToken** | **string**| 调用/oauth/access_token/生成的token，此token需要用户授权。 | 
- **optional** | ***ItemCommentReplyOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-
-Optional parameters are passed through a pointer to a ItemCommentReplyOpts struct
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **commentId** | **optional.String**|  | 
- **content** | **optional.String**|  | 
- **itemId** | **optional.String**|  | 
+**body** | [**ItemCommentReplyReq**](ItemCommentReplyReq.md)|  | 
 
 ### Return type
 
@@ -106,7 +93,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: multipart/form-data
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -220,7 +207,7 @@ No authorization required
 
 ## VideoCommentReply
 
-> VideoCommentReplyRsp VideoCommentReply(ctx, openId, accessToken, optional)
+> VideoCommentReplyRsp VideoCommentReply(ctx, openId, accessToken, body)
 
 (企业号)回复视频评论
 
@@ -234,20 +221,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **openId** | **string**| 通过/oauth/access_token/获取，用户唯一标志 | 
 **accessToken** | **string**| 调用/oauth/access_token/生成的token，此token需要用户授权。 | 
- **optional** | ***VideoCommentReplyOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-
-Optional parameters are passed through a pointer to a VideoCommentReplyOpts struct
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **commentId** | **optional.String**| 需要回复的评论id | 
- **content** | **optional.String**| 评论内容 | 
- **itemId** | **optional.String**| 视频id | 
+**body** | [**VideoCommentReplyReq**](VideoCommentReplyReq.md)|  | 
 
 ### Return type
 
@@ -259,7 +233,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: multipart/form-data
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -322,7 +296,7 @@ No authorization required
 
 ## VideoCommentTop
 
-> VideoCommentTopRsp VideoCommentTop(ctx, openId, accessToken, optional)
+> VideoCommentTopRsp VideoCommentTop(ctx, openId, accessToken, body)
 
 (企业号)置顶视频评论
 
@@ -336,20 +310,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **openId** | **string**| 通过/oauth/access_token/获取，用户唯一标志 | 
 **accessToken** | **string**| 调用/oauth/access_token/生成的token，此token需要用户授权。 | 
- **optional** | ***VideoCommentTopOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-
-Optional parameters are passed through a pointer to a VideoCommentTopOpts struct
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **top** | **optional.Bool**| true置顶, false取消置顶 | 
- **commentId** | **optional.String**| 需要回复的评论id | 
- **itemId** | **optional.String**| 视频id | 
+**body** | [**VideoCommentTopReq**](VideoCommentTopReq.md)|  | 
 
 ### Return type
 
@@ -361,7 +322,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: multipart/form-data
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

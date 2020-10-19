@@ -4,9 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Bind** | **bool** | 是否绑定 | [optional] 
-**TagId** | **int64** | 标签id | [optional] 
-**UserId** | **string** | 用户openid | [optional] 
+**PersonaId** | **string** | 客服id | [optional] 
+**ToUserId** | **string** | 会话对方的open_id | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

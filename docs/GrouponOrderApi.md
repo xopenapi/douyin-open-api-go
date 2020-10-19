@@ -220,7 +220,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **orderId** | **optional.String**| 团购活动订单Id | 
+ **body** | [**optional.Interface of EnterpriseGrouponOrderRefundConfirmReq**](EnterpriseGrouponOrderRefundConfirmReq.md)|  | 
 
 ### Return type
 
@@ -232,7 +232,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: multipart/form-data
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

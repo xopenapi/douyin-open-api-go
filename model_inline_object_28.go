@@ -11,5 +11,7 @@ package douyin
 
 // InlineObject28 struct for InlineObject28
 type InlineObject28 struct {
-	CardId string `json:"card_id,omitempty"`
+	// 外部平台SPU ID
+	SpuExtId string           `json:"spu_ext_id,omitempty"`
+	Skus     []PoiSkuSyncSkus `json:"skus,omitempty"`
 }

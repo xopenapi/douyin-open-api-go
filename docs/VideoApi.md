@@ -433,7 +433,7 @@ No authorization required
 
 ## ToutiaoVideoCreate
 
-> TouTiaoVideoCreateRsp ToutiaoVideoCreate(ctx, openId, accessToken, optional)
+> TouTiaoVideoCreateRsp ToutiaoVideoCreate(ctx, openId, accessToken, body)
 
 创建头条视频
 
@@ -447,18 +447,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **openId** | **string**| 通过/oauth/access_token/获取，用户唯一标志 | 
 **accessToken** | **string**| 调用/oauth/access_token/生成的token，此token需要用户授权。 | 
- **optional** | ***ToutiaoVideoCreateOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-
-Optional parameters are passed through a pointer to a ToutiaoVideoCreateOpts struct
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **body** | [**optional.Interface of InlineObject3**](InlineObject3.md)|  | 
+**body** | [**DouyinVideoCreateReq**](DouyinVideoCreateReq.md)|  | 
 
 ### Return type
 
@@ -505,7 +494,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **body** | [**optional.Interface of InlineObject4**](InlineObject4.md)|  | 
+ **body** | [**optional.Interface of InlineObject3**](InlineObject3.md)|  | 
 
 ### Return type
 

@@ -51,7 +51,7 @@ func TestLauchHttpServer(t *testing.T) {
 	http.ListenAndServe(":8888", nil)
 }
 
-// 7
+// 7	1	测试通过	账号授权
 func TestOauthApiClient(t *testing.T) {
 	//TestLauchHttpServer()
 
@@ -118,7 +118,37 @@ func TestOauthApiClient(t *testing.T) {
 
 }
 
-// 7
+// 3	2	测试通过	用户管理
+func TestUserinfoApiClient(t *testing.T) {
+	//TestLauchHttpServer()
+
+	cfg := douyin.NewConfiguration()
+	client := douyin.NewAPIClient(cfg)
+
+	rsp1, r, err := client.UserinfoApi.Userinfo(context.Background(), openId, accessToken)
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Log(r)
+	t.Log(rsp1)
+
+	rsp2, r, err := client.UserinfoApi.FansList(context.Background(), openId, accessToken, count, nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Log(r)
+	t.Log(rsp2)
+
+	rsp3, r, err := client.UserinfoApi.FollowingList(context.Background(), openId, accessToken, count, nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Log(r)
+	t.Log(rsp3)
+
+}
+
+// 7	4	互动管理
 func TestCommentApiClient(t *testing.T) {
 	//TestLauchHttpServer()
 
@@ -147,6 +177,20 @@ func TestCommentApiClient(t *testing.T) {
 	t.Log(r)
 	t.Log(rsp3)
 
+}
+
+// 4	4-2 评论管理（企业号）	测试通过
+func TestCommentEnterprise(t *testing.T) {
+	cfg := douyin.NewConfiguration()
+	client := douyin.NewAPIClient(cfg)
+
+	//首先获取视频列表，拿到1个视频的itemId
+	var itemIds = getVideos(t)
+
+	// 该api已自动将 itemId 进行 urlEncode 了
+	itemId = "@9VwU1/6eU81pLGf2dN8sVs783WLuOvGHP5N2rA2lK1AWb/n960zdRmYqig357zEBpRdBtTEjuK+IZVM2DbFJqA=="
+	itemId = itemIds[0]
+	// 获取该视频的评论列表
 	rsp4, r, err := client.CommentApi.VideoCommentList(context.Background(), openId, accessToken, count, itemId, nil)
 	if err != nil {
 		t.Fatal(err)
@@ -154,6 +198,8 @@ func TestCommentApiClient(t *testing.T) {
 	t.Log(r)
 	t.Log(rsp4)
 
+	// 获取某个评论 下的回复列表
+	var commentId = rsp4.Data.List[0].CommentId
 	rsp5, r, err := client.CommentApi.VideoCommentReplyList(context.Background(), openId, accessToken, count, itemId, commentId, nil)
 	if err != nil {
 		t.Fatal(err)
@@ -161,20 +207,29 @@ func TestCommentApiClient(t *testing.T) {
 	t.Log(r)
 	t.Log(rsp5)
 
-	rsp6, r, err := client.CommentApi.VideoCommentReply(context.Background(), openId, accessToken, nil)
+	// 回复某个评论
+	var videoCommentReplyReq douyin.VideoCommentReplyReq
+	videoCommentReplyReq.CommentId = commentId
+	videoCommentReplyReq.ItemId = itemId
+	videoCommentReplyReq.Content = "这是测试数据1"
+	rsp6, r, err := client.CommentApi.VideoCommentReply(context.Background(), openId, accessToken, videoCommentReplyReq)
 	if err != nil {
 		t.Fatal(err)
 	}
 	t.Log(r)
 	t.Log(rsp6)
 
-	rsp7, r, err := client.CommentApi.VideoCommentTop(context.Background(), openId, accessToken, nil)
+	// 置顶评论，注意，该评论不能是 回复列表的 comment_id
+	var videoCommentTopReq douyin.VideoCommentTopReq
+	videoCommentTopReq.ItemId = itemId
+	videoCommentTopReq.CommentId = rsp4.Data.List[len(rsp4.Data.List)-1].CommentId
+	videoCommentTopReq.Top = true
+	rsp7, r, err := client.CommentApi.VideoCommentTop(context.Background(), openId, accessToken, videoCommentTopReq)
 	if err != nil {
 		t.Fatal(err)
 	}
 	t.Log(r)
 	t.Log(rsp7)
-
 }
 
 // 13
@@ -977,36 +1032,6 @@ func TestStarApiClient(t *testing.T) {
 
 }
 
-// 3
-func TestUserinfoApiClient(t *testing.T) {
-	//TestLauchHttpServer()
-
-	cfg := douyin.NewConfiguration()
-	client := douyin.NewAPIClient(cfg)
-
-	rsp1, r, err := client.UserinfoApi.Userinfo(context.Background(), openId, accessToken)
-	if err != nil {
-		t.Fatal(err)
-	}
-	t.Log(r)
-	t.Log(rsp1)
-
-	rsp2, r, err := client.UserinfoApi.FansList(context.Background(), openId, accessToken, count, nil)
-	if err != nil {
-		t.Fatal(err)
-	}
-	t.Log(r)
-	t.Log(rsp2)
-
-	rsp3, r, err := client.UserinfoApi.FollowingList(context.Background(), openId, accessToken, count, nil)
-	if err != nil {
-		t.Fatal(err)
-	}
-	t.Log(r)
-	t.Log(rsp3)
-
-}
-
 // 读取文件到[]byte中
 func file2Bytes(filename string) ([]byte, error) {
 
@@ -1224,6 +1249,35 @@ func TestGetSpecVideos(t *testing.T) {
 	t.Log(len(rsp8.Data.List))
 }
 
+// 头条 单次发布视频，视频文件小 测试中
+func TestTouTiaoPublishVideoOnce(t *testing.T) {
+	cfg := douyin.NewConfiguration()
+	client := douyin.NewAPIClient(cfg)
+
+	filename := "/Users/mac/Downloads/2.mp4"
+	video, err := os.Open(filename)
+	if err != nil {
+		t.Log(err)
+	}
+
+	// 单次上传并发布，测试通过
+	rsp1, r, err := client.VideoApi.ToutiaoVideoUpload(context.Background(), openId, accessToken, video)
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Log(r)
+	videoId := rsp1.Data.Video.VideoId
+	t.Log(rsp1.Data.Video.VideoId)
+	var body douyin.DouyinVideoCreateReq
+	body.VideoId = string(videoId)
+	// 发布
+	rsp5_0, r, err := client.VideoApi.ToutiaoVideoCreate(context.Background(), openId, accessToken, body)
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Log(rsp5_0.Data.ItemId)
+}
+
 // 21	视频测试
 func TestVideoApiClient(t *testing.T) {
 	// 抖音 单次发布视频
@@ -1263,12 +1317,12 @@ func TestVideoApiClient(t *testing.T) {
 	t.Log(r)
 	t.Log(rsp11)
 
-	rsp12, r, err := client.VideoApi.ToutiaoVideoCreate(context.Background(), openId, accessToken, nil)
-	if err != nil {
-		t.Fatal(err)
-	}
-	t.Log(r)
-	t.Log(rsp12)
+	/*	rsp12, r, err := client.VideoApi.ToutiaoVideoCreate(context.Background(), openId, accessToken, nil)
+		if err != nil {
+			t.Fatal(err)
+		}
+		t.Log(r)
+		t.Log(rsp12)*/
 
 	rsp13, r, err := client.VideoApi.ToutiaoVideoPartInit(context.Background(), openId, accessToken)
 	if err != nil {

@@ -4,9 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CardId** | **string** | 卡片id，创建时不传；更新时必传。同一个用户的卡片id不可重复 | [optional] 
-**CardType** | **string** | 卡片类型 &#x60;question_list&#x60; - 问题列表 | [optional] 
-**Content** | **string** | 卡片内容字段 json序列化成string， { \&quot;question_list\&quot; { \&quot;text\&quot; \&quot;有什么疑问呢\&quot;, \&quot;questions\&quot; [{ \&quot;name\&quot; \&quot;问题1\&quot;, \&quot;text\&quot; \&quot;关键词1\&quot; }, { \&quot;name\&quot; \&quot;问题2\&quot;, \&quot;text\&quot; \&quot;关键词2\&quot; } ] } } | [optional] 
+**Description** | **string** | SPU描述 | [optional] 
+**Name** | **string** | SPU名称 | [optional] 
+**Order** | **int64** | SPU展示顺序,降序 | [optional] 
+**SpuExtId** | **string** | 接入方SPU ID | [optional] 
+**SpuType** | **int64** | spu类型号，1-酒店民宿房型，90-景区门票，91-团购券 20 电商实体商品 21 电商虚拟商品 | [optional] 
+**Status** | **int64** | 在线状态 1 - 在线; 2 - 下线 | [optional] 
+**SupplierExtId** | **string** | 接入方店铺ID | [optional] 
+**Attributes** | [**PoiSupplier**](PoiSupplier.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

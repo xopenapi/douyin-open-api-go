@@ -930,21 +930,11 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_3'
         content:
           application/json:
             schema:
-              properties:
-                text:
-                  description: 视频标题不要超过30个字符
-                  type: string
-                video_id:
-                  description: video_id, 通过/toutiao/video/upload/接口得到
-                  type: string
-                extra:
-                  $ref: '#/components/schemas/_toutiao_video_create_extra'
-              type: object
-        required: false
+              $ref: '#/components/schemas/DouyinVideoCreateReq'
+        required: true
       responses:
         "200":
           content:
@@ -1125,7 +1115,7 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_4'
+        $ref: '#/components/requestBodies/inline_object_3'
         content:
           application/json:
             schema:
@@ -1165,7 +1155,7 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_5'
+        $ref: '#/components/requestBodies/inline_object_4'
         content:
           multipart/form-data:
             schema:
@@ -1247,7 +1237,7 @@ paths:
           format: int64
           type: integer
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_6'
+        $ref: '#/components/requestBodies/inline_object_5'
         content:
           multipart/form-data:
             schema:
@@ -1322,30 +1312,10 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_7'
         content:
           multipart/form-data:
             schema:
-              properties:
-                abstract:
-                  description: 视频简介，400字以内
-                  type: string
-                claim_origin:
-                  description: 是否声明原创（授权账号需要在西瓜视频端内开通「实名认证」）
-                  type: string
-                cover_tsp:
-                  description: 从视频中截取封面的时间，用该帧作为封面（单位为毫秒）
-                  type: string
-                praise:
-                  description: 是否给视频开通可以赞赏的入口（授权账号需要在西瓜视频端内开通「实名认证」）
-                  type: string
-                text:
-                  description: 标题长度应该在5-30字之间
-                  type: string
-                video_id:
-                  description: video_id, 通过/xigua/video/upload/接口得到
-                  type: string
-              type: object
+              $ref: '#/components/schemas/XiGuaVideoCreateReq'
         required: false
       responses:
         "200":
@@ -1416,7 +1386,7 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_8'
+        $ref: '#/components/requestBodies/inline_object_6'
         content:
           multipart/form-data:
             schema:
@@ -1554,18 +1524,10 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_9'
         content:
-          multipart/form-data:
+          application/json:
             schema:
-              properties:
-                comment_id:
-                  type: string
-                content:
-                  type: string
-                item_id:
-                  type: string
-              type: object
+              $ref: '#/components/schemas/ItemCommentReplyReq'
         required: true
       responses:
         "200":
@@ -1694,21 +1656,10 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_10'
         content:
-          multipart/form-data:
+          application/json:
             schema:
-              properties:
-                comment_id:
-                  description: 需要回复的评论id
-                  type: string
-                content:
-                  description: 评论内容
-                  type: string
-                item_id:
-                  description: 视频id
-                  type: string
-              type: object
+              $ref: '#/components/schemas/VideoCommentReplyReq'
         required: true
       responses:
         "200":
@@ -1739,21 +1690,10 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_11'
         content:
-          multipart/form-data:
+          application/json:
             schema:
-              properties:
-                top:
-                  description: true置顶, false取消置顶
-                  type: boolean
-                comment_id:
-                  description: 需要回复的评论id
-                  type: string
-                item_id:
-                  description: 视频id
-                  type: string
-              type: object
+              $ref: '#/components/schemas/VideoCommentTopReq'
         required: true
       responses:
         "200":
@@ -1784,28 +1724,10 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_12'
         content:
-          multipart/form-data:
+          application/json:
             schema:
-              properties:
-                persona_id:
-                  description: 客服id，传则走客服会话，否则为普通会话
-                  type: string
-                to_user_id:
-                  description: 消息的接收方openid
-                  type: string
-                client_msg_id:
-                  description: 内部使用
-                  type: string
-                content:
-                  description: 消息体见下方schema
-                  type: string
-                message_type:
-                  description: 消息内容格式 `text` - 文本消息 `image` - 图片消息 `video` - 视频消息
-                    `card` - 卡片消息
-                  type: string
-              type: object
+              $ref: '#/components/schemas/EnterpriseImMessageSendReq'
         required: true
       responses:
         "200":
@@ -1922,21 +1844,10 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_13'
         content:
-          multipart/form-data:
+          application/json:
             schema:
-              properties:
-                sec_item_id:
-                  description: 视频搜索接口返回的加密的视频id
-                  type: string
-                comment_id:
-                  description: 需要回复的评论id（如果需要回复的是视频不传此字段）
-                  type: string
-                content:
-                  description: 评论内容
-                  type: string
-              type: object
+              $ref: '#/components/schemas/VideoSearchCommentReplyReq'
         required: true
       responses:
         "200":
@@ -2936,14 +2847,10 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_14'
         content:
-          multipart/form-data:
+          application/json:
             schema:
-              properties:
-                tag_name:
-                  type: string
-              type: object
+              $ref: '#/components/schemas/EnterpriseLeadsTagCreateReq'
         required: false
       responses:
         "200":
@@ -2974,19 +2881,10 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_15'
         content:
-          multipart/form-data:
+          application/json:
             schema:
-              properties:
-                tag_id:
-                  description: 标签id
-                  format: int64
-                  type: integer
-                tag_name:
-                  description: 标签名称
-                  type: string
-              type: object
+              $ref: '#/components/schemas/EnterpriseLeadsTagUpdateReq'
         required: false
       responses:
         "200":
@@ -3017,16 +2915,10 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_16'
         content:
-          multipart/form-data:
+          application/json:
             schema:
-              properties:
-                tag_id:
-                  description: 标签id
-                  format: int64
-                  type: integer
-              type: object
+              $ref: '#/components/schemas/EnterpriseLeadsTagDeleteReq'
         required: false
       responses:
         "200":
@@ -3057,22 +2949,10 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_17'
         content:
-          multipart/form-data:
+          application/json:
             schema:
-              properties:
-                bind:
-                  description: 是否绑定
-                  type: boolean
-                tag_id:
-                  description: 标签id
-                  format: int64
-                  type: integer
-                user_id:
-                  description: 用户openid
-                  type: string
-              type: object
+              $ref: '#/components/schemas/EnterpriseLeadsTagUserUpdateReq'
         required: false
       responses:
         "200":
@@ -3103,18 +2983,10 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_18'
         content:
-          multipart/form-data:
+          application/json:
             schema:
-              properties:
-                role_name:
-                  description: 角色名（暂未开放）
-                  type: string
-                nickname:
-                  description: 昵称
-                  type: string
-              type: object
+              $ref: '#/components/schemas/EnterpriseImPersonCreateReq'
         required: false
       responses:
         "200":
@@ -3145,15 +3017,10 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_19'
         content:
-          multipart/form-data:
+          application/json:
             schema:
-              properties:
-                persona_id:
-                  description: 客服id
-                  type: string
-              type: object
+              $ref: '#/components/schemas/EnterpriseImPersonDeleteReq'
         required: false
       responses:
         "200":
@@ -3225,18 +3092,10 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_20'
         content:
-          multipart/form-data:
+          application/json:
             schema:
-              properties:
-                persona_id:
-                  description: 客服id
-                  type: string
-                to_user_id:
-                  description: 会话对方的open_id
-                  type: string
-              type: object
+              $ref: '#/components/schemas/EnterpriseImPersonConversationCreateReq'
         required: false
       responses:
         "200":
@@ -3267,18 +3126,10 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_21'
         content:
-          multipart/form-data:
+          application/json:
             schema:
-              properties:
-                persona_id:
-                  description: 客服id
-                  type: string
-                to_user_id:
-                  description: 会话对方的open_id
-                  type: string
-              type: object
+              $ref: '#/components/schemas/EnterpriseImPersonConversationDeleteReq'
         required: false
       responses:
         "200":
@@ -3309,88 +3160,10 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_22'
         content:
-          multipart/form-data:
+          application/json:
             schema:
-              properties:
-                actual_amount:
-                  description: 实际金额(单位分)
-                  format: int64
-                  type: integer
-                code_type:
-                  description: 0券码生成的方式;1系统生成;2自定义上传
-                  format: int64
-                  type: integer
-                h5_url:
-                  description: 团购活动详情页链接
-                  type: string
-                order_limit:
-                  description: 单用户购买数量上限
-                  format: int64
-                  type: integer
-                audit_msg:
-                  description: 审核失败原因
-                  type: string
-                groupon_id:
-                  description: 团购活动Id，审核失败修改用
-                  type: string
-                start_time:
-                  description: 活动开始时间 unix time
-                  format: int64
-                  type: integer
-                stock:
-                  description: 团购活动库存总数
-                  format: int64
-                  type: integer
-                title:
-                  description: 卡券标题
-                  type: string
-                end_time:
-                  description: 活动截止时间 unix time
-                  format: int64
-                  type: integer
-                merchant_name:
-                  description: 商户名称
-                  type: string
-                service_number:
-                  description: 联系电话
-                  type: string
-                status:
-                  description: 活动状态 创建时可以忽略 1有效 2审核中 3审核失败 4中止
-                  format: int64
-                  type: integer
-                notification:
-                  description: 团购须知
-                  type: string
-                original_amount:
-                  description: 原价(单位分)
-                  format: int64
-                  type: integer
-                sold_count:
-                  description: 已售出数量
-                  format: int64
-                  type: integer
-                use_type:
-                  description: 团购使用方式 1 到店核销
-                  format: int64
-                  type: integer
-                groupon_goods:
-                  description: 团购商品
-                  items:
-                    $ref: '#/components/schemas/_enterprise_groupon_save_groupon_goods'
-                  type: array
-                cover_images:
-                  description: 封面图
-                  items:
-                    type: string
-                  type: array
-                poi_ids:
-                  description: 绑定的POI 列表 默认展示全部门店
-                  items:
-                    type: string
-                  type: array
-              type: object
+              $ref: '#/components/schemas/EnterpriseGrouponSaveReq'
         required: false
       responses:
         "200":
@@ -3503,15 +3276,10 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_23'
         content:
-          multipart/form-data:
+          application/json:
             schema:
-              properties:
-                groupon_id:
-                  description: 团购活动Id
-                  type: string
-              type: object
+              $ref: '#/components/schemas/EnterpriseGrouponOfflineReq'
         required: false
       responses:
         "200":
@@ -3735,15 +3503,10 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_24'
         content:
-          multipart/form-data:
+          application/json:
             schema:
-              properties:
-                order_id:
-                  description: 团购活动订单Id
-                  type: string
-              type: object
+              $ref: '#/components/schemas/EnterpriseGrouponOrderRefundConfirmReq'
         required: false
       responses:
         "200":
@@ -3774,18 +3537,10 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_25'
         content:
-          multipart/form-data:
+          application/json:
             schema:
-              properties:
-                code:
-                  description: 券码的列表
-                  type: string
-                groupon_id:
-                  description: 团购活动的Id
-                  type: string
-              type: object
+              $ref: '#/components/schemas/EnterpriseGrouponCodeVerificationReq'
         required: false
       responses:
         "200":
@@ -3816,20 +3571,10 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_26'
         content:
-          multipart/form-data:
+          application/json:
             schema:
-              properties:
-                code:
-                  description: 券码的列表
-                  items:
-                    type: string
-                  type: array
-                groupon_id:
-                  description: 团购活动的Id
-                  type: string
-              type: object
+              $ref: '#/components/schemas/EnterpriseGrouponCodeStatusReq'
         required: false
       responses:
         "200":
@@ -3860,23 +3605,10 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_27'
         content:
-          multipart/form-data:
+          application/json:
             schema:
-              properties:
-                card_id:
-                  description: 卡片id，创建时不传；更新时必传。同一个用户的卡片id不可重复
-                  type: string
-                card_type:
-                  description: 卡片类型 `question_list` - 问题列表
-                  type: string
-                content:
-                  description: 卡片内容字段 json序列化成string， { "question_list" { "text" "有什么疑问呢",
-                    "questions" [{ "name" "问题1", "text" "关键词1" }, { "name" "问题2",
-                    "text" "关键词2" } ] } }
-                  type: string
-              type: object
+              $ref: '#/components/schemas/EnterpriseImCardSaveReq'
         required: false
       responses:
         "200":
@@ -3948,14 +3680,10 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_28'
         content:
-          multipart/form-data:
+          application/json:
             schema:
-              properties:
-                card_id:
-                  type: string
-              type: object
+              $ref: '#/components/schemas/EnterpriseImCardDeleteReq'
         required: false
       responses:
         "200":
@@ -3981,7 +3709,7 @@ paths:
           type: string
       requestBody:
         content:
-          multipart/form-data:
+          application/json:
             schema:
               $ref: '#/components/schemas/PoiSupplier'
         required: false
@@ -4060,21 +3788,10 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_29'
         content:
-          multipart/form-data:
+          application/json:
             schema:
-              properties:
-                match_type:
-                  description: 匹配类型，0-离线匹配 1-实时匹配。离线匹配，不会实时返回结果，最大上传1w个数据，通过/poi/supplier/match/query/接口查询匹配结果；
-                    在线匹配，实时返回结果，最大上传100个数据，需要申请授权。
-                  format: int64
-                  type: integer
-                match_data_list:
-                  items:
-                    $ref: '#/components/schemas/_poi_supplier_match_match_data_list'
-                  type: array
-              type: object
+              $ref: '#/components/schemas/PoiSupplierMatchReq'
         required: false
       responses:
         "200":
@@ -4099,9 +3816,9 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_30'
+        $ref: '#/components/requestBodies/inline_object_7'
         content:
-          multipart/form-data:
+          application/json:
             schema:
               properties:
                 supplier_ext_ids:
@@ -4133,38 +3850,10 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_31'
         content:
-          multipart/form-data:
+          application/json:
             schema:
-              properties:
-                description:
-                  description: SPU描述
-                  type: string
-                name:
-                  description: SPU名称
-                  type: string
-                order:
-                  description: SPU展示顺序,降序
-                  format: int64
-                  type: integer
-                spu_ext_id:
-                  description: 接入方SPU ID
-                  type: string
-                spu_type:
-                  description: spu类型号，1-酒店民宿房型，90-景区门票，91-团购券 20 电商实体商品 21 电商虚拟商品
-                  format: int64
-                  type: integer
-                status:
-                  description: 在线状态 1 - 在线; 2 - 下线
-                  format: int64
-                  type: integer
-                supplier_ext_id:
-                  description: 接入方店铺ID
-                  type: string
-                attributes:
-                  $ref: '#/components/schemas/PoiSupplier'
-              type: object
+              $ref: '#/components/schemas/PoiSpuSyncReq'
         required: false
       responses:
         "200":
@@ -4215,19 +3904,10 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_32'
         content:
           application/json:
             schema:
-              properties:
-                spu_ext_id:
-                  description: 外部平台SPU ID
-                  type: string
-                skus:
-                  items:
-                    $ref: '#/components/schemas/_poi_sku_sync_skus'
-                  type: array
-              type: object
+              $ref: '#/components/schemas/PoiSkuSyncReq'
         required: false
       responses:
         "200":
@@ -4295,47 +3975,17 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_33'
         content:
-          multipart/form-data:
+          application/json:
             schema:
-              properties:
-                trans_code:
-                  description: 交易场景码，SEND_MONEY_REDPACKET 红包转账 SEND_VCOIN_REDPACKET
-                    抖币转账
-                  type: string
-                amount:
-                  description: 数目
-                  format: int64
-                  type: integer
-                biz_order_no:
-                  description: 外部订单号，由调用方生成，长度小于64
-                  type: string
-                live_id:
-                  description: 业务id
-                  format: int64
-                  type: integer
-                merchant_id:
-                  description: 商户id
-                  format: int64
-                  type: integer
-                order_desc:
-                  description: 订单描述，长度小于256
-                  type: string
-                order_name:
-                  description: 订单名称，长度小于64
-                  type: string
-                remark:
-                  description: 标记，长度小于512
-                  type: string
-              type: object
+              $ref: '#/components/schemas/DouyinPayAccountTransReq'
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DouyinPayAccountTrans'
+                $ref: '#/components/schemas/DouyinPayAccountTransRsp'
           description: successful operation
       summary: 商户向用户转账
       tags:
@@ -4433,32 +4083,17 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_34'
         content:
-          multipart/form-data:
+          application/json:
             schema:
-              properties:
-                order_id:
-                  description: 抖音订单号
-                  type: string
-                status:
-                  description: 订单确认状态。0 - 订单确认, 1 - 价格变动, 2 - 库存不足, 3 - 确认中
-                  format: int64
-                  type: integer
-                supplier_ext_id:
-                  description: 接入方商铺ID
-                  type: string
-                order_ext_id:
-                  description: 接入方订单号
-                  type: string
-              type: object
+              $ref: '#/components/schemas/PoiOrderStatusReq'
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PoiOrderStatus'
+                $ref: '#/components/schemas/PoiOrderStatusRsp'
           description: successful operation
       summary: 订单状态同步接口
       tags:
@@ -4469,54 +4104,10 @@ paths:
       description: 下单接口(该接口由接入方实现)
       operationId: poi_ext_hotel_order_commit
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_35'
         content:
-          multipart/form-data:
+          application/json:
             schema:
-              properties:
-                status:
-                  description: 订单支付状态。0 - 未支付, 1 - 已支付
-                  format: int64
-                  type: integer
-                check_in:
-                  description: 入住时间 yyyyMMdd
-                  type: string
-                check_out:
-                  description: 离店时间 yyyyMMdd
-                  type: string
-                customer_name:
-                  description: 预订人姓名
-                  type: string
-                customer_phone:
-                  description: 预订人电话
-                  format: int64
-                  type: integer
-                order_id:
-                  description: 抖音订单号
-                  type: string
-                remark:
-                  description: 备注
-                  type: string
-                total_price:
-                  description: 总价, 单位人民币分
-                  format: int64
-                  type: integer
-                reserve_amount:
-                  description: 预定数量
-                  format: int64
-                  type: integer
-                spu_ext_id:
-                  description: 接入方房型ID
-                  type: string
-                date_price:
-                  items:
-                    $ref: '#/components/schemas/_poi_ext_hotel_order_commit_date_price'
-                  type: array
-                customer_list:
-                  items:
-                    $ref: '#/components/schemas/_poi_ext_hotel_order_commit_customer_list'
-                  type: array
-              type: object
+              $ref: '#/components/schemas/PoiExtHotelOrderCommitReq'
         required: true
       responses:
         "200":
@@ -4534,29 +4125,10 @@ paths:
       description: 支付状态通知(该接口由接入方实现)
       operationId: poi_ext_hotel_order_status
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_36'
         content:
-          multipart/form-data:
+          application/json:
             schema:
-              properties:
-                status:
-                  description: 订单支付状态。0 - 未支付, 1 - 已支付
-                  format: int64
-                  type: integer
-                order_id:
-                  description: 抖音订单号
-                  type: string
-                supplier_ext_id:
-                  description: 接入方商铺ID
-                  type: string
-                order_ext_id:
-                  description: 接入方订单号
-                  type: string
-                date_price:
-                  items:
-                    $ref: '#/components/schemas/_poi_ext_hotel_order_commit_date_price'
-                  type: array
-              type: object
+              $ref: '#/components/schemas/PoiExtHotelOrderStatusReq'
         required: true
       responses:
         "200":
@@ -4574,29 +4146,10 @@ paths:
       description: 取消订单(该接口由接入方实现)
       operationId: poi_ext_hotel_order_cancel
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_37'
         content:
-          multipart/form-data:
+          application/json:
             schema:
-              properties:
-                order_id:
-                  description: 抖音订单号
-                  type: string
-                order_status:
-                  description: 订单状态。0 - 未支付, 1 - 已支付
-                  format: int64
-                  type: integer
-                supplier_ext_id:
-                  description: 接入方商铺ID
-                  type: string
-                order_ext_id:
-                  description: 接入方订单号
-                  type: string
-                date_price:
-                  items:
-                    $ref: '#/components/schemas/_poi_ext_hotel_order_commit_date_price'
-                  type: array
-              type: object
+              $ref: '#/components/schemas/PoiExtHotelOrderCancelReq'
         required: true
       responses:
         "200":
@@ -4621,28 +4174,10 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_38'
         content:
           application/json:
             schema:
-              properties:
-                order_type:
-                  description: 订单类型- 201 预约点餐订单, 202 餐厅预定订单, 203 餐厅排队订单, 9001 景区门票订单,
-                    9101 团购券订单, 9201 在线预约订单, 9301 外卖订单, 140 住宿订单
-                  format: int64
-                  type: integer
-                date_time:
-                  description: 订单状态。0 - 未支付, 1 - 已支付
-                  format: int64
-                  type: integer
-                order_detail:
-                  description: 订单的细节，不同的订单业务有不同的结构体，请具体询问业务方字段结构
-                  type: string
-                ext_shop_info:
-                  $ref: '#/components/schemas/_poi_order_sync_ext_shop_info'
-                mini_app:
-                  $ref: '#/components/schemas/_poi_order_sync_mini_app'
-              type: object
+              $ref: '#/components/schemas/PoiOrderSyncReq'
         required: false
       responses:
         "200":
@@ -4926,7 +4461,6 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_39'
         content:
           multipart/form-data:
             schema:
@@ -4937,7 +4471,8 @@ paths:
                     pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
                     type: string
                   type: array
-              type: object
+              required:
+              - media
         required: true
       responses:
         "200":
@@ -4949,7 +4484,6 @@ paths:
       summary: 上传素材
       tags:
       - media
-      x-codegen-request-body-name: body
   /enterprise/media/temp/upload:
     post:
       description: 上传临时素材
@@ -4968,7 +4502,6 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_40'
         content:
           multipart/form-data:
             schema:
@@ -4979,7 +4512,8 @@ paths:
                     pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
                     type: string
                   type: array
-              type: object
+              required:
+              - media
         required: true
       responses:
         "200":
@@ -4991,7 +4525,6 @@ paths:
       summary: 上传临时素材
       tags:
       - media
-      x-codegen-request-body-name: body
   /enterprise/media/list:
     get:
       description: 获取永久素材列表
@@ -5050,15 +4583,10 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_41'
         content:
-          multipart/form-data:
+          application/json:
             schema:
-              properties:
-                media_id:
-                  description: 素材id
-                  type: string
-              type: object
+              $ref: '#/components/schemas/EnterpriseMediaDeleteReq'
         required: true
       responses:
         "200":
@@ -5110,15 +4638,10 @@ paths:
         schema:
           type: string
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_42'
         content:
-          multipart/form-data:
+          application/json:
             schema:
-              properties:
-                event_type:
-                  description: 需要mock的事件类型, 开放平台会通过webhook发送一条mock数据给你
-                  type: string
-              type: object
+              $ref: '#/components/schemas/SandboxWebhookEventEendReq'
         required: true
       responses:
         "200":
@@ -5154,173 +4677,23 @@ paths:
       - js
 components:
   requestBodies:
-    inline_object_30:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/inline_object_30'
-      required: false
-    inline_object_10:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/inline_object_10'
-      required: true
-    inline_object_32:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/inline_object_32'
-      required: false
-    inline_object_31:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/inline_object_31'
-      required: false
-    inline_object_12:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/inline_object_12'
-      required: true
-    inline_object_34:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/inline_object_34'
-      required: true
-    inline_object_11:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/inline_object_11'
-      required: true
-    inline_object_33:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/inline_object_33'
-      required: true
-    inline_object_14:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/inline_object_14'
-      required: false
-    inline_object_36:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/inline_object_36'
-      required: true
-    inline_object_13:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/inline_object_13'
-      required: true
-    inline_object_35:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/inline_object_35'
-      required: true
-    inline_object_16:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/inline_object_16'
-      required: false
-    inline_object_38:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/inline_object_38'
-      required: false
-    inline_object_15:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/inline_object_15'
-      required: false
-    inline_object_37:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/inline_object_37'
-      required: true
-    inline_object_29:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/inline_object_29'
-      required: false
-    inline_object_28:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/inline_object_28'
-      required: false
     inline_object_1:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/inline_object_1'
       required: true
-    inline_object_41:
+    inline_object:
       content:
-        multipart/form-data:
+        application/json:
           schema:
-            $ref: '#/components/schemas/inline_object_41'
-      required: true
-    inline_object_40:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/inline_object_40'
-      required: true
-    inline_object_9:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/inline_object_9'
-      required: true
-    inline_object_21:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/inline_object_21'
-      required: false
-    inline_object_8:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/inline_object_8'
-      required: false
-    inline_object_20:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/inline_object_20'
-      required: false
-    inline_object_42:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/inline_object_42'
+            $ref: '#/components/schemas/inline_object'
       required: true
     inline_object_7:
       content:
-        multipart/form-data:
+        application/json:
           schema:
             $ref: '#/components/schemas/inline_object_7'
-      required: false
-    inline_object_23:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/inline_object_23'
       required: false
     inline_object_6:
       content:
@@ -5328,35 +4701,17 @@ components:
           schema:
             $ref: '#/components/schemas/inline_object_6'
       required: false
-    inline_object_22:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/inline_object_22'
-      required: false
     inline_object_5:
       content:
         multipart/form-data:
           schema:
             $ref: '#/components/schemas/inline_object_5'
       required: false
-    inline_object_25:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/inline_object_25'
-      required: false
     inline_object_4:
       content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/inline_object_4'
-      required: false
-    inline_object_24:
-      content:
         multipart/form-data:
           schema:
-            $ref: '#/components/schemas/inline_object_24'
+            $ref: '#/components/schemas/inline_object_4'
       required: false
     inline_object_3:
       content:
@@ -5364,53 +4719,11 @@ components:
           schema:
             $ref: '#/components/schemas/inline_object_3'
       required: false
-    inline_object_27:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/inline_object_27'
-      required: false
     inline_object_2:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/inline_object_2'
-      required: true
-    inline_object_26:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/inline_object_26'
-      required: false
-    inline_object_18:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/inline_object_18'
-      required: false
-    inline_object_17:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/inline_object_17'
-      required: false
-    inline_object_39:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/inline_object_39'
-      required: true
-    inline_object_19:
-      content:
-        multipart/form-data:
-          schema:
-            $ref: '#/components/schemas/inline_object_19'
-      required: false
-    inline_object:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/inline_object'
       required: true
   schemas:
     ConnectRsp:
@@ -6089,9 +5402,9 @@ components:
           error_code: 0
           has_more: true
           video:
-            width: 5
+            width: 1
             height: 6
-            video_id: 1
+            video_id: video_id
         extra:
           sub_error_code: 1
           sub_description: sub_description
@@ -6101,7 +5414,7 @@ components:
           logid: logid
       properties:
         data:
-          $ref: '#/components/schemas/ToutiaoVideoUploadRsp_data'
+          $ref: '#/components/schemas/DouyinVideoUploadRsp_data'
         extra:
           $ref: '#/components/schemas/FollowingListRsp_data_extra'
       title: ToutiaoVideoUploadRsp
@@ -6175,9 +5488,9 @@ components:
           description: description
           error_code: 0
           video:
-            width: 5
+            width: 1
             height: 6
-            video_id: 1
+            video_id: video_id
         extra:
           sub_error_code: 1
           sub_description: sub_description
@@ -6187,7 +5500,7 @@ components:
           logid: logid
       properties:
         data:
-          $ref: '#/components/schemas/TouTiaoVideoPartCompleteRsp_data'
+          $ref: '#/components/schemas/DouyinVideoPartCompleteRsp_data'
         extra:
           $ref: '#/components/schemas/FollowingListRsp_data_extra'
       title: TouTiaoVideoPartCompleteRsp
@@ -6283,9 +5596,9 @@ components:
           description: description
           error_code: 0
           video:
-            width: 5
+            width: 1
             height: 6
-            video_id: 1
+            video_id: video_id
         extra:
           sub_error_code: 1
           sub_description: sub_description
@@ -6295,10 +5608,33 @@ components:
           logid: logid
       properties:
         data:
-          $ref: '#/components/schemas/TouTiaoVideoPartCompleteRsp_data'
+          $ref: '#/components/schemas/DouyinVideoPartCompleteRsp_data'
         extra:
           $ref: '#/components/schemas/FollowingListRsp_data_extra'
       title: XiGuaVideoUploadRsp
+      type: object
+    XiGuaVideoCreateReq:
+      description: ""
+      properties:
+        abstract:
+          description: 视频简介，400字以内
+          type: string
+        claim_origin:
+          description: 是否声明原创（授权账号需要在西瓜视频端内开通「实名认证」）
+          type: string
+        cover_tsp:
+          description: 从视频中截取封面的时间，用该帧作为封面（单位为毫秒）
+          type: string
+        praise:
+          description: 是否给视频开通可以赞赏的入口（授权账号需要在西瓜视频端内开通「实名认证」）
+          type: string
+        text:
+          description: 标题长度应该在5-30字之间
+          type: string
+        video_id:
+          description: video_id, 通过/xigua/video/upload/接口得到
+          type: string
+      title: DouyinVideoCreateReq
       type: object
     XiGuaVideoCreateRsp:
       description: ""
@@ -6381,7 +5717,7 @@ components:
           logid: logid
       properties:
         data:
-          $ref: '#/components/schemas/TouTiaoVideoPartCompleteRsp_data'
+          $ref: '#/components/schemas/XiGuaVideoPartCompleteRsp_data'
         extra:
           $ref: '#/components/schemas/FollowingListRsp_data_extra'
       title: XiGuaVideoPartCompleteRsp
@@ -6544,6 +5880,21 @@ components:
           $ref: '#/components/schemas/FollowingListRsp_data_extra'
       title: ItemCommentReplyListRsp
       type: object
+    ItemCommentReplyReq:
+      description: ""
+      example:
+        item_id: item_id
+        comment_id: comment_id
+        content: content
+      properties:
+        comment_id:
+          type: string
+        content:
+          type: string
+        item_id:
+          type: string
+      title: ItemCommentReplyReq
+      type: object
     ItemCommentReplyRsp:
       description: ""
       example:
@@ -6654,6 +6005,24 @@ components:
           $ref: '#/components/schemas/ConnectRsp_extra'
       title: VideoCommentReplyRsp
       type: object
+    VideoCommentReplyReq:
+      description: ""
+      example:
+        item_id: item_id
+        comment_id: comment_id
+        content: content
+      properties:
+        comment_id:
+          description: 需要回复的评论id
+          type: string
+        content:
+          description: 评论内容
+          type: string
+        item_id:
+          description: 视频id
+          type: string
+      title: VideoCommentReplyReq
+      type: object
     VideoCommentTopRsp:
       description: ""
       example:
@@ -6669,6 +6038,51 @@ components:
         extra:
           $ref: '#/components/schemas/ConnectRsp_extra'
       title: VideoCommentTopRsp
+      type: object
+    VideoCommentTopReq:
+      description: ""
+      example:
+        top: true
+        item_id: item_id
+        comment_id: comment_id
+      properties:
+        top:
+          description: true置顶, false取消置顶
+          type: boolean
+        comment_id:
+          description: 需要回复的评论id
+          type: string
+        item_id:
+          description: 视频id
+          type: string
+      title: VideoCommentTopReq
+      type: object
+    EnterpriseImMessageSendReq:
+      description: ""
+      example:
+        client_msg_id: client_msg_id
+        to_user_id: to_user_id
+        persona_id: persona_id
+        message_type: message_type
+        content: content
+      properties:
+        persona_id:
+          description: 客服id，传则走客服会话，否则为普通会话
+          type: string
+        to_user_id:
+          description: 消息的接收方openid
+          type: string
+        client_msg_id:
+          description: 内部使用
+          type: string
+        content:
+          description: 消息体见下方schema
+          type: string
+        message_type:
+          description: 消息内容格式 `text` - 文本消息 `image` - 图片消息 `video` - 视频消息 `card` -
+            卡片消息
+          type: string
+      title: EnterpriseImMessageSendReq
       type: object
     EnterpriseImMessageSendRsp:
       description: ""
@@ -6782,6 +6196,24 @@ components:
         extra:
           $ref: '#/components/schemas/FollowingListRsp_data_extra'
       title: VideoSearchCommentListRsp
+      type: object
+    VideoSearchCommentReplyReq:
+      description: ""
+      example:
+        sec_item_id: sec_item_id
+        comment_id: comment_id
+        content: content
+      properties:
+        sec_item_id:
+          description: 视频搜索接口返回的加密的视频id
+          type: string
+        comment_id:
+          description: 需要回复的评论id（如果需要回复的是视频不传此字段）
+          type: string
+        content:
+          description: 评论内容
+          type: string
+      title: VideoSearchCommentReplyReq
       type: object
     VideoSearchCommentReplyRsp:
       description: ""
@@ -7691,6 +7123,15 @@ components:
           $ref: '#/components/schemas/FollowingListRsp_data_extra'
       title: EnterpriseLeadsTagUserListRsp
       type: object
+    EnterpriseLeadsTagCreateReq:
+      description: ""
+      example:
+        tag_name: tag_name
+      properties:
+        tag_name:
+          type: string
+      title: EnterpriseLeadsTagCreateReq
+      type: object
     EnterpriseLeadsTagCreateRsp:
       description: ""
       example:
@@ -7714,6 +7155,21 @@ components:
         extra:
           $ref: '#/components/schemas/FollowingListRsp_data_extra'
       title: EnterpriseLeadsTagCreateRsp
+      type: object
+    EnterpriseLeadsTagUpdateReq:
+      description: ""
+      example:
+        tag_name: tag_name
+        tag_id: 0
+      properties:
+        tag_id:
+          description: 标签id
+          format: int64
+          type: integer
+        tag_name:
+          description: 标签名称
+          type: string
+      title: EnterpriseLeadsTagUpdateReq
       type: object
     EnterpriseLeadsTagUpdateRsp:
       description: ""
@@ -7739,6 +7195,17 @@ components:
           $ref: '#/components/schemas/FollowingListRsp_data_extra'
       title: EnterpriseLeadsTagUpdateRsp
       type: object
+    EnterpriseLeadsTagDeleteReq:
+      description: ""
+      example:
+        tag_id: 0
+      properties:
+        tag_id:
+          description: 标签id
+          format: int64
+          type: integer
+      title: EnterpriseLeadsTagDeleteReq
+      type: object
     EnterpriseLeadsTagDeleteRsp:
       description: ""
       example:
@@ -7761,6 +7228,25 @@ components:
         extra:
           $ref: '#/components/schemas/FollowingListRsp_data_extra'
       title: EnterpriseLeadsTagDeleteRsp
+      type: object
+    EnterpriseLeadsTagUserUpdateReq:
+      description: ""
+      example:
+        bind: true
+        user_id: user_id
+        tag_id: 0
+      properties:
+        bind:
+          description: 是否绑定
+          type: boolean
+        tag_id:
+          description: 标签id
+          format: int64
+          type: integer
+        user_id:
+          description: 用户openid
+          type: string
+      title: EnterpriseLeadsTagUserUpdateReq
       type: object
     EnterpriseLeadsTagUserUpdateRsp:
       description: ""
@@ -7785,6 +7271,20 @@ components:
           $ref: '#/components/schemas/FollowingListRsp_data_extra'
       title: EnterpriseLeadsTagUserUpdateRsp
       type: object
+    EnterpriseImPersonCreateReq:
+      description: ""
+      example:
+        role_name: role_name
+        nickname: nickname
+      properties:
+        role_name:
+          description: 角色名（暂未开放）
+          type: string
+        nickname:
+          description: 昵称
+          type: string
+      title: EnterpriseImPersonCreateReq
+      type: object
     EnterpriseImPersonCreateRsp:
       description: ""
       example:
@@ -7808,6 +7308,16 @@ components:
         extra:
           $ref: '#/components/schemas/FollowingListRsp_data_extra'
       title: EnterpriseImPersonCreateRsp
+      type: object
+    EnterpriseImPersonDeleteReq:
+      description: ""
+      example:
+        persona_id: persona_id
+      properties:
+        persona_id:
+          description: 客服id
+          type: string
+      title: EnterpriseImPersonDeleteReq
       type: object
     EnterpriseImPersonDeleteRsp:
       description: ""
@@ -7858,6 +7368,20 @@ components:
           $ref: '#/components/schemas/FollowingListRsp_data_extra'
       title: EnterpriseImPersonListRsp
       type: object
+    EnterpriseImPersonConversationCreateReq:
+      description: ""
+      example:
+        to_user_id: to_user_id
+        persona_id: persona_id
+      properties:
+        persona_id:
+          description: 客服id
+          type: string
+        to_user_id:
+          description: 会话对方的open_id
+          type: string
+      title: EnterpriseImPersonConversationCreateReq
+      type: object
     EnterpriseImPersonConversationCreateRsp:
       description: ""
       example:
@@ -7878,6 +7402,20 @@ components:
           $ref: '#/components/schemas/FollowingListRsp_data_extra'
       title: EnterpriseImPersonConversationCreateRsp
       type: object
+    EnterpriseImPersonConversationDeleteReq:
+      description: ""
+      example:
+        to_user_id: to_user_id
+        persona_id: persona_id
+      properties:
+        persona_id:
+          description: 客服id
+          type: string
+        to_user_id:
+          description: 会话对方的open_id
+          type: string
+      title: EnterpriseImPersonConversationDeleteReq
+      type: object
     EnterpriseImPersonConversationDeleteRsp:
       description: ""
       example:
@@ -7897,6 +7435,116 @@ components:
         extra:
           $ref: '#/components/schemas/FollowingListRsp_data_extra'
       title: EnterpriseImPersonConversationDeleteRsp
+      type: object
+    EnterpriseGrouponSaveReq:
+      description: ""
+      example:
+        cover_images:
+        - cover_images
+        - cover_images
+        actual_amount: 0
+        end_time: 2
+        merchant_name: merchant_name
+        title: title
+        start_time: 5
+        notification: notification
+        h5_url: h5_url
+        use_type: 2
+        groupon_id: groupon_id
+        original_amount: 9
+        poi_ids:
+        - poi_ids
+        - poi_ids
+        order_limit: 1
+        stock: 5
+        service_number: service_number
+        groupon_goods:
+        - price: 4
+          name: name
+        - price: 4
+          name: name
+        audit_msg: audit_msg
+        code_type: 6
+        status: 7
+        sold_count: 3
+      properties:
+        actual_amount:
+          description: 实际金额(单位分)
+          format: int64
+          type: integer
+        code_type:
+          description: 0券码生成的方式;1系统生成;2自定义上传
+          format: int64
+          type: integer
+        h5_url:
+          description: 团购活动详情页链接
+          type: string
+        order_limit:
+          description: 单用户购买数量上限
+          format: int64
+          type: integer
+        audit_msg:
+          description: 审核失败原因
+          type: string
+        groupon_id:
+          description: 团购活动Id，审核失败修改用
+          type: string
+        start_time:
+          description: 活动开始时间 unix time
+          format: int64
+          type: integer
+        stock:
+          description: 团购活动库存总数
+          format: int64
+          type: integer
+        title:
+          description: 卡券标题
+          type: string
+        end_time:
+          description: 活动截止时间 unix time
+          format: int64
+          type: integer
+        merchant_name:
+          description: 商户名称
+          type: string
+        service_number:
+          description: 联系电话
+          type: string
+        status:
+          description: 活动状态 创建时可以忽略 1有效 2审核中 3审核失败 4中止
+          format: int64
+          type: integer
+        notification:
+          description: 团购须知
+          type: string
+        original_amount:
+          description: 原价(单位分)
+          format: int64
+          type: integer
+        sold_count:
+          description: 已售出数量
+          format: int64
+          type: integer
+        use_type:
+          description: 团购使用方式 1 到店核销
+          format: int64
+          type: integer
+        groupon_goods:
+          description: 团购商品
+          items:
+            $ref: '#/components/schemas/EnterpriseGrouponSaveReq_groupon_goods'
+          type: array
+        cover_images:
+          description: 封面图
+          items:
+            type: string
+          type: array
+        poi_ids:
+          description: 绑定的POI 列表 默认展示全部门店
+          items:
+            type: string
+          type: array
+      title: EnterpriseGrouponSaveReq
       type: object
     EnterpriseGrouponSaveRsp:
       description: ""
@@ -8075,6 +7723,16 @@ components:
         extra:
           $ref: '#/components/schemas/FollowingListRsp_data_extra'
       title: EnterpriseGrouponDetailRsp
+      type: object
+    EnterpriseGrouponOfflineReq:
+      description: ""
+      example:
+        groupon_id: groupon_id
+      properties:
+        groupon_id:
+          description: 团购活动Id
+          type: string
+      title: EnterpriseGrouponOfflineReq
       type: object
     EnterpriseGrouponOfflineRsp:
       description: ""
@@ -8312,6 +7970,16 @@ components:
           $ref: '#/components/schemas/FollowingListRsp_data_extra'
       title: EnterpriseGrouponOrderOverviewRsp
       type: object
+    EnterpriseGrouponOrderRefundConfirmReq:
+      description: ""
+      example:
+        order_id: order_id
+      properties:
+        order_id:
+          description: 团购活动订单Id
+          type: string
+      title: EnterpriseGrouponOrderRefundConfirmReq
+      type: object
     EnterpriseGrouponOrderRefundConfirmRsp:
       description: ""
       example:
@@ -8332,6 +8000,20 @@ components:
           $ref: '#/components/schemas/FollowingListRsp_data_extra'
       title: EnterpriseGrouponOrderRefundConfirmRsp
       type: object
+    EnterpriseGrouponCodeVerificationReq:
+      description: ""
+      example:
+        code: code
+        groupon_id: groupon_id
+      properties:
+        code:
+          description: 券码的列表
+          type: string
+        groupon_id:
+          description: 团购活动的Id
+          type: string
+      title: EnterpriseGrouponCodeVerificationReq
+      type: object
     EnterpriseGrouponCodeVerificationRsp:
       description: ""
       example:
@@ -8351,6 +8033,24 @@ components:
         extra:
           $ref: '#/components/schemas/FollowingListRsp_data_extra'
       title: EnterpriseGrouponCodeVerificationRsp
+      type: object
+    EnterpriseGrouponCodeStatusReq:
+      description: ""
+      example:
+        code:
+        - code
+        - code
+        groupon_id: groupon_id
+      properties:
+        code:
+          description: 券码的列表
+          items:
+            type: string
+          type: array
+        groupon_id:
+          description: 团购活动的Id
+          type: string
+      title: EnterpriseGrouponCodeStatusReq
       type: object
     EnterpriseGrouponCodeStatusRsp:
       description: ""
@@ -8384,6 +8084,26 @@ components:
         extra:
           $ref: '#/components/schemas/FollowingListRsp_data_extra'
       title: EnterpriseGrouponCodeStatusRsp
+      type: object
+    EnterpriseImCardSaveReq:
+      description: ""
+      example:
+        card_type: card_type
+        card_id: card_id
+        content: content
+      properties:
+        card_id:
+          description: 卡片id，创建时不传；更新时必传。同一个用户的卡片id不可重复
+          type: string
+        card_type:
+          description: 卡片类型 `question_list` - 问题列表
+          type: string
+        content:
+          description: 卡片内容字段 json序列化成string， { "question_list" { "text" "有什么疑问呢",
+            "questions" [{ "name" "问题1", "text" "关键词1" }, { "name" "问题2", "text" "关键词2"
+            } ] } }
+          type: string
+      title: EnterpriseImCardSaveReq
       type: object
     EnterpriseImCardSaveRsp:
       description: ""
@@ -8439,6 +8159,15 @@ components:
           $ref: '#/components/schemas/FollowingListRsp_data_extra'
       title: EnterpriseImCardListRsp
       type: object
+    EnterpriseImCardDeleteReq:
+      description: ""
+      example:
+        card_id: card_id
+      properties:
+        card_id:
+          type: string
+      title: EnterpriseImCardDeleteReq
+      type: object
     EnterpriseImCardDeleteRsp:
       description: ""
       example:
@@ -8489,29 +8218,29 @@ components:
         contact_tel: contact_tel
         description: description
         attributes:
-          "1105": 4
+          "1105": 2
           "1104":
             check_in_time: check_in_time
             check_out_time: check_out_time
             breakfast:
-              price: 3
-              type: 2
+              price: 9
+              type: 3
             pet: pet
             child: child
           "1103":
-          - code: 9
+          - code: 7
             name: name
-          - code: 9
+          - code: 7
             name: name
           "1102":
-          - code: 9
+          - code: 7
             name: name
-          - code: 9
+          - code: 7
             name: name
           "1101":
-          - code: 9
+          - code: 7
             name: name
-          - code: 9
+          - code: 7
             name: name
           "3101":
             preferential_policy:
@@ -8522,55 +8251,55 @@ components:
               discount: discount
               population: population
             preferential_policy_ext:
-              node_type: 7
+              node_type: 4
               content: content
             open_time: open_time
             scenic_intro:
-            - node_type: 1
+            - node_type: 7
               content: content
-            - node_type: 1
+            - node_type: 7
               content: content
             facility:
             - name: name
             - name: name
             play_intro:
-            - node_type: 1
+            - node_type: 7
               content: content
-            - node_type: 1
+            - node_type: 7
               content: content
             open_time_ext:
-            - node_type: 1
+            - node_type: 7
               content: content
-            - node_type: 1
+            - node_type: 7
               content: content
             pet: 1
             traffic:
-            - node_type: 1
+            - node_type: 7
               content: content
-            - node_type: 1
+            - node_type: 7
               content: content
         services:
         - entry:
             entry_mini_app:
               path: path
-              is_test: 7
+              is_test: 2
               params: params
               app_id: app_id
-            entry_type: 2
+            entry_type: 5
           service_type: 5
-          enable: 5
+          enable: 1
         - entry:
             entry_mini_app:
               path: path
-              is_test: 7
+              is_test: 2
               params: params
               app_id: app_id
-            entry_type: 2
+            entry_type: 5
           service_type: 5
-          enable: 5
+          enable: 1
         poi_id: poi_id
-        type: 1
-        status: 6
+        type: 6
+        status: 0
       properties:
         contact_phone:
           description: 联系手机号
@@ -8637,29 +8366,29 @@ components:
             contact_tel: contact_tel
             description: description
             attributes:
-              "1105": 4
+              "1105": 2
               "1104":
                 check_in_time: check_in_time
                 check_out_time: check_out_time
                 breakfast:
-                  price: 3
-                  type: 2
+                  price: 9
+                  type: 3
                 pet: pet
                 child: child
               "1103":
-              - code: 9
+              - code: 7
                 name: name
-              - code: 9
+              - code: 7
                 name: name
               "1102":
-              - code: 9
+              - code: 7
                 name: name
-              - code: 9
+              - code: 7
                 name: name
               "1101":
-              - code: 9
+              - code: 7
                 name: name
-              - code: 9
+              - code: 7
                 name: name
               "3101":
                 preferential_policy:
@@ -8670,55 +8399,55 @@ components:
                   discount: discount
                   population: population
                 preferential_policy_ext:
-                  node_type: 7
+                  node_type: 4
                   content: content
                 open_time: open_time
                 scenic_intro:
-                - node_type: 1
+                - node_type: 7
                   content: content
-                - node_type: 1
+                - node_type: 7
                   content: content
                 facility:
                 - name: name
                 - name: name
                 play_intro:
-                - node_type: 1
+                - node_type: 7
                   content: content
-                - node_type: 1
+                - node_type: 7
                   content: content
                 open_time_ext:
-                - node_type: 1
+                - node_type: 7
                   content: content
-                - node_type: 1
+                - node_type: 7
                   content: content
                 pet: 1
                 traffic:
-                - node_type: 1
+                - node_type: 7
                   content: content
-                - node_type: 1
+                - node_type: 7
                   content: content
             services:
             - entry:
                 entry_mini_app:
                   path: path
-                  is_test: 7
+                  is_test: 2
                   params: params
                   app_id: app_id
-                entry_type: 2
+                entry_type: 5
               service_type: 5
-              enable: 5
+              enable: 1
             - entry:
                 entry_mini_app:
                   path: path
-                  is_test: 7
+                  is_test: 2
                   params: params
                   app_id: app_id
-                entry_type: 2
+                entry_type: 5
               service_type: 5
-              enable: 5
+              enable: 1
             poi_id: poi_id
-            type: 1
-            status: 6
+            type: 6
+            status: 0
         extra:
           now: 2
           logid: logid
@@ -8751,6 +8480,39 @@ components:
         extra:
           $ref: '#/components/schemas/FansDataRsp_extra'
       title: PoiQueryRsp
+      type: object
+    PoiSupplierMatchReq:
+      description: ""
+      example:
+        match_type: 0
+        match_data_list:
+        - poi_name: poi_name
+          address: address
+          province: province
+          city: city
+          latitude: latitude
+          amap_id: amap_id
+          supplier_ext_id: supplier_ext_id
+          longitude: longitude
+        - poi_name: poi_name
+          address: address
+          province: province
+          city: city
+          latitude: latitude
+          amap_id: amap_id
+          supplier_ext_id: supplier_ext_id
+          longitude: longitude
+      properties:
+        match_type:
+          description: 匹配类型，0-离线匹配 1-实时匹配。离线匹配，不会实时返回结果，最大上传1w个数据，通过/poi/supplier/match/query/接口查询匹配结果；
+            在线匹配，实时返回结果，最大上传100个数据，需要申请授权。
+          format: int64
+          type: integer
+        match_data_list:
+          items:
+            $ref: '#/components/schemas/PoiSupplierMatchReq_match_data_list'
+          type: array
+      title: PoiSupplierMatchReq
       type: object
     PoiSupplierMatchRsp:
       description: ""
@@ -8818,6 +8580,138 @@ components:
           $ref: '#/components/schemas/FansDataRsp_extra'
       title: PoiSupplierMatchQueryRsp
       type: object
+    PoiSpuSyncReq:
+      description: ""
+      example:
+        spu_ext_id: spu_ext_id
+        name: name
+        spu_type: 6
+        supplier_ext_id: supplier_ext_id
+        description: description
+        attributes:
+          images:
+          - images
+          - images
+          address: address
+          contact_phone: contact_phone
+          name: name
+          supplier_ext_id: supplier_ext_id
+          contact_tel: contact_tel
+          description: description
+          attributes:
+            "1105": 2
+            "1104":
+              check_in_time: check_in_time
+              check_out_time: check_out_time
+              breakfast:
+                price: 9
+                type: 3
+              pet: pet
+              child: child
+            "1103":
+            - code: 7
+              name: name
+            - code: 7
+              name: name
+            "1102":
+            - code: 7
+              name: name
+            - code: 7
+              name: name
+            "1101":
+            - code: 7
+              name: name
+            - code: 7
+              name: name
+            "3101":
+              preferential_policy:
+              - condition: condition
+                discount: discount
+                population: population
+              - condition: condition
+                discount: discount
+                population: population
+              preferential_policy_ext:
+                node_type: 4
+                content: content
+              open_time: open_time
+              scenic_intro:
+              - node_type: 7
+                content: content
+              - node_type: 7
+                content: content
+              facility:
+              - name: name
+              - name: name
+              play_intro:
+              - node_type: 7
+                content: content
+              - node_type: 7
+                content: content
+              open_time_ext:
+              - node_type: 7
+                content: content
+              - node_type: 7
+                content: content
+              pet: 1
+              traffic:
+              - node_type: 7
+                content: content
+              - node_type: 7
+                content: content
+          services:
+          - entry:
+              entry_mini_app:
+                path: path
+                is_test: 2
+                params: params
+                app_id: app_id
+              entry_type: 5
+            service_type: 5
+            enable: 1
+          - entry:
+              entry_mini_app:
+                path: path
+                is_test: 2
+                params: params
+                app_id: app_id
+              entry_type: 5
+            service_type: 5
+            enable: 1
+          poi_id: poi_id
+          type: 6
+          status: 0
+        order: 0
+        status: 1
+      properties:
+        description:
+          description: SPU描述
+          type: string
+        name:
+          description: SPU名称
+          type: string
+        order:
+          description: SPU展示顺序,降序
+          format: int64
+          type: integer
+        spu_ext_id:
+          description: 接入方SPU ID
+          type: string
+        spu_type:
+          description: spu类型号，1-酒店民宿房型，90-景区门票，91-团购券 20 电商实体商品 21 电商虚拟商品
+          format: int64
+          type: integer
+        status:
+          description: 在线状态 1 - 在线; 2 - 下线
+          format: int64
+          type: integer
+        supplier_ext_id:
+          description: 接入方店铺ID
+          type: string
+        attributes:
+          $ref: '#/components/schemas/PoiSupplier'
+      title: PoiSpuSyncReq
+      type: object
     PoiSpuSyncRsp:
       description: ""
       example:
@@ -8868,6 +8762,31 @@ components:
           $ref: '#/components/schemas/FansDataRsp_extra'
       title: PoiSpuQueryRsp
       type: object
+    PoiSkuSyncReq:
+      description: ""
+      example:
+        spu_ext_id: spu_ext_id
+        skus:
+        - price: 0
+          attributes:
+            "1310": "1310"
+          stock: 1
+          status: 6
+        - price: 0
+          attributes:
+            "1310": "1310"
+          stock: 1
+          status: 6
+      properties:
+        spu_ext_id:
+          description: 外部平台SPU ID
+          type: string
+        skus:
+          items:
+            $ref: '#/components/schemas/PoiSkuSyncReq_skus'
+          type: array
+      title: PoiSkuSyncReq
+      type: object
     PoiSkuSyncRsp:
       description: ""
       example:
@@ -8900,7 +8819,48 @@ components:
           $ref: '#/components/schemas/FansDataRsp_extra'
       title: PoiExtHotelSkuRsp
       type: object
-    DouyinPayAccountTrans:
+    DouyinPayAccountTransReq:
+      description: ""
+      example:
+        trans_code: trans_code
+        amount: 0
+        live_id: 6
+        remark: remark
+        biz_order_no: biz_order_no
+        merchant_id: 1
+        order_desc: order_desc
+        order_name: order_name
+      properties:
+        trans_code:
+          description: 交易场景码，SEND_MONEY_REDPACKET 红包转账 SEND_VCOIN_REDPACKET 抖币转账
+          type: string
+        amount:
+          description: 数目
+          format: int64
+          type: integer
+        biz_order_no:
+          description: 外部订单号，由调用方生成，长度小于64
+          type: string
+        live_id:
+          description: 业务id
+          format: int64
+          type: integer
+        merchant_id:
+          description: 商户id
+          format: int64
+          type: integer
+        order_desc:
+          description: 订单描述，长度小于256
+          type: string
+        order_name:
+          description: 订单名称，长度小于64
+          type: string
+        remark:
+          description: 标记，长度小于512
+          type: string
+      title: DouyinPayAccountTransReq
+      type: object
+    DouyinPayAccountTransRsp:
       description: ""
       example:
         data:
@@ -8917,10 +8877,10 @@ components:
           logid: logid
       properties:
         data:
-          $ref: '#/components/schemas/DouyinPayAccountTrans_data'
+          $ref: '#/components/schemas/DouyinPayAccountTransRsp_data'
         extra:
           $ref: '#/components/schemas/FansDataRsp_extra'
-      title: DouyinPayAccountTrans
+      title: DouyinPayAccountTransRsp
       type: object
     DouyinPayOrderQueryRsp:
       description: ""
@@ -8973,7 +8933,30 @@ components:
           $ref: '#/components/schemas/FansDataRsp_extra'
       title: DouyinPayAccountQueryRsp
       type: object
-    PoiOrderStatus:
+    PoiOrderStatusReq:
+      description: ""
+      example:
+        order_ext_id: order_ext_id
+        supplier_ext_id: supplier_ext_id
+        order_id: order_id
+        status: 0
+      properties:
+        order_id:
+          description: 抖音订单号
+          type: string
+        status:
+          description: 订单确认状态。0 - 订单确认, 1 - 价格变动, 2 - 库存不足, 3 - 确认中
+          format: int64
+          type: integer
+        supplier_ext_id:
+          description: 接入方商铺ID
+          type: string
+        order_ext_id:
+          description: 接入方订单号
+          type: string
+      title: PoiOrderStatusReq
+      type: object
+    PoiOrderStatusRsp:
       description: ""
       example:
         data:
@@ -8986,10 +8969,80 @@ components:
           logid: logid
       properties:
         data:
-          $ref: '#/components/schemas/PoiOrderStatus_data'
+          $ref: '#/components/schemas/PoiOrderStatusRsp_data'
         extra:
           $ref: '#/components/schemas/FansDataRsp_extra'
-      title: PoiOrderStatus
+      title: PoiOrderStatusRsp
+      type: object
+    PoiExtHotelOrderCommitReq:
+      description: ""
+      example:
+        date_price:
+        - date: date
+          date_price: 5
+        - date: date
+          date_price: 5
+        check_out: check_out
+        spu_ext_id: spu_ext_id
+        total_price: 1
+        reserve_amount: 5
+        check_in: check_in
+        customer_phone: 6
+        customer_list:
+        - cn_name: cn_name
+          surname: surname
+          given_name: given_name
+        - cn_name: cn_name
+          surname: surname
+          given_name: given_name
+        remark: remark
+        customer_name: customer_name
+        order_id: order_id
+        status: 0
+      properties:
+        status:
+          description: 订单支付状态。0 - 未支付, 1 - 已支付
+          format: int64
+          type: integer
+        check_in:
+          description: 入住时间 yyyyMMdd
+          type: string
+        check_out:
+          description: 离店时间 yyyyMMdd
+          type: string
+        customer_name:
+          description: 预订人姓名
+          type: string
+        customer_phone:
+          description: 预订人电话
+          format: int64
+          type: integer
+        order_id:
+          description: 抖音订单号
+          type: string
+        remark:
+          description: 备注
+          type: string
+        total_price:
+          description: 总价, 单位人民币分
+          format: int64
+          type: integer
+        reserve_amount:
+          description: 预定数量
+          format: int64
+          type: integer
+        spu_ext_id:
+          description: 接入方房型ID
+          type: string
+        date_price:
+          items:
+            $ref: '#/components/schemas/PoiExtHotelOrderCommitReq_date_price'
+          type: array
+        customer_list:
+          items:
+            $ref: '#/components/schemas/PoiExtHotelOrderCommitReq_customer_list'
+          type: array
+      title: PoiExtHotelOrderCommitReq
       type: object
     PoiExtHotelOrderCommitRsp:
       description: ""
@@ -9007,6 +9060,38 @@ components:
         extra:
           $ref: '#/components/schemas/FansDataRsp_extra'
       title: PoiExtHotelOrderCommitRsp
+      type: object
+    PoiExtHotelOrderStatusReq:
+      description: ""
+      example:
+        date_price:
+        - date: date
+          date_price: 5
+        - date: date
+          date_price: 5
+        order_ext_id: order_ext_id
+        supplier_ext_id: supplier_ext_id
+        order_id: order_id
+        status: 0
+      properties:
+        status:
+          description: 订单支付状态。0 - 未支付, 1 - 已支付
+          format: int64
+          type: integer
+        order_id:
+          description: 抖音订单号
+          type: string
+        supplier_ext_id:
+          description: 接入方商铺ID
+          type: string
+        order_ext_id:
+          description: 接入方订单号
+          type: string
+        date_price:
+          items:
+            $ref: '#/components/schemas/PoiExtHotelOrderCommitReq_date_price'
+          type: array
+      title: PoiExtHotelOrderStatusReq
       type: object
     PoiExtHotelOrderStatusRsp:
       description: ""
@@ -9027,6 +9112,38 @@ components:
           $ref: '#/components/schemas/FansDataRsp_extra'
       title: PoiExtHotelOrderStatusRsp
       type: object
+    PoiExtHotelOrderCancelReq:
+      description: ""
+      example:
+        date_price:
+        - date: date
+          date_price: 5
+        - date: date
+          date_price: 5
+        order_status: 0
+        order_ext_id: order_ext_id
+        supplier_ext_id: supplier_ext_id
+        order_id: order_id
+      properties:
+        order_id:
+          description: 抖音订单号
+          type: string
+        order_status:
+          description: 订单状态。0 - 未支付, 1 - 已支付
+          format: int64
+          type: integer
+        supplier_ext_id:
+          description: 接入方商铺ID
+          type: string
+        order_ext_id:
+          description: 接入方订单号
+          type: string
+        date_price:
+          items:
+            $ref: '#/components/schemas/PoiExtHotelOrderCommitReq_date_price'
+          type: array
+      title: PoiExtHotelOrderCancelReq
+      type: object
     PoiExtHotelOrderCancelRsp:
       description: ""
       example:
@@ -9045,6 +9162,37 @@ components:
         extra:
           $ref: '#/components/schemas/FansDataRsp_extra'
       title: PoiExtHotelOrderCancelRsp
+      type: object
+    PoiOrderSyncReq:
+      description: ""
+      example:
+        date_time: 6
+        ext_shop_info:
+          shop_id: shop_id
+          ext_shop_id: ext_shop_id
+        order_detail: order_detail
+        order_type: 0
+        mini_app:
+          user_open_id: user_open_id
+          app_id: app_id
+      properties:
+        order_type:
+          description: 订单类型- 201 预约点餐订单, 202 餐厅预定订单, 203 餐厅排队订单, 9001 景区门票订单, 9101
+            团购券订单, 9201 在线预约订单, 9301 外卖订单, 140 住宿订单
+          format: int64
+          type: integer
+        date_time:
+          description: 订单状态。0 - 未支付, 1 - 已支付
+          format: int64
+          type: integer
+        order_detail:
+          description: 订单的细节，不同的订单业务有不同的结构体，请具体询问业务方字段结构
+          type: string
+        ext_shop_info:
+          $ref: '#/components/schemas/PoiOrderSyncReq_ext_shop_info'
+        mini_app:
+          $ref: '#/components/schemas/PoiOrderSyncReq_mini_app'
+      title: PoiOrderSyncReq
       type: object
     PoiOrderSyncRsp:
       description: ""
@@ -9343,6 +9491,16 @@ components:
           $ref: '#/components/schemas/FollowingListRsp_data_extra'
       title: EnterpriseMediaListRsp
       type: object
+    EnterpriseMediaDeleteReq:
+      description: ""
+      example:
+        media_id: media_id
+      properties:
+        media_id:
+          description: 素材id
+          type: string
+      title: EnterpriseMediaDeleteReq
+      type: object
     EnterpriseMediaDeleteRsp:
       description: ""
       example:
@@ -9383,6 +9541,16 @@ components:
         extra:
           $ref: '#/components/schemas/FollowingListRsp_data_extra'
       title: DevtoolMicappIsLegalRsp
+      type: object
+    SandboxWebhookEventEendReq:
+      description: ""
+      example:
+        event_type: event_type
+      properties:
+        event_type:
+          description: 需要mock的事件类型, 开放平台会通过webhook发送一条mock数据给你
+          type: string
+      title: SandboxWebhookEventEendReq
       type: object
     SandboxWebhookEventEendRsp:
       description: ""
@@ -9468,42 +9636,19 @@ components:
             type: string
           type: array
       type: object
-    _toutiao_video_create_extra:
-      properties:
-        now:
-          description: 毫秒级时间戳
-          format: int64
-          type: integer
-        sub_description:
-          description: 子错误码描述
-          type: string
-        sub_error_code:
-          description: 子错误码
-          type: string
-        description:
-          description: 错误码描述
-          type: string
-        error_code:
-          description: 错误码
-          type: string
-        logid:
-          description: 标识请求的唯一id
-          type: string
     inline_object_3:
-      properties:
-        text:
-          description: 视频标题不要超过30个字符
-          type: string
-        video_id:
-          description: video_id, 通过/toutiao/video/upload/接口得到
-          type: string
-        extra:
-          $ref: '#/components/schemas/_toutiao_video_create_extra'
-      type: object
-    inline_object_4:
       properties:
         item_ids:
           items:
+            type: string
+          type: array
+      type: object
+    inline_object_4:
+      properties:
+        video:
+          items:
+            format: byte
+            pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
             type: string
           type: array
       type: object
@@ -9518,634 +9663,17 @@ components:
       type: object
     inline_object_6:
       properties:
-        video:
-          items:
-            format: byte
-            pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
-            type: string
-          type: array
-      type: object
-    inline_object_7:
-      properties:
-        abstract:
-          description: 视频简介，400字以内
-          type: string
-        claim_origin:
-          description: 是否声明原创（授权账号需要在西瓜视频端内开通「实名认证」）
-          type: string
-        cover_tsp:
-          description: 从视频中截取封面的时间，用该帧作为封面（单位为毫秒）
-          type: string
-        praise:
-          description: 是否给视频开通可以赞赏的入口（授权账号需要在西瓜视频端内开通「实名认证」）
-          type: string
-        text:
-          description: 标题长度应该在5-30字之间
-          type: string
-        video_id:
-          description: video_id, 通过/xigua/video/upload/接口得到
-          type: string
-      type: object
-    inline_object_8:
-      properties:
         item_ids:
           items:
             type: string
           type: array
       type: object
-    inline_object_9:
-      properties:
-        comment_id:
-          type: string
-        content:
-          type: string
-        item_id:
-          type: string
-      type: object
-    inline_object_10:
-      properties:
-        comment_id:
-          description: 需要回复的评论id
-          type: string
-        content:
-          description: 评论内容
-          type: string
-        item_id:
-          description: 视频id
-          type: string
-      type: object
-    inline_object_11:
-      properties:
-        top:
-          description: true置顶, false取消置顶
-          type: boolean
-        comment_id:
-          description: 需要回复的评论id
-          type: string
-        item_id:
-          description: 视频id
-          type: string
-      type: object
-    inline_object_12:
-      properties:
-        persona_id:
-          description: 客服id，传则走客服会话，否则为普通会话
-          type: string
-        to_user_id:
-          description: 消息的接收方openid
-          type: string
-        client_msg_id:
-          description: 内部使用
-          type: string
-        content:
-          description: 消息体见下方schema
-          type: string
-        message_type:
-          description: 消息内容格式 `text` - 文本消息 `image` - 图片消息 `video` - 视频消息 `card` -
-            卡片消息
-          type: string
-      type: object
-    inline_object_13:
-      properties:
-        sec_item_id:
-          description: 视频搜索接口返回的加密的视频id
-          type: string
-        comment_id:
-          description: 需要回复的评论id（如果需要回复的是视频不传此字段）
-          type: string
-        content:
-          description: 评论内容
-          type: string
-      type: object
-    inline_object_14:
-      properties:
-        tag_name:
-          type: string
-      type: object
-    inline_object_15:
-      properties:
-        tag_id:
-          description: 标签id
-          format: int64
-          type: integer
-        tag_name:
-          description: 标签名称
-          type: string
-      type: object
-    inline_object_16:
-      properties:
-        tag_id:
-          description: 标签id
-          format: int64
-          type: integer
-      type: object
-    inline_object_17:
-      properties:
-        bind:
-          description: 是否绑定
-          type: boolean
-        tag_id:
-          description: 标签id
-          format: int64
-          type: integer
-        user_id:
-          description: 用户openid
-          type: string
-      type: object
-    inline_object_18:
-      properties:
-        role_name:
-          description: 角色名（暂未开放）
-          type: string
-        nickname:
-          description: 昵称
-          type: string
-      type: object
-    inline_object_19:
-      properties:
-        persona_id:
-          description: 客服id
-          type: string
-      type: object
-    inline_object_20:
-      properties:
-        persona_id:
-          description: 客服id
-          type: string
-        to_user_id:
-          description: 会话对方的open_id
-          type: string
-      type: object
-    inline_object_21:
-      properties:
-        persona_id:
-          description: 客服id
-          type: string
-        to_user_id:
-          description: 会话对方的open_id
-          type: string
-      type: object
-    _enterprise_groupon_save_groupon_goods:
-      properties:
-        name:
-          description: 商品名称
-          type: string
-        price:
-          description: 商品金额(单位分)
-          format: int64
-          type: integer
-    inline_object_22:
-      properties:
-        actual_amount:
-          description: 实际金额(单位分)
-          format: int64
-          type: integer
-        code_type:
-          description: 0券码生成的方式;1系统生成;2自定义上传
-          format: int64
-          type: integer
-        h5_url:
-          description: 团购活动详情页链接
-          type: string
-        order_limit:
-          description: 单用户购买数量上限
-          format: int64
-          type: integer
-        audit_msg:
-          description: 审核失败原因
-          type: string
-        groupon_id:
-          description: 团购活动Id，审核失败修改用
-          type: string
-        start_time:
-          description: 活动开始时间 unix time
-          format: int64
-          type: integer
-        stock:
-          description: 团购活动库存总数
-          format: int64
-          type: integer
-        title:
-          description: 卡券标题
-          type: string
-        end_time:
-          description: 活动截止时间 unix time
-          format: int64
-          type: integer
-        merchant_name:
-          description: 商户名称
-          type: string
-        service_number:
-          description: 联系电话
-          type: string
-        status:
-          description: 活动状态 创建时可以忽略 1有效 2审核中 3审核失败 4中止
-          format: int64
-          type: integer
-        notification:
-          description: 团购须知
-          type: string
-        original_amount:
-          description: 原价(单位分)
-          format: int64
-          type: integer
-        sold_count:
-          description: 已售出数量
-          format: int64
-          type: integer
-        use_type:
-          description: 团购使用方式 1 到店核销
-          format: int64
-          type: integer
-        groupon_goods:
-          description: 团购商品
-          items:
-            $ref: '#/components/schemas/_enterprise_groupon_save_groupon_goods'
-          type: array
-        cover_images:
-          description: 封面图
-          items:
-            type: string
-          type: array
-        poi_ids:
-          description: 绑定的POI 列表 默认展示全部门店
-          items:
-            type: string
-          type: array
-      type: object
-    inline_object_23:
-      properties:
-        groupon_id:
-          description: 团购活动Id
-          type: string
-      type: object
-    inline_object_24:
-      properties:
-        order_id:
-          description: 团购活动订单Id
-          type: string
-      type: object
-    inline_object_25:
-      properties:
-        code:
-          description: 券码的列表
-          type: string
-        groupon_id:
-          description: 团购活动的Id
-          type: string
-      type: object
-    inline_object_26:
-      properties:
-        code:
-          description: 券码的列表
-          items:
-            type: string
-          type: array
-        groupon_id:
-          description: 团购活动的Id
-          type: string
-      type: object
-    inline_object_27:
-      properties:
-        card_id:
-          description: 卡片id，创建时不传；更新时必传。同一个用户的卡片id不可重复
-          type: string
-        card_type:
-          description: 卡片类型 `question_list` - 问题列表
-          type: string
-        content:
-          description: 卡片内容字段 json序列化成string， { "question_list" { "text" "有什么疑问呢",
-            "questions" [{ "name" "问题1", "text" "关键词1" }, { "name" "问题2", "text" "关键词2"
-            } ] } }
-          type: string
-      type: object
-    inline_object_28:
-      properties:
-        card_id:
-          type: string
-      type: object
-    _poi_supplier_match_match_data_list:
-      properties:
-        address:
-          description: POI地址
-          type: string
-        amap_id:
-          description: 高德POI ID
-          type: string
-        city:
-          description: POI所在城市
-          type: string
-        latitude:
-          description: 纬度
-          type: string
-        longitude:
-          description: 经度
-          type: string
-        poi_name:
-          description: POI名称
-          type: string
-        province:
-          description: POI所在省份
-          type: string
-        supplier_ext_id:
-          description: 第三方商户ID
-          type: string
-    inline_object_29:
-      properties:
-        match_type:
-          description: 匹配类型，0-离线匹配 1-实时匹配。离线匹配，不会实时返回结果，最大上传1w个数据，通过/poi/supplier/match/query/接口查询匹配结果；
-            在线匹配，实时返回结果，最大上传100个数据，需要申请授权。
-          format: int64
-          type: integer
-        match_data_list:
-          items:
-            $ref: '#/components/schemas/_poi_supplier_match_match_data_list'
-          type: array
-      type: object
-    inline_object_30:
+    inline_object_7:
       properties:
         supplier_ext_ids:
           items:
             type: string
           type: array
-      type: object
-    inline_object_31:
-      properties:
-        description:
-          description: SPU描述
-          type: string
-        name:
-          description: SPU名称
-          type: string
-        order:
-          description: SPU展示顺序,降序
-          format: int64
-          type: integer
-        spu_ext_id:
-          description: 接入方SPU ID
-          type: string
-        spu_type:
-          description: spu类型号，1-酒店民宿房型，90-景区门票，91-团购券 20 电商实体商品 21 电商虚拟商品
-          format: int64
-          type: integer
-        status:
-          description: 在线状态 1 - 在线; 2 - 下线
-          format: int64
-          type: integer
-        supplier_ext_id:
-          description: 接入方店铺ID
-          type: string
-        attributes:
-          $ref: '#/components/schemas/PoiSupplier'
-      type: object
-    _poi_sku_sync_attributes:
-      description: SKU属性字段
-      properties:
-        "1310":
-          description: 酒店、名宿SKU日期
-          type: string
-    _poi_sku_sync_skus:
-      properties:
-        price:
-          description: 价格(人民币分)
-          format: int64
-          type: integer
-        status:
-          description: 在线状态 1 - 在线; 2 - 下线
-          format: int64
-          type: integer
-        stock:
-          description: 库存数量
-          format: int64
-          type: integer
-        attributes:
-          $ref: '#/components/schemas/_poi_sku_sync_attributes'
-    inline_object_32:
-      properties:
-        spu_ext_id:
-          description: 外部平台SPU ID
-          type: string
-        skus:
-          items:
-            $ref: '#/components/schemas/_poi_sku_sync_skus'
-          type: array
-      type: object
-    inline_object_33:
-      properties:
-        trans_code:
-          description: 交易场景码，SEND_MONEY_REDPACKET 红包转账 SEND_VCOIN_REDPACKET 抖币转账
-          type: string
-        amount:
-          description: 数目
-          format: int64
-          type: integer
-        biz_order_no:
-          description: 外部订单号，由调用方生成，长度小于64
-          type: string
-        live_id:
-          description: 业务id
-          format: int64
-          type: integer
-        merchant_id:
-          description: 商户id
-          format: int64
-          type: integer
-        order_desc:
-          description: 订单描述，长度小于256
-          type: string
-        order_name:
-          description: 订单名称，长度小于64
-          type: string
-        remark:
-          description: 标记，长度小于512
-          type: string
-      type: object
-    inline_object_34:
-      properties:
-        order_id:
-          description: 抖音订单号
-          type: string
-        status:
-          description: 订单确认状态。0 - 订单确认, 1 - 价格变动, 2 - 库存不足, 3 - 确认中
-          format: int64
-          type: integer
-        supplier_ext_id:
-          description: 接入方商铺ID
-          type: string
-        order_ext_id:
-          description: 接入方订单号
-          type: string
-      type: object
-    _poi_ext_hotel_order_commit_date_price:
-      properties:
-        date:
-          description: 入住日期 yyyyMMdd
-          type: string
-        date_price:
-          description: 入住日价格, 人民币分
-          format: int64
-          type: integer
-    _poi_ext_hotel_order_commit_customer_list:
-      properties:
-        cn_name:
-          description: 中文全称
-          type: string
-        given_name:
-          description: 英文名
-          type: string
-        surname:
-          description: 英文姓
-          type: string
-    inline_object_35:
-      properties:
-        status:
-          description: 订单支付状态。0 - 未支付, 1 - 已支付
-          format: int64
-          type: integer
-        check_in:
-          description: 入住时间 yyyyMMdd
-          type: string
-        check_out:
-          description: 离店时间 yyyyMMdd
-          type: string
-        customer_name:
-          description: 预订人姓名
-          type: string
-        customer_phone:
-          description: 预订人电话
-          format: int64
-          type: integer
-        order_id:
-          description: 抖音订单号
-          type: string
-        remark:
-          description: 备注
-          type: string
-        total_price:
-          description: 总价, 单位人民币分
-          format: int64
-          type: integer
-        reserve_amount:
-          description: 预定数量
-          format: int64
-          type: integer
-        spu_ext_id:
-          description: 接入方房型ID
-          type: string
-        date_price:
-          items:
-            $ref: '#/components/schemas/_poi_ext_hotel_order_commit_date_price'
-          type: array
-        customer_list:
-          items:
-            $ref: '#/components/schemas/_poi_ext_hotel_order_commit_customer_list'
-          type: array
-      type: object
-    inline_object_36:
-      properties:
-        status:
-          description: 订单支付状态。0 - 未支付, 1 - 已支付
-          format: int64
-          type: integer
-        order_id:
-          description: 抖音订单号
-          type: string
-        supplier_ext_id:
-          description: 接入方商铺ID
-          type: string
-        order_ext_id:
-          description: 接入方订单号
-          type: string
-        date_price:
-          items:
-            $ref: '#/components/schemas/_poi_ext_hotel_order_commit_date_price'
-          type: array
-      type: object
-    inline_object_37:
-      properties:
-        order_id:
-          description: 抖音订单号
-          type: string
-        order_status:
-          description: 订单状态。0 - 未支付, 1 - 已支付
-          format: int64
-          type: integer
-        supplier_ext_id:
-          description: 接入方商铺ID
-          type: string
-        order_ext_id:
-          description: 接入方订单号
-          type: string
-        date_price:
-          items:
-            $ref: '#/components/schemas/_poi_ext_hotel_order_commit_date_price'
-          type: array
-      type: object
-    _poi_order_sync_ext_shop_info:
-      properties:
-        ext_shop_id:
-          description: 外部商户ID
-          type: string
-        shop_id:
-          description: 抖音商户ID
-          type: string
-    _poi_order_sync_mini_app:
-      description: 小程序形式对接抖音时，该字段必传
-      properties:
-        user_open_id:
-          description: 外部商户ID
-          type: string
-        app_id:
-          description: 抖音商户ID
-          type: string
-    inline_object_38:
-      properties:
-        order_type:
-          description: 订单类型- 201 预约点餐订单, 202 餐厅预定订单, 203 餐厅排队订单, 9001 景区门票订单, 9101
-            团购券订单, 9201 在线预约订单, 9301 外卖订单, 140 住宿订单
-          format: int64
-          type: integer
-        date_time:
-          description: 订单状态。0 - 未支付, 1 - 已支付
-          format: int64
-          type: integer
-        order_detail:
-          description: 订单的细节，不同的订单业务有不同的结构体，请具体询问业务方字段结构
-          type: string
-        ext_shop_info:
-          $ref: '#/components/schemas/_poi_order_sync_ext_shop_info'
-        mini_app:
-          $ref: '#/components/schemas/_poi_order_sync_mini_app'
-      type: object
-    inline_object_39:
-      properties:
-        media:
-          items:
-            format: byte
-            pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
-            type: string
-          type: array
-      type: object
-    inline_object_40:
-      properties:
-        media:
-          items:
-            format: byte
-            pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
-            type: string
-          type: array
-      type: object
-    inline_object_41:
-      properties:
-        media_id:
-          description: 素材id
-          type: string
-      type: object
-    inline_object_42:
-      properties:
-        event_type:
-          description: 需要mock的事件类型, 开放平台会通过webhook发送一条mock数据给你
-          type: string
       type: object
     ConnectRsp_data:
       example:
@@ -10478,6 +10006,14 @@ components:
           format: int64
           type: integer
     DouyinVideoUploadRsp_data:
+      example:
+        description: description
+        error_code: 0
+        has_more: true
+        video:
+          width: 1
+          height: 6
+          video_id: video_id
       properties:
         error_code:
           description: 错误码
@@ -10841,61 +10377,6 @@ components:
           items:
             $ref: '#/components/schemas/DouyinVideoPositionSearchRsp_data_pois'
           type: array
-    ToutiaoVideoUploadRsp_data_video:
-      example:
-        width: 5
-        height: 6
-        video_id: 1
-      properties:
-        height:
-          format: int64
-          type: integer
-        video_id:
-          description: 视频文件id
-          format: int64
-          type: integer
-        width:
-          format: int64
-          type: integer
-    ToutiaoVideoUploadRsp_data:
-      example:
-        description: description
-        error_code: 0
-        has_more: true
-        video:
-          width: 5
-          height: 6
-          video_id: 1
-      properties:
-        error_code:
-          description: 错误码
-          format: int64
-          type: integer
-        has_more:
-          type: boolean
-        description:
-          description: 错误码描述
-          type: string
-        video:
-          $ref: '#/components/schemas/ToutiaoVideoUploadRsp_data_video'
-    TouTiaoVideoPartCompleteRsp_data:
-      example:
-        description: description
-        error_code: 0
-        video:
-          width: 5
-          height: 6
-          video_id: 1
-      properties:
-        error_code:
-          description: 错误码
-          format: int64
-          type: integer
-        description:
-          description: 错误码描述
-          type: string
-        video:
-          $ref: '#/components/schemas/ToutiaoVideoUploadRsp_data_video'
     TouTiaoVideoListRsp_data_statistics:
       example:
         comment_count: 5
@@ -11024,6 +10505,40 @@ components:
           items:
             $ref: '#/components/schemas/TouTiaoVideoListRsp_data_list'
           type: array
+    XiGuaVideoPartCompleteRsp_data_video:
+      example:
+        width: 5
+        height: 6
+        video_id: 1
+      properties:
+        height:
+          format: int64
+          type: integer
+        video_id:
+          description: 视频文件id
+          format: int64
+          type: integer
+        width:
+          format: int64
+          type: integer
+    XiGuaVideoPartCompleteRsp_data:
+      example:
+        description: description
+        error_code: 0
+        video:
+          width: 5
+          height: 6
+          video_id: 1
+      properties:
+        error_code:
+          description: 错误码
+          format: int64
+          type: integer
+        description:
+          description: 错误码描述
+          type: string
+        video:
+          $ref: '#/components/schemas/XiGuaVideoPartCompleteRsp_data_video'
     ItemCommentListRsp_data_list:
       example:
         create_time: 1
@@ -12733,6 +12248,18 @@ components:
           items:
             $ref: '#/components/schemas/EnterpriseImPersonListRsp_data_personas'
           type: array
+    EnterpriseGrouponSaveReq_groupon_goods:
+      example:
+        price: 4
+        name: name
+      properties:
+        name:
+          description: 商品名称
+          type: string
+        price:
+          description: 商品金额(单位分)
+          format: int64
+          type: integer
     EnterpriseGrouponSaveRsp_data:
       example:
         groupon_id: groupon_id
@@ -13504,7 +13031,7 @@ components:
       description: 抖音小程序入口参数
       example:
         path: path
-        is_test: 7
+        is_test: 2
         params: params
         app_id: app_id
       properties:
@@ -13525,10 +13052,10 @@ components:
       example:
         entry_mini_app:
           path: path
-          is_test: 7
+          is_test: 2
           params: params
           app_id: app_id
-        entry_type: 2
+        entry_type: 5
       properties:
         entry_type:
           description: 入口类型(1:H5，2:抖音小程序)
@@ -13541,12 +13068,12 @@ components:
         entry:
           entry_mini_app:
             path: path
-            is_test: 7
+            is_test: 2
             params: params
             app_id: app_id
-          entry_type: 2
+          entry_type: 5
         service_type: 5
-        enable: 5
+        enable: 1
       properties:
         enable:
           description: 上线状态(1:上线，2:下线)
@@ -13561,7 +13088,7 @@ components:
           $ref: '#/components/schemas/PoiSupplier_entry'
     PoiSupplier_attributes_1101:
       example:
-        code: 9
+        code: 7
         name: name
       properties:
         code:
@@ -13577,8 +13104,8 @@ components:
     PoiSupplier_attributes_1104_breakfast:
       description: 早餐政策
       example:
-        price: 3
-        type: 2
+        price: 9
+        type: 3
       properties:
         price:
           format: int64
@@ -13592,8 +13119,8 @@ components:
         check_in_time: check_in_time
         check_out_time: check_out_time
         breakfast:
-          price: 3
-          type: 2
+          price: 9
+          type: 3
         pet: pet
         child: child
       properties:
@@ -13629,7 +13156,7 @@ components:
     PoiSupplier_attributes_3101_preferential_policy_ext:
       description: 优待政策-扩展区(不超过1000个汉字)
       example:
-        node_type: 7
+        node_type: 4
         content: content
       properties:
         content:
@@ -13641,7 +13168,7 @@ components:
           type: integer
     PoiSupplier_attributes_3101_scenic_intro:
       example:
-        node_type: 1
+        node_type: 7
         content: content
       properties:
         content:
@@ -13669,32 +13196,32 @@ components:
           discount: discount
           population: population
         preferential_policy_ext:
-          node_type: 7
+          node_type: 4
           content: content
         open_time: open_time
         scenic_intro:
-        - node_type: 1
+        - node_type: 7
           content: content
-        - node_type: 1
+        - node_type: 7
           content: content
         facility:
         - name: name
         - name: name
         play_intro:
-        - node_type: 1
+        - node_type: 7
           content: content
-        - node_type: 1
+        - node_type: 7
           content: content
         open_time_ext:
-        - node_type: 1
+        - node_type: 7
           content: content
-        - node_type: 1
+        - node_type: 7
           content: content
         pet: 1
         traffic:
-        - node_type: 1
+        - node_type: 7
           content: content
-        - node_type: 1
+        - node_type: 7
           content: content
       properties:
         preferential_policy:
@@ -13739,29 +13266,29 @@ components:
     PoiSupplier_attributes:
       description: 店铺属性字段，编号规则：垂直行业 1xxx-酒店民宿 2xxx-餐饮 3xxx-景区 通用属性-9yxxx
       example:
-        "1105": 4
+        "1105": 2
         "1104":
           check_in_time: check_in_time
           check_out_time: check_out_time
           breakfast:
-            price: 3
-            type: 2
+            price: 9
+            type: 3
           pet: pet
           child: child
         "1103":
-        - code: 9
+        - code: 7
           name: name
-        - code: 9
+        - code: 7
           name: name
         "1102":
-        - code: 9
+        - code: 7
           name: name
-        - code: 9
+        - code: 7
           name: name
         "1101":
-        - code: 9
+        - code: 7
           name: name
-        - code: 9
+        - code: 7
           name: name
         "3101":
           preferential_policy:
@@ -13772,32 +13299,32 @@ components:
             discount: discount
             population: population
           preferential_policy_ext:
-            node_type: 7
+            node_type: 4
             content: content
           open_time: open_time
           scenic_intro:
-          - node_type: 1
+          - node_type: 7
             content: content
-          - node_type: 1
+          - node_type: 7
             content: content
           facility:
           - name: name
           - name: name
           play_intro:
-          - node_type: 1
+          - node_type: 7
             content: content
-          - node_type: 1
+          - node_type: 7
             content: content
           open_time_ext:
-          - node_type: 1
+          - node_type: 7
             content: content
-          - node_type: 1
+          - node_type: 7
             content: content
           pet: 1
           traffic:
-          - node_type: 1
+          - node_type: 7
             content: content
-          - node_type: 1
+          - node_type: 7
             content: content
       properties:
         "1101":
@@ -13850,29 +13377,29 @@ components:
           contact_tel: contact_tel
           description: description
           attributes:
-            "1105": 4
+            "1105": 2
             "1104":
               check_in_time: check_in_time
               check_out_time: check_out_time
               breakfast:
-                price: 3
-                type: 2
+                price: 9
+                type: 3
               pet: pet
               child: child
             "1103":
-            - code: 9
+            - code: 7
               name: name
-            - code: 9
+            - code: 7
               name: name
             "1102":
-            - code: 9
+            - code: 7
               name: name
-            - code: 9
+            - code: 7
               name: name
             "1101":
-            - code: 9
+            - code: 7
               name: name
-            - code: 9
+            - code: 7
               name: name
             "3101":
               preferential_policy:
@@ -13883,55 +13410,55 @@ components:
                 discount: discount
                 population: population
               preferential_policy_ext:
-                node_type: 7
+                node_type: 4
                 content: content
               open_time: open_time
               scenic_intro:
-              - node_type: 1
+              - node_type: 7
                 content: content
-              - node_type: 1
+              - node_type: 7
                 content: content
               facility:
               - name: name
               - name: name
               play_intro:
-              - node_type: 1
+              - node_type: 7
                 content: content
-              - node_type: 1
+              - node_type: 7
                 content: content
               open_time_ext:
-              - node_type: 1
+              - node_type: 7
                 content: content
-              - node_type: 1
+              - node_type: 7
                 content: content
               pet: 1
               traffic:
-              - node_type: 1
+              - node_type: 7
                 content: content
-              - node_type: 1
+              - node_type: 7
                 content: content
           services:
           - entry:
               entry_mini_app:
                 path: path
-                is_test: 7
+                is_test: 2
                 params: params
                 app_id: app_id
-              entry_type: 2
+              entry_type: 5
             service_type: 5
-            enable: 5
+            enable: 1
           - entry:
               entry_mini_app:
                 path: path
-                is_test: 7
+                is_test: 2
                 params: params
                 app_id: app_id
-              entry_type: 2
+              entry_type: 5
             service_type: 5
-            enable: 5
+            enable: 1
           poi_id: poi_id
-          type: 1
-          status: 6
+          type: 6
+          status: 0
       properties:
         error_code:
           description: 错误码
@@ -13986,6 +13513,41 @@ components:
           description: 错误码描述
           format: int64
           type: integer
+    PoiSupplierMatchReq_match_data_list:
+      example:
+        poi_name: poi_name
+        address: address
+        province: province
+        city: city
+        latitude: latitude
+        amap_id: amap_id
+        supplier_ext_id: supplier_ext_id
+        longitude: longitude
+      properties:
+        address:
+          description: POI地址
+          type: string
+        amap_id:
+          description: 高德POI ID
+          type: string
+        city:
+          description: POI所在城市
+          type: string
+        latitude:
+          description: 纬度
+          type: string
+        longitude:
+          description: 经度
+          type: string
+        poi_name:
+          description: POI名称
+          type: string
+        province:
+          description: POI所在省份
+          type: string
+        supplier_ext_id:
+          description: 第三方商户ID
+          type: string
     PoiSupplierMatchRsp_data_match_result_list:
       example:
         poi_name: poi_name
@@ -14105,6 +13667,36 @@ components:
           $ref: '#/components/schemas/PoiSupplierQueryRsp_data_sync_status'
         data_detail:
           $ref: '#/components/schemas/PoiQueryRsp'
+    PoiSkuSyncReq_attributes:
+      description: SKU属性字段
+      example:
+        "1310": "1310"
+      properties:
+        "1310":
+          description: 酒店、名宿SKU日期
+          type: string
+    PoiSkuSyncReq_skus:
+      example:
+        price: 0
+        attributes:
+          "1310": "1310"
+        stock: 1
+        status: 6
+      properties:
+        price:
+          description: 价格(人民币分)
+          format: int64
+          type: integer
+        status:
+          description: 在线状态 1 - 在线; 2 - 下线
+          format: int64
+          type: integer
+        stock:
+          description: 库存数量
+          format: int64
+          type: integer
+        attributes:
+          $ref: '#/components/schemas/PoiSkuSyncReq_attributes'
     PoiSkuSyncRsp_data:
       example:
         description: description
@@ -14117,7 +13709,7 @@ components:
         description:
           description: 错误码描述
           type: string
-    DouyinPayAccountTrans_data:
+    DouyinPayAccountTransRsp_data:
       example:
         pay_order_no: pay_order_no
         sub_msg: sub_msg
@@ -14259,7 +13851,7 @@ components:
           description: 返回错误码
           format: int64
           type: integer
-    PoiOrderStatus_data:
+    PoiOrderStatusRsp_data:
       example:
         ext: ext
         balance: 0
@@ -14280,6 +13872,33 @@ components:
           description: 返回错误码
           format: int64
           type: integer
+    PoiExtHotelOrderCommitReq_date_price:
+      example:
+        date: date
+        date_price: 5
+      properties:
+        date:
+          description: 入住日期 yyyyMMdd
+          type: string
+        date_price:
+          description: 入住日价格, 人民币分
+          format: int64
+          type: integer
+    PoiExtHotelOrderCommitReq_customer_list:
+      example:
+        cn_name: cn_name
+        surname: surname
+        given_name: given_name
+      properties:
+        cn_name:
+          description: 中文全称
+          type: string
+        given_name:
+          description: 英文名
+          type: string
+        surname:
+          description: 英文姓
+          type: string
     PoiExtHotelOrderCommitRsp_data:
       example:
         order_ext_id: order_ext_id
@@ -14322,6 +13941,29 @@ components:
           description: 订单确认状态。0 - 订单确认, 1 - 价格变动, 2 - 库存不足, 3 - 确认中
           format: int64
           type: integer
+    PoiOrderSyncReq_ext_shop_info:
+      example:
+        shop_id: shop_id
+        ext_shop_id: ext_shop_id
+      properties:
+        ext_shop_id:
+          description: 外部商户ID
+          type: string
+        shop_id:
+          description: 抖音商户ID
+          type: string
+    PoiOrderSyncReq_mini_app:
+      description: 小程序形式对接抖音时，该字段必传
+      example:
+        user_open_id: user_open_id
+        app_id: app_id
+      properties:
+        user_open_id:
+          description: 外部商户ID
+          type: string
+        app_id:
+          description: 抖音商户ID
+          type: string
     PoiOrderSyncRsp_data:
       example:
         description: description

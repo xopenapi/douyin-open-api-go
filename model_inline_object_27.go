@@ -11,10 +11,19 @@ package douyin
 
 // InlineObject27 struct for InlineObject27
 type InlineObject27 struct {
-	// 卡片id，创建时不传；更新时必传。同一个用户的卡片id不可重复
-	CardId string `json:"card_id,omitempty"`
-	// 卡片类型 `question_list` - 问题列表
-	CardType string `json:"card_type,omitempty"`
-	// 卡片内容字段 json序列化成string， { \"question_list\" { \"text\" \"有什么疑问呢\", \"questions\" [{ \"name\" \"问题1\", \"text\" \"关键词1\" }, { \"name\" \"问题2\", \"text\" \"关键词2\" } ] } }
-	Content string `json:"content,omitempty"`
+	// SPU描述
+	Description string `json:"description,omitempty"`
+	// SPU名称
+	Name string `json:"name,omitempty"`
+	// SPU展示顺序,降序
+	Order int64 `json:"order,omitempty"`
+	// 接入方SPU ID
+	SpuExtId string `json:"spu_ext_id,omitempty"`
+	// spu类型号，1-酒店民宿房型，90-景区门票，91-团购券 20 电商实体商品 21 电商虚拟商品
+	SpuType int64 `json:"spu_type,omitempty"`
+	// 在线状态 1 - 在线; 2 - 下线
+	Status int64 `json:"status,omitempty"`
+	// 接入方店铺ID
+	SupplierExtId string      `json:"supplier_ext_id,omitempty"`
+	Attributes    PoiSupplier `json:"attributes,omitempty"`
 }

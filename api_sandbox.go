@@ -11,7 +11,6 @@ package douyin
 
 import (
 	_context "context"
-	"github.com/antihax/optional"
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
@@ -25,21 +24,15 @@ var (
 // SandboxApiService SandboxApi service
 type SandboxApiService service
 
-// SandboxWebhookEventSendOpts Optional parameters for the method 'SandboxWebhookEventSend'
-type SandboxWebhookEventSendOpts struct {
-	EventType optional.String
-}
-
 /*
 SandboxWebhookEventSend 模拟webhook事件
 模拟webhook事件
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param accessToken 调用/oauth/client_token/生成的token，此token不需要用户授权
- * @param optional nil or *SandboxWebhookEventSendOpts - Optional Parameters:
- * @param "EventType" (optional.String) -  需要mock的事件类型, 开放平台会通过webhook发送一条mock数据给你
+ * @param body
 @return SandboxWebhookEventEendRsp
 */
-func (a *SandboxApiService) SandboxWebhookEventSend(ctx _context.Context, accessToken string, localVarOptionals *SandboxWebhookEventSendOpts) (SandboxWebhookEventEendRsp, *_nethttp.Response, error) {
+func (a *SandboxApiService) SandboxWebhookEventSend(ctx _context.Context, accessToken string, body SandboxWebhookEventEendReq) (SandboxWebhookEventEendRsp, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -57,7 +50,7 @@ func (a *SandboxApiService) SandboxWebhookEventSend(ctx _context.Context, access
 
 	localVarQueryParams.Add("access_token", parameterToString(accessToken, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"multipart/form-data"}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -73,9 +66,8 @@ func (a *SandboxApiService) SandboxWebhookEventSend(ctx _context.Context, access
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if localVarOptionals != nil && localVarOptionals.EventType.IsSet() {
-		localVarFormParams.Add("event_type", parameterToString(localVarOptionals.EventType.Value(), ""))
-	}
+	// body params
+	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

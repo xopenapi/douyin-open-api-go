@@ -11,20 +11,13 @@ package douyin
 
 // InlineObject33 struct for InlineObject33
 type InlineObject33 struct {
-	// 交易场景码，SEND_MONEY_REDPACKET 红包转账 SEND_VCOIN_REDPACKET 抖币转账
-	TransCode string `json:"trans_code,omitempty"`
-	// 数目
-	Amount int64 `json:"amount,omitempty"`
-	// 外部订单号，由调用方生成，长度小于64
-	BizOrderNo string `json:"biz_order_no,omitempty"`
-	// 业务id
-	LiveId int64 `json:"live_id,omitempty"`
-	// 商户id
-	MerchantId int64 `json:"merchant_id,omitempty"`
-	// 订单描述，长度小于256
-	OrderDesc string `json:"order_desc,omitempty"`
-	// 订单名称，长度小于64
-	OrderName string `json:"order_name,omitempty"`
-	// 标记，长度小于512
-	Remark string `json:"remark,omitempty"`
+	// 抖音订单号
+	OrderId string `json:"order_id,omitempty"`
+	// 订单状态。0 - 未支付, 1 - 已支付
+	OrderStatus int64 `json:"order_status,omitempty"`
+	// 接入方商铺ID
+	SupplierExtId string `json:"supplier_ext_id,omitempty"`
+	// 接入方订单号
+	OrderExtId string                            `json:"order_ext_id,omitempty"`
+	DatePrice  []PoiExtHotelOrderCommitDatePrice `json:"date_price,omitempty"`
 }

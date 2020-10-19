@@ -11,9 +11,5 @@ package douyin
 
 // InlineObject3 struct for InlineObject3
 type InlineObject3 struct {
-	// 视频标题不要超过30个字符
-	Text string `json:"text,omitempty"`
-	// video_id, 通过/toutiao/video/upload/接口得到
-	VideoId string                  `json:"video_id,omitempty"`
-	Extra   ToutiaoVideoCreateExtra `json:"extra,omitempty"`
+	ItemIds []string `json:"item_ids,omitempty"`
 }

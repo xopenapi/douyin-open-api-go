@@ -11,5 +11,6 @@ package douyin
 
 // InlineObject40 struct for InlineObject40
 type InlineObject40 struct {
-	Media []string `json:"media,omitempty"`
+	// 需要mock的事件类型, 开放平台会通过webhook发送一条mock数据给你
+	EventType string `json:"event_type,omitempty"`
 }

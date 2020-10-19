@@ -11,6 +11,6 @@ package douyin
 
 // ToutiaoVideoUploadRsp
 type ToutiaoVideoUploadRsp struct {
-	Data  ToutiaoVideoUploadRspData `json:"data,omitempty"`
+	Data  DouyinVideoUploadRspData  `json:"data,omitempty"`
 	Extra FollowingListRspDataExtra `json:"extra,omitempty"`
 }

@@ -11,10 +11,8 @@ package douyin
 
 // InlineObject11 struct for InlineObject11
 type InlineObject11 struct {
-	// true置顶, false取消置顶
-	Top bool `json:"top,omitempty"`
-	// 需要回复的评论id
-	CommentId string `json:"comment_id,omitempty"`
-	// 视频id
-	ItemId string `json:"item_id,omitempty"`
+	// 标签id
+	TagId int64 `json:"tag_id,omitempty"`
+	// 标签名称
+	TagName string `json:"tag_name,omitempty"`
 }

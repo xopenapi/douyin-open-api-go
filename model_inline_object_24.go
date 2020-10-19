@@ -11,6 +11,5 @@ package douyin
 
 // InlineObject24 struct for InlineObject24
 type InlineObject24 struct {
-	// 团购活动订单Id
-	OrderId string `json:"order_id,omitempty"`
+	CardId string `json:"card_id,omitempty"`
 }

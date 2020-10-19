@@ -209,26 +209,16 @@ func (a *VideoSearchApiService) VideoSearchCommentList(ctx _context.Context, sec
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-// VideoSearchCommentReplyOpts Optional parameters for the method 'VideoSearchCommentReply'
-type VideoSearchCommentReplyOpts struct {
-	SecItemId optional.String
-	CommentId optional.String
-	Content   optional.String
-}
-
 /*
 VideoSearchCommentReply 关键词视频评论回复
 关键词视频评论回复
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
  * @param openId 通过/oauth/access_token/获取，用户唯一标志。
- * @param optional nil or *VideoSearchCommentReplyOpts - Optional Parameters:
- * @param "SecItemId" (optional.String) -  视频搜索接口返回的加密的视频id
- * @param "CommentId" (optional.String) -  需要回复的评论id（如果需要回复的是视频不传此字段）
- * @param "Content" (optional.String) -  评论内容
+ * @param body
 @return VideoSearchCommentReplyRsp
 */
-func (a *VideoSearchApiService) VideoSearchCommentReply(ctx _context.Context, accessToken string, openId string, localVarOptionals *VideoSearchCommentReplyOpts) (VideoSearchCommentReplyRsp, *_nethttp.Response, error) {
+func (a *VideoSearchApiService) VideoSearchCommentReply(ctx _context.Context, accessToken string, openId string, body VideoSearchCommentReplyReq) (VideoSearchCommentReplyRsp, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -247,7 +237,7 @@ func (a *VideoSearchApiService) VideoSearchCommentReply(ctx _context.Context, ac
 	localVarQueryParams.Add("access_token", parameterToString(accessToken, ""))
 	localVarQueryParams.Add("open_id", parameterToString(openId, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"multipart/form-data"}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -263,15 +253,8 @@ func (a *VideoSearchApiService) VideoSearchCommentReply(ctx _context.Context, ac
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if localVarOptionals != nil && localVarOptionals.SecItemId.IsSet() {
-		localVarFormParams.Add("sec_item_id", parameterToString(localVarOptionals.SecItemId.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.CommentId.IsSet() {
-		localVarFormParams.Add("comment_id", parameterToString(localVarOptionals.CommentId.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Content.IsSet() {
-		localVarFormParams.Add("content", parameterToString(localVarOptionals.Content.Value(), ""))
-	}
+	// body params
+	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

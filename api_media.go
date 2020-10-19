@@ -25,22 +25,16 @@ var (
 // MediaApiService MediaApi service
 type MediaApiService service
 
-// EnterpriseMediaDeleteOpts Optional parameters for the method 'EnterpriseMediaDelete'
-type EnterpriseMediaDeleteOpts struct {
-	MediaId optional.String
-}
-
 /*
 EnterpriseMediaDelete 删除永久素材
 删除永久素材
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param accessToken 调用/oauth/client_token/生成的token，此token不需要用户授权
  * @param openId 通过/oauth/access_token/获取，用户唯一标志
- * @param optional nil or *EnterpriseMediaDeleteOpts - Optional Parameters:
- * @param "MediaId" (optional.String) -  素材id
+ * @param body
 @return EnterpriseMediaDeleteRsp
 */
-func (a *MediaApiService) EnterpriseMediaDelete(ctx _context.Context, accessToken string, openId string, localVarOptionals *EnterpriseMediaDeleteOpts) (EnterpriseMediaDeleteRsp, *_nethttp.Response, error) {
+func (a *MediaApiService) EnterpriseMediaDelete(ctx _context.Context, accessToken string, openId string, body EnterpriseMediaDeleteReq) (EnterpriseMediaDeleteRsp, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -59,7 +53,7 @@ func (a *MediaApiService) EnterpriseMediaDelete(ctx _context.Context, accessToke
 	localVarQueryParams.Add("access_token", parameterToString(accessToken, ""))
 	localVarQueryParams.Add("open_id", parameterToString(openId, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"multipart/form-data"}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -75,9 +69,8 @@ func (a *MediaApiService) EnterpriseMediaDelete(ctx _context.Context, accessToke
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if localVarOptionals != nil && localVarOptionals.MediaId.IsSet() {
-		localVarFormParams.Add("media_id", parameterToString(localVarOptionals.MediaId.Value(), ""))
-	}
+	// body params
+	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -205,22 +198,16 @@ func (a *MediaApiService) EnterpriseMediaList(ctx _context.Context, accessToken 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-// EnterpriseMediaTempUploadOpts Optional parameters for the method 'EnterpriseMediaTempUpload'
-type EnterpriseMediaTempUploadOpts struct {
-	Media optional.Interface
-}
-
 /*
 EnterpriseMediaTempUpload 上传临时素材
 上传临时素材
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param accessToken 调用/oauth/client_token/生成的token，此token不需要用户授权
  * @param openId 通过/oauth/access_token/获取，用户唯一标志
- * @param optional nil or *EnterpriseMediaTempUploadOpts - Optional Parameters:
- * @param "Media" (optional.Interface of []string) -
+ * @param media
 @return EnterpriseMediaTempUploadRsp
 */
-func (a *MediaApiService) EnterpriseMediaTempUpload(ctx _context.Context, accessToken string, openId string, localVarOptionals *EnterpriseMediaTempUploadOpts) (EnterpriseMediaTempUploadRsp, *_nethttp.Response, error) {
+func (a *MediaApiService) EnterpriseMediaTempUpload(ctx _context.Context, accessToken string, openId string, media []string) (EnterpriseMediaTempUploadRsp, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -255,9 +242,7 @@ func (a *MediaApiService) EnterpriseMediaTempUpload(ctx _context.Context, access
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if localVarOptionals != nil && localVarOptionals.Media.IsSet() {
-		localVarFormParams.Add("media", parameterToString(localVarOptionals.Media.Value(), "csv"))
-	}
+	localVarFormParams.Add("media", parameterToString(media, "csv"))
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -294,22 +279,16 @@ func (a *MediaApiService) EnterpriseMediaTempUpload(ctx _context.Context, access
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-// EnterpriseMediaUploadOpts Optional parameters for the method 'EnterpriseMediaUpload'
-type EnterpriseMediaUploadOpts struct {
-	Media optional.Interface
-}
-
 /*
 EnterpriseMediaUpload 上传素材
 上传素材
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param accessToken 调用/oauth/client_token/生成的token，此token不需要用户授权
  * @param openId 通过/oauth/access_token/获取，用户唯一标志
- * @param optional nil or *EnterpriseMediaUploadOpts - Optional Parameters:
- * @param "Media" (optional.Interface of []string) -
+ * @param media
 @return EnterpriseMediaUploadRsp
 */
-func (a *MediaApiService) EnterpriseMediaUpload(ctx _context.Context, accessToken string, openId string, localVarOptionals *EnterpriseMediaUploadOpts) (EnterpriseMediaUploadRsp, *_nethttp.Response, error) {
+func (a *MediaApiService) EnterpriseMediaUpload(ctx _context.Context, accessToken string, openId string, media []string) (EnterpriseMediaUploadRsp, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -344,9 +323,7 @@ func (a *MediaApiService) EnterpriseMediaUpload(ctx _context.Context, accessToke
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if localVarOptionals != nil && localVarOptionals.Media.IsSet() {
-		localVarFormParams.Add("media", parameterToString(localVarOptionals.Media.Value(), "csv"))
-	}
+	localVarFormParams.Add("media", parameterToString(media, "csv"))
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

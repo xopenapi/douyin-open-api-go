@@ -27,8 +27,7 @@ type EnterpriseImApiService service
 
 // EnterpriseImPersonConversationCreateOpts Optional parameters for the method 'EnterpriseImPersonConversationCreate'
 type EnterpriseImPersonConversationCreateOpts struct {
-	PersonaId optional.String
-	ToUserId  optional.String
+	Body optional.Interface
 }
 
 /*
@@ -38,8 +37,7 @@ EnterpriseImPersonConversationCreate 主动创建客服会话
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
  * @param openId 通过/oauth/access_token/获取，用户唯一标志
  * @param optional nil or *EnterpriseImPersonConversationCreateOpts - Optional Parameters:
- * @param "PersonaId" (optional.String) -  客服id
- * @param "ToUserId" (optional.String) -  会话对方的open_id
+ * @param "Body" (optional.Interface of EnterpriseImPersonConversationCreateReq) -
 @return EnterpriseImPersonConversationCreateRsp
 */
 func (a *EnterpriseImApiService) EnterpriseImPersonConversationCreate(ctx _context.Context, accessToken string, openId string, localVarOptionals *EnterpriseImPersonConversationCreateOpts) (EnterpriseImPersonConversationCreateRsp, *_nethttp.Response, error) {
@@ -61,7 +59,7 @@ func (a *EnterpriseImApiService) EnterpriseImPersonConversationCreate(ctx _conte
 	localVarQueryParams.Add("access_token", parameterToString(accessToken, ""))
 	localVarQueryParams.Add("open_id", parameterToString(openId, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"multipart/form-data"}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -77,12 +75,15 @@ func (a *EnterpriseImApiService) EnterpriseImPersonConversationCreate(ctx _conte
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if localVarOptionals != nil && localVarOptionals.PersonaId.IsSet() {
-		localVarFormParams.Add("persona_id", parameterToString(localVarOptionals.PersonaId.Value(), ""))
+	// body params
+	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
+		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(EnterpriseImPersonConversationCreateReq)
+		if !localVarOptionalBodyok {
+			return localVarReturnValue, nil, reportError("body should be EnterpriseImPersonConversationCreateReq")
+		}
+		localVarPostBody = &localVarOptionalBody
 	}
-	if localVarOptionals != nil && localVarOptionals.ToUserId.IsSet() {
-		localVarFormParams.Add("to_user_id", parameterToString(localVarOptionals.ToUserId.Value(), ""))
-	}
+
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -121,8 +122,7 @@ func (a *EnterpriseImApiService) EnterpriseImPersonConversationCreate(ctx _conte
 
 // EnterpriseImPersonConversationDeleteOpts Optional parameters for the method 'EnterpriseImPersonConversationDelete'
 type EnterpriseImPersonConversationDeleteOpts struct {
-	PersonaId optional.String
-	ToUserId  optional.String
+	Body optional.Interface
 }
 
 /*
@@ -132,8 +132,7 @@ EnterpriseImPersonConversationDelete 删除客服会话
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
  * @param openId 通过/oauth/access_token/获取，用户唯一标志
  * @param optional nil or *EnterpriseImPersonConversationDeleteOpts - Optional Parameters:
- * @param "PersonaId" (optional.String) -  客服id
- * @param "ToUserId" (optional.String) -  会话对方的open_id
+ * @param "Body" (optional.Interface of EnterpriseImPersonConversationDeleteReq) -
 @return EnterpriseImPersonConversationDeleteRsp
 */
 func (a *EnterpriseImApiService) EnterpriseImPersonConversationDelete(ctx _context.Context, accessToken string, openId string, localVarOptionals *EnterpriseImPersonConversationDeleteOpts) (EnterpriseImPersonConversationDeleteRsp, *_nethttp.Response, error) {
@@ -155,7 +154,7 @@ func (a *EnterpriseImApiService) EnterpriseImPersonConversationDelete(ctx _conte
 	localVarQueryParams.Add("access_token", parameterToString(accessToken, ""))
 	localVarQueryParams.Add("open_id", parameterToString(openId, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"multipart/form-data"}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -171,12 +170,15 @@ func (a *EnterpriseImApiService) EnterpriseImPersonConversationDelete(ctx _conte
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if localVarOptionals != nil && localVarOptionals.PersonaId.IsSet() {
-		localVarFormParams.Add("persona_id", parameterToString(localVarOptionals.PersonaId.Value(), ""))
+	// body params
+	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
+		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(EnterpriseImPersonConversationDeleteReq)
+		if !localVarOptionalBodyok {
+			return localVarReturnValue, nil, reportError("body should be EnterpriseImPersonConversationDeleteReq")
+		}
+		localVarPostBody = &localVarOptionalBody
 	}
-	if localVarOptionals != nil && localVarOptionals.ToUserId.IsSet() {
-		localVarFormParams.Add("to_user_id", parameterToString(localVarOptionals.ToUserId.Value(), ""))
-	}
+
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -215,8 +217,7 @@ func (a *EnterpriseImApiService) EnterpriseImPersonConversationDelete(ctx _conte
 
 // EnterpriseImPersonCreateOpts Optional parameters for the method 'EnterpriseImPersonCreate'
 type EnterpriseImPersonCreateOpts struct {
-	RoleName optional.String
-	Nickname optional.String
+	Body optional.Interface
 }
 
 /*
@@ -226,8 +227,7 @@ EnterpriseImPersonCreate 客服账号
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
  * @param openId 通过/oauth/access_token/获取，用户唯一标志
  * @param optional nil or *EnterpriseImPersonCreateOpts - Optional Parameters:
- * @param "RoleName" (optional.String) -  角色名（暂未开放）
- * @param "Nickname" (optional.String) -  昵称
+ * @param "Body" (optional.Interface of EnterpriseImPersonCreateReq) -
 @return EnterpriseImPersonCreateRsp
 */
 func (a *EnterpriseImApiService) EnterpriseImPersonCreate(ctx _context.Context, accessToken string, openId string, localVarOptionals *EnterpriseImPersonCreateOpts) (EnterpriseImPersonCreateRsp, *_nethttp.Response, error) {
@@ -249,7 +249,7 @@ func (a *EnterpriseImApiService) EnterpriseImPersonCreate(ctx _context.Context, 
 	localVarQueryParams.Add("access_token", parameterToString(accessToken, ""))
 	localVarQueryParams.Add("open_id", parameterToString(openId, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"multipart/form-data"}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -265,12 +265,15 @@ func (a *EnterpriseImApiService) EnterpriseImPersonCreate(ctx _context.Context, 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if localVarOptionals != nil && localVarOptionals.RoleName.IsSet() {
-		localVarFormParams.Add("role_name", parameterToString(localVarOptionals.RoleName.Value(), ""))
+	// body params
+	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
+		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(EnterpriseImPersonCreateReq)
+		if !localVarOptionalBodyok {
+			return localVarReturnValue, nil, reportError("body should be EnterpriseImPersonCreateReq")
+		}
+		localVarPostBody = &localVarOptionalBody
 	}
-	if localVarOptionals != nil && localVarOptionals.Nickname.IsSet() {
-		localVarFormParams.Add("nickname", parameterToString(localVarOptionals.Nickname.Value(), ""))
-	}
+
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -309,7 +312,7 @@ func (a *EnterpriseImApiService) EnterpriseImPersonCreate(ctx _context.Context, 
 
 // EnterpriseImPersonDeleteOpts Optional parameters for the method 'EnterpriseImPersonDelete'
 type EnterpriseImPersonDeleteOpts struct {
-	PersonaId optional.String
+	Body optional.Interface
 }
 
 /*
@@ -319,7 +322,7 @@ EnterpriseImPersonDelete 删除客服账号
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
  * @param openId 通过/oauth/access_token/获取，用户唯一标志
  * @param optional nil or *EnterpriseImPersonDeleteOpts - Optional Parameters:
- * @param "PersonaId" (optional.String) -  客服id
+ * @param "Body" (optional.Interface of EnterpriseImPersonDeleteReq) -
 @return EnterpriseImPersonDeleteRsp
 */
 func (a *EnterpriseImApiService) EnterpriseImPersonDelete(ctx _context.Context, accessToken string, openId string, localVarOptionals *EnterpriseImPersonDeleteOpts) (EnterpriseImPersonDeleteRsp, *_nethttp.Response, error) {
@@ -341,7 +344,7 @@ func (a *EnterpriseImApiService) EnterpriseImPersonDelete(ctx _context.Context, 
 	localVarQueryParams.Add("access_token", parameterToString(accessToken, ""))
 	localVarQueryParams.Add("open_id", parameterToString(openId, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"multipart/form-data"}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -357,9 +360,15 @@ func (a *EnterpriseImApiService) EnterpriseImPersonDelete(ctx _context.Context, 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if localVarOptionals != nil && localVarOptionals.PersonaId.IsSet() {
-		localVarFormParams.Add("persona_id", parameterToString(localVarOptionals.PersonaId.Value(), ""))
+	// body params
+	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
+		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(EnterpriseImPersonDeleteReq)
+		if !localVarOptionalBodyok {
+			return localVarReturnValue, nil, reportError("body should be EnterpriseImPersonDeleteReq")
+		}
+		localVarPostBody = &localVarOptionalBody
 	}
+
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

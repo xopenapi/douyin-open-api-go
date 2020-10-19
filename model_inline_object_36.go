@@ -11,13 +11,5 @@ package douyin
 
 // InlineObject36 struct for InlineObject36
 type InlineObject36 struct {
-	// 订单支付状态。0 - 未支付, 1 - 已支付
-	Status int64 `json:"status,omitempty"`
-	// 抖音订单号
-	OrderId string `json:"order_id,omitempty"`
-	// 接入方商铺ID
-	SupplierExtId string `json:"supplier_ext_id,omitempty"`
-	// 接入方订单号
-	OrderExtId string                            `json:"order_ext_id,omitempty"`
-	DatePrice  []PoiExtHotelOrderCommitDatePrice `json:"date_price,omitempty"`
+	Media []string `json:"media,omitempty"`
 }

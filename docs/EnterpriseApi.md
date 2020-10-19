@@ -43,7 +43,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **tagName** | **optional.String**|  | 
+ **body** | [**optional.Interface of EnterpriseLeadsTagCreateReq**](EnterpriseLeadsTagCreateReq.md)|  | 
 
 ### Return type
 
@@ -55,7 +55,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: multipart/form-data
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -90,7 +90,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **tagId** | **optional.Int64**| 标签id | 
+ **body** | [**optional.Interface of EnterpriseLeadsTagDeleteReq**](EnterpriseLeadsTagDeleteReq.md)|  | 
 
 ### Return type
 
@@ -102,7 +102,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: multipart/form-data
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -186,8 +186,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **tagId** | **optional.Int64**| 标签id | 
- **tagName** | **optional.String**| 标签名称 | 
+ **body** | [**optional.Interface of EnterpriseLeadsTagUpdateReq**](EnterpriseLeadsTagUpdateReq.md)|  | 
 
 ### Return type
 
@@ -199,7 +198,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: multipart/form-data
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -285,9 +284,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **bind** | **optional.Bool**| 是否绑定 | 
- **tagId** | **optional.Int64**| 标签id | 
- **userId** | **optional.String**| 用户openid | 
+ **body** | [**optional.Interface of EnterpriseLeadsTagUserUpdateReq**](EnterpriseLeadsTagUserUpdateReq.md)|  | 
 
 ### Return type
 
@@ -299,7 +296,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: multipart/form-data
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

@@ -106,8 +106,7 @@ func (a *PoiApiService) PoiQuery(ctx _context.Context, accessToken string, amapI
 
 // PoiSupplierMatchOpts Optional parameters for the method 'PoiSupplierMatch'
 type PoiSupplierMatchOpts struct {
-	MatchType     optional.Int64
-	MatchDataList optional.Interface
+	Body optional.Interface
 }
 
 /*
@@ -116,8 +115,7 @@ PoiSupplierMatch 店铺匹配
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
  * @param optional nil or *PoiSupplierMatchOpts - Optional Parameters:
- * @param "MatchType" (optional.Int64) -  匹配类型，0-离线匹配 1-实时匹配。离线匹配，不会实时返回结果，最大上传1w个数据，通过/poi/supplier/match/query/接口查询匹配结果； 在线匹配，实时返回结果，最大上传100个数据，需要申请授权。
- * @param "MatchDataList" (optional.Interface of []PoiSupplierMatchMatchDataList) -
+ * @param "Body" (optional.Interface of PoiSupplierMatchReq) -
 @return PoiSupplierMatchRsp
 */
 func (a *PoiApiService) PoiSupplierMatch(ctx _context.Context, accessToken string, localVarOptionals *PoiSupplierMatchOpts) (PoiSupplierMatchRsp, *_nethttp.Response, error) {
@@ -138,7 +136,7 @@ func (a *PoiApiService) PoiSupplierMatch(ctx _context.Context, accessToken strin
 
 	localVarQueryParams.Add("access_token", parameterToString(accessToken, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"multipart/form-data"}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -154,16 +152,15 @@ func (a *PoiApiService) PoiSupplierMatch(ctx _context.Context, accessToken strin
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if localVarOptionals != nil && localVarOptionals.MatchType.IsSet() {
-		localVarFormParams.Add("match_type", parameterToString(localVarOptionals.MatchType.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.MatchDataList.IsSet() {
-		paramJson, err := parameterToJson(localVarOptionals.MatchDataList.Value())
-		if err != nil {
-			return localVarReturnValue, nil, err
+	// body params
+	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
+		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(PoiSupplierMatchReq)
+		if !localVarOptionalBodyok {
+			return localVarReturnValue, nil, reportError("body should be PoiSupplierMatchReq")
 		}
-		localVarFormParams.Add("match_data_list", paramJson)
+		localVarPostBody = &localVarOptionalBody
 	}
+
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -202,7 +199,7 @@ func (a *PoiApiService) PoiSupplierMatch(ctx _context.Context, accessToken strin
 
 // PoiSupplierMatchQueryOpts Optional parameters for the method 'PoiSupplierMatchQuery'
 type PoiSupplierMatchQueryOpts struct {
-	SupplierExtIds optional.Interface
+	Body optional.Interface
 }
 
 /*
@@ -211,7 +208,7 @@ PoiSupplierMatchQuery 店铺匹配结果查询
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
  * @param optional nil or *PoiSupplierMatchQueryOpts - Optional Parameters:
- * @param "SupplierExtIds" (optional.Interface of []string) -
+ * @param "Body" (optional.Interface of InlineObject7) -
 @return PoiSupplierMatchQueryRsp
 */
 func (a *PoiApiService) PoiSupplierMatchQuery(ctx _context.Context, accessToken string, localVarOptionals *PoiSupplierMatchQueryOpts) (PoiSupplierMatchQueryRsp, *_nethttp.Response, error) {
@@ -232,7 +229,7 @@ func (a *PoiApiService) PoiSupplierMatchQuery(ctx _context.Context, accessToken 
 
 	localVarQueryParams.Add("access_token", parameterToString(accessToken, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"multipart/form-data"}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -248,9 +245,15 @@ func (a *PoiApiService) PoiSupplierMatchQuery(ctx _context.Context, accessToken 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if localVarOptionals != nil && localVarOptionals.SupplierExtIds.IsSet() {
-		localVarFormParams.Add("supplier_ext_ids", parameterToString(localVarOptionals.SupplierExtIds.Value(), "csv"))
+	// body params
+	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
+		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(InlineObject7)
+		if !localVarOptionalBodyok {
+			return localVarReturnValue, nil, reportError("body should be InlineObject7")
+		}
+		localVarPostBody = &localVarOptionalBody
 	}
+
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -368,18 +371,7 @@ func (a *PoiApiService) PoiSupplierQuery(ctx _context.Context, accessToken strin
 
 // PoiSupplierSyncOpts Optional parameters for the method 'PoiSupplierSync'
 type PoiSupplierSyncOpts struct {
-	ContactPhone  optional.String
-	Name          optional.String
-	PoiId         optional.String
-	Status        optional.Int64
-	Address       optional.String
-	ContactTel    optional.String
-	Description   optional.String
-	SupplierExtId optional.String
-	Type_         optional.Int64
-	Images        optional.Interface
-	Services      optional.Interface
-	Attributes    optional.Interface
+	Body optional.Interface
 }
 
 /*
@@ -388,18 +380,7 @@ PoiSupplierSync 商铺同步
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
  * @param optional nil or *PoiSupplierSyncOpts - Optional Parameters:
- * @param "ContactPhone" (optional.String) -  联系手机号
- * @param "Name" (optional.String) -  店铺名称
- * @param "PoiId" (optional.String) -  抖音poi id, 三方如果使用高德poi id可以通过/poi/query/接口转换，其它三方poi id走poi匹配功能进行抖音poi id获取
- * @param "Status" (optional.Int64) -  在线状态 1 - 在线; 2 - 下线
- * @param "Address" (optional.String) -  店铺地址
- * @param "ContactTel" (optional.String) -  联系座机号
- * @param "Description" (optional.String) -  店铺介绍(<=500字)
- * @param "SupplierExtId" (optional.String) -  接入方店铺id
- * @param "Type_" (optional.Int64) -  店铺类型 1 - 酒店民宿 2 - 餐饮 3 - 景区 4 - 电商 5 - 教育 6 - 丽人 7 - 爱车 8 - 亲子 9 - 宠物 10 - 家装 11 - 娱乐场所 12 - 图文快印
- * @param "Images" (optional.Interface of []string) -  店铺图片
- * @param "Services" (optional.Interface of []PoiSupplierServices) -  店铺提供的服务列表
- * @param "Attributes" (optional.Interface of PoiSupplierAttributes) -
+ * @param "Body" (optional.Interface of PoiSupplier) -
 @return PoiSupplierSyncRsp
 */
 func (a *PoiApiService) PoiSupplierSync(ctx _context.Context, accessToken string, localVarOptionals *PoiSupplierSyncOpts) (PoiSupplierSyncRsp, *_nethttp.Response, error) {
@@ -420,7 +401,7 @@ func (a *PoiApiService) PoiSupplierSync(ctx _context.Context, accessToken string
 
 	localVarQueryParams.Add("access_token", parameterToString(accessToken, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"multipart/form-data"}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -436,50 +417,15 @@ func (a *PoiApiService) PoiSupplierSync(ctx _context.Context, accessToken string
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if localVarOptionals != nil && localVarOptionals.ContactPhone.IsSet() {
-		localVarFormParams.Add("contact_phone", parameterToString(localVarOptionals.ContactPhone.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Name.IsSet() {
-		localVarFormParams.Add("name", parameterToString(localVarOptionals.Name.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.PoiId.IsSet() {
-		localVarFormParams.Add("poi_id", parameterToString(localVarOptionals.PoiId.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Status.IsSet() {
-		localVarFormParams.Add("status", parameterToString(localVarOptionals.Status.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Address.IsSet() {
-		localVarFormParams.Add("address", parameterToString(localVarOptionals.Address.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.ContactTel.IsSet() {
-		localVarFormParams.Add("contact_tel", parameterToString(localVarOptionals.ContactTel.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Description.IsSet() {
-		localVarFormParams.Add("description", parameterToString(localVarOptionals.Description.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.SupplierExtId.IsSet() {
-		localVarFormParams.Add("supplier_ext_id", parameterToString(localVarOptionals.SupplierExtId.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Type_.IsSet() {
-		localVarFormParams.Add("type", parameterToString(localVarOptionals.Type_.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Images.IsSet() {
-		localVarFormParams.Add("images", parameterToString(localVarOptionals.Images.Value(), "csv"))
-	}
-	if localVarOptionals != nil && localVarOptionals.Services.IsSet() {
-		paramJson, err := parameterToJson(localVarOptionals.Services.Value())
-		if err != nil {
-			return localVarReturnValue, nil, err
+	// body params
+	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
+		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(PoiSupplier)
+		if !localVarOptionalBodyok {
+			return localVarReturnValue, nil, reportError("body should be PoiSupplier")
 		}
-		localVarFormParams.Add("services", paramJson)
+		localVarPostBody = &localVarOptionalBody
 	}
-	if localVarOptionals != nil && localVarOptionals.Attributes.IsSet() {
-		paramJson, err := parameterToJson(localVarOptionals.Attributes.Value())
-		if err != nil {
-			return localVarReturnValue, nil, err
-		}
-		localVarFormParams.Add("attributes", paramJson)
-	}
+
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

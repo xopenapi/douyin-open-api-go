@@ -36,8 +36,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **code** | [**optional.Interface of []string**](string.md)| 券码的列表 | 
- **grouponId** | **optional.String**| 团购活动的Id | 
+ **body** | [**optional.Interface of EnterpriseGrouponCodeStatusReq**](EnterpriseGrouponCodeStatusReq.md)|  | 
 
 ### Return type
 
@@ -49,7 +48,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: multipart/form-data
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -84,8 +83,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **code** | **optional.String**| 券码的列表 | 
- **grouponId** | **optional.String**| 团购活动的Id | 
+ **body** | [**optional.Interface of EnterpriseGrouponCodeVerificationReq**](EnterpriseGrouponCodeVerificationReq.md)|  | 
 
 ### Return type
 
@@ -97,7 +95,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: multipart/form-data
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

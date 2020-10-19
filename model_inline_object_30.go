@@ -11,5 +11,12 @@ package douyin
 
 // InlineObject30 struct for InlineObject30
 type InlineObject30 struct {
-	SupplierExtIds []string `json:"supplier_ext_ids,omitempty"`
+	// 抖音订单号
+	OrderId string `json:"order_id,omitempty"`
+	// 订单确认状态。0 - 订单确认, 1 - 价格变动, 2 - 库存不足, 3 - 确认中
+	Status int64 `json:"status,omitempty"`
+	// 接入方商铺ID
+	SupplierExtId string `json:"supplier_ext_id,omitempty"`
+	// 接入方订单号
+	OrderExtId string `json:"order_ext_id,omitempty"`
 }

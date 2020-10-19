@@ -11,5 +11,8 @@ package douyin
 
 // InlineObject14 struct for InlineObject14
 type InlineObject14 struct {
-	TagName string `json:"tag_name,omitempty"`
+	// 角色名（暂未开放）
+	RoleName string `json:"role_name,omitempty"`
+	// 昵称
+	Nickname string `json:"nickname,omitempty"`
 }

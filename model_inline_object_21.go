@@ -11,8 +11,8 @@ package douyin
 
 // InlineObject21 struct for InlineObject21
 type InlineObject21 struct {
-	// 客服id
-	PersonaId string `json:"persona_id,omitempty"`
-	// 会话对方的open_id
-	ToUserId string `json:"to_user_id,omitempty"`
+	// 券码的列表
+	Code string `json:"code,omitempty"`
+	// 团购活动的Id
+	GrouponId string `json:"groupon_id,omitempty"`
 }

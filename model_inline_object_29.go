@@ -11,7 +11,20 @@ package douyin
 
 // InlineObject29 struct for InlineObject29
 type InlineObject29 struct {
-	// 匹配类型，0-离线匹配 1-实时匹配。离线匹配，不会实时返回结果，最大上传1w个数据，通过/poi/supplier/match/query/接口查询匹配结果； 在线匹配，实时返回结果，最大上传100个数据，需要申请授权。
-	MatchType     int64                           `json:"match_type,omitempty"`
-	MatchDataList []PoiSupplierMatchMatchDataList `json:"match_data_list,omitempty"`
+	// 交易场景码，SEND_MONEY_REDPACKET 红包转账 SEND_VCOIN_REDPACKET 抖币转账
+	TransCode string `json:"trans_code,omitempty"`
+	// 数目
+	Amount int64 `json:"amount,omitempty"`
+	// 外部订单号，由调用方生成，长度小于64
+	BizOrderNo string `json:"biz_order_no,omitempty"`
+	// 业务id
+	LiveId int64 `json:"live_id,omitempty"`
+	// 商户id
+	MerchantId int64 `json:"merchant_id,omitempty"`
+	// 订单描述，长度小于256
+	OrderDesc string `json:"order_desc,omitempty"`
+	// 订单名称，长度小于64
+	OrderName string `json:"order_name,omitempty"`
+	// 标记，长度小于512
+	Remark string `json:"remark,omitempty"`
 }

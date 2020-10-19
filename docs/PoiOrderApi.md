@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## PoiExtHotelOrderCancel
 
-> PoiExtHotelOrderCancelRsp PoiExtHotelOrderCancel(ctx, optional)
+> PoiExtHotelOrderCancelRsp PoiExtHotelOrderCancel(ctx, body)
 
 取消订单(该接口由接入方实现)
 
@@ -26,20 +26,7 @@ Method | HTTP request | Description
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***PoiExtHotelOrderCancelOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-
-Optional parameters are passed through a pointer to a PoiExtHotelOrderCancelOpts struct
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **orderId** | **optional.String**| 抖音订单号 | 
- **orderStatus** | **optional.Int64**| 订单状态。0 - 未支付, 1 - 已支付 | 
- **supplierExtId** | **optional.String**| 接入方商铺ID | 
- **orderExtId** | **optional.String**| 接入方订单号 | 
- **datePrice** | [**optional.Interface of []PoiExtHotelOrderCommitDatePrice**](PoiExtHotelOrderCommitDatePrice.md)|  | 
+**body** | [**PoiExtHotelOrderCancelReq**](PoiExtHotelOrderCancelReq.md)|  | 
 
 ### Return type
 
@@ -51,7 +38,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: multipart/form-data
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -61,7 +48,7 @@ No authorization required
 
 ## PoiExtHotelOrderCommit
 
-> PoiExtHotelOrderCommitRsp PoiExtHotelOrderCommit(ctx, optional)
+> PoiExtHotelOrderCommitRsp PoiExtHotelOrderCommit(ctx, body)
 
 下单接口(该接口由接入方实现)
 
@@ -73,27 +60,7 @@ No authorization required
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***PoiExtHotelOrderCommitOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-
-Optional parameters are passed through a pointer to a PoiExtHotelOrderCommitOpts struct
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **status** | **optional.Int64**| 订单支付状态。0 - 未支付, 1 - 已支付 | 
- **checkIn** | **optional.String**| 入住时间 yyyyMMdd | 
- **checkOut** | **optional.String**| 离店时间 yyyyMMdd | 
- **customerName** | **optional.String**| 预订人姓名 | 
- **customerPhone** | **optional.Int64**| 预订人电话 | 
- **orderId** | **optional.String**| 抖音订单号 | 
- **remark** | **optional.String**| 备注 | 
- **totalPrice** | **optional.Int64**| 总价, 单位人民币分 | 
- **reserveAmount** | **optional.Int64**| 预定数量 | 
- **spuExtId** | **optional.String**| 接入方房型ID | 
- **datePrice** | [**optional.Interface of []PoiExtHotelOrderCommitDatePrice**](PoiExtHotelOrderCommitDatePrice.md)|  | 
- **customerList** | [**optional.Interface of []PoiExtHotelOrderCommitCustomerList**](PoiExtHotelOrderCommitCustomerList.md)|  | 
+**body** | [**PoiExtHotelOrderCommitReq**](PoiExtHotelOrderCommitReq.md)|  | 
 
 ### Return type
 
@@ -105,7 +72,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: multipart/form-data
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -115,7 +82,7 @@ No authorization required
 
 ## PoiExtHotelOrderStatus
 
-> PoiExtHotelOrderStatusRsp PoiExtHotelOrderStatus(ctx, optional)
+> PoiExtHotelOrderStatusRsp PoiExtHotelOrderStatus(ctx, body)
 
 支付状态通知(该接口由接入方实现)
 
@@ -127,20 +94,7 @@ No authorization required
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***PoiExtHotelOrderStatusOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-
-Optional parameters are passed through a pointer to a PoiExtHotelOrderStatusOpts struct
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **status** | **optional.Int64**| 订单支付状态。0 - 未支付, 1 - 已支付 | 
- **orderId** | **optional.String**| 抖音订单号 | 
- **supplierExtId** | **optional.String**| 接入方商铺ID | 
- **orderExtId** | **optional.String**| 接入方订单号 | 
- **datePrice** | [**optional.Interface of []PoiExtHotelOrderCommitDatePrice**](PoiExtHotelOrderCommitDatePrice.md)|  | 
+**body** | [**PoiExtHotelOrderStatusReq**](PoiExtHotelOrderStatusReq.md)|  | 
 
 ### Return type
 
@@ -152,7 +106,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: multipart/form-data
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -162,7 +116,7 @@ No authorization required
 
 ## PoiOrderStatus
 
-> PoiOrderStatus PoiOrderStatus(ctx, accessToken, optional)
+> PoiOrderStatusRsp PoiOrderStatus(ctx, accessToken, body)
 
 订单状态同步接口
 
@@ -175,24 +129,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **accessToken** | **string**| 通过/oauth/access_token/获取，用户唯一标志。 | 
- **optional** | ***PoiOrderStatusOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-
-Optional parameters are passed through a pointer to a PoiOrderStatusOpts struct
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **orderId** | **optional.String**| 抖音订单号 | 
- **status** | **optional.Int64**| 订单确认状态。0 - 订单确认, 1 - 价格变动, 2 - 库存不足, 3 - 确认中 | 
- **supplierExtId** | **optional.String**| 接入方商铺ID | 
- **orderExtId** | **optional.String**| 接入方订单号 | 
+**body** | [**PoiOrderStatusReq**](PoiOrderStatusReq.md)|  | 
 
 ### Return type
 
-[**PoiOrderStatus**](PoiOrderStatus.md)
+[**PoiOrderStatusRsp**](PoiOrderStatusRsp.md)
 
 ### Authorization
 
@@ -200,7 +141,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: multipart/form-data
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -233,7 +174,7 @@ Optional parameters are passed through a pointer to a PoiOrderSyncOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **body** | [**optional.Interface of InlineObject38**](InlineObject38.md)|  | 
+ **body** | [**optional.Interface of PoiOrderSyncReq**](PoiOrderSyncReq.md)|  | 
 
 ### Return type
 

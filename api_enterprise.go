@@ -27,7 +27,7 @@ type EnterpriseApiService service
 
 // EnterpriseLeadsTagCreateOpts Optional parameters for the method 'EnterpriseLeadsTagCreate'
 type EnterpriseLeadsTagCreateOpts struct {
-	TagName optional.String
+	Body optional.Interface
 }
 
 /*
@@ -37,7 +37,7 @@ EnterpriseLeadsTagCreate 创建标签
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
  * @param openId 通过/oauth/access_token/获取，用户唯一标志
  * @param optional nil or *EnterpriseLeadsTagCreateOpts - Optional Parameters:
- * @param "TagName" (optional.String) -
+ * @param "Body" (optional.Interface of EnterpriseLeadsTagCreateReq) -
 @return EnterpriseLeadsTagCreateRsp
 */
 func (a *EnterpriseApiService) EnterpriseLeadsTagCreate(ctx _context.Context, accessToken string, openId string, localVarOptionals *EnterpriseLeadsTagCreateOpts) (EnterpriseLeadsTagCreateRsp, *_nethttp.Response, error) {
@@ -59,7 +59,7 @@ func (a *EnterpriseApiService) EnterpriseLeadsTagCreate(ctx _context.Context, ac
 	localVarQueryParams.Add("access_token", parameterToString(accessToken, ""))
 	localVarQueryParams.Add("open_id", parameterToString(openId, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"multipart/form-data"}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -75,9 +75,15 @@ func (a *EnterpriseApiService) EnterpriseLeadsTagCreate(ctx _context.Context, ac
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if localVarOptionals != nil && localVarOptionals.TagName.IsSet() {
-		localVarFormParams.Add("tag_name", parameterToString(localVarOptionals.TagName.Value(), ""))
+	// body params
+	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
+		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(EnterpriseLeadsTagCreateReq)
+		if !localVarOptionalBodyok {
+			return localVarReturnValue, nil, reportError("body should be EnterpriseLeadsTagCreateReq")
+		}
+		localVarPostBody = &localVarOptionalBody
 	}
+
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -116,7 +122,7 @@ func (a *EnterpriseApiService) EnterpriseLeadsTagCreate(ctx _context.Context, ac
 
 // EnterpriseLeadsTagDeleteOpts Optional parameters for the method 'EnterpriseLeadsTagDelete'
 type EnterpriseLeadsTagDeleteOpts struct {
-	TagId optional.Int64
+	Body optional.Interface
 }
 
 /*
@@ -126,7 +132,7 @@ EnterpriseLeadsTagDelete 删除标签
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
  * @param openId 通过/oauth/access_token/获取，用户唯一标志
  * @param optional nil or *EnterpriseLeadsTagDeleteOpts - Optional Parameters:
- * @param "TagId" (optional.Int64) -  标签id
+ * @param "Body" (optional.Interface of EnterpriseLeadsTagDeleteReq) -
 @return EnterpriseLeadsTagDeleteRsp
 */
 func (a *EnterpriseApiService) EnterpriseLeadsTagDelete(ctx _context.Context, accessToken string, openId string, localVarOptionals *EnterpriseLeadsTagDeleteOpts) (EnterpriseLeadsTagDeleteRsp, *_nethttp.Response, error) {
@@ -148,7 +154,7 @@ func (a *EnterpriseApiService) EnterpriseLeadsTagDelete(ctx _context.Context, ac
 	localVarQueryParams.Add("access_token", parameterToString(accessToken, ""))
 	localVarQueryParams.Add("open_id", parameterToString(openId, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"multipart/form-data"}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -164,9 +170,15 @@ func (a *EnterpriseApiService) EnterpriseLeadsTagDelete(ctx _context.Context, ac
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if localVarOptionals != nil && localVarOptionals.TagId.IsSet() {
-		localVarFormParams.Add("tag_id", parameterToString(localVarOptionals.TagId.Value(), ""))
+	// body params
+	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
+		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(EnterpriseLeadsTagDeleteReq)
+		if !localVarOptionalBodyok {
+			return localVarReturnValue, nil, reportError("body should be EnterpriseLeadsTagDeleteReq")
+		}
+		localVarPostBody = &localVarOptionalBody
 	}
+
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -296,8 +308,7 @@ func (a *EnterpriseApiService) EnterpriseLeadsTagList(ctx _context.Context, acce
 
 // EnterpriseLeadsTagUpdateOpts Optional parameters for the method 'EnterpriseLeadsTagUpdate'
 type EnterpriseLeadsTagUpdateOpts struct {
-	TagId   optional.Int64
-	TagName optional.String
+	Body optional.Interface
 }
 
 /*
@@ -307,8 +318,7 @@ EnterpriseLeadsTagUpdate 编辑标签
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
  * @param openId 通过/oauth/access_token/获取，用户唯一标志
  * @param optional nil or *EnterpriseLeadsTagUpdateOpts - Optional Parameters:
- * @param "TagId" (optional.Int64) -  标签id
- * @param "TagName" (optional.String) -  标签名称
+ * @param "Body" (optional.Interface of EnterpriseLeadsTagUpdateReq) -
 @return EnterpriseLeadsTagUpdateRsp
 */
 func (a *EnterpriseApiService) EnterpriseLeadsTagUpdate(ctx _context.Context, accessToken string, openId string, localVarOptionals *EnterpriseLeadsTagUpdateOpts) (EnterpriseLeadsTagUpdateRsp, *_nethttp.Response, error) {
@@ -330,7 +340,7 @@ func (a *EnterpriseApiService) EnterpriseLeadsTagUpdate(ctx _context.Context, ac
 	localVarQueryParams.Add("access_token", parameterToString(accessToken, ""))
 	localVarQueryParams.Add("open_id", parameterToString(openId, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"multipart/form-data"}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -346,12 +356,15 @@ func (a *EnterpriseApiService) EnterpriseLeadsTagUpdate(ctx _context.Context, ac
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if localVarOptionals != nil && localVarOptionals.TagId.IsSet() {
-		localVarFormParams.Add("tag_id", parameterToString(localVarOptionals.TagId.Value(), ""))
+	// body params
+	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
+		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(EnterpriseLeadsTagUpdateReq)
+		if !localVarOptionalBodyok {
+			return localVarReturnValue, nil, reportError("body should be EnterpriseLeadsTagUpdateReq")
+		}
+		localVarPostBody = &localVarOptionalBody
 	}
-	if localVarOptionals != nil && localVarOptionals.TagName.IsSet() {
-		localVarFormParams.Add("tag_name", parameterToString(localVarOptionals.TagName.Value(), ""))
-	}
+
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -483,9 +496,7 @@ func (a *EnterpriseApiService) EnterpriseLeadsTagUserList(ctx _context.Context, 
 
 // EnterpriseLeadsTagUserUpdateOpts Optional parameters for the method 'EnterpriseLeadsTagUserUpdate'
 type EnterpriseLeadsTagUserUpdateOpts struct {
-	Bind   optional.Bool
-	TagId  optional.Int64
-	UserId optional.String
+	Body optional.Interface
 }
 
 /*
@@ -495,9 +506,7 @@ EnterpriseLeadsTagUserUpdate 给用户设置标签
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
  * @param openId 通过/oauth/access_token/获取，用户唯一标志
  * @param optional nil or *EnterpriseLeadsTagUserUpdateOpts - Optional Parameters:
- * @param "Bind" (optional.Bool) -  是否绑定
- * @param "TagId" (optional.Int64) -  标签id
- * @param "UserId" (optional.String) -  用户openid
+ * @param "Body" (optional.Interface of EnterpriseLeadsTagUserUpdateReq) -
 @return EnterpriseLeadsTagUserUpdateRsp
 */
 func (a *EnterpriseApiService) EnterpriseLeadsTagUserUpdate(ctx _context.Context, accessToken string, openId string, localVarOptionals *EnterpriseLeadsTagUserUpdateOpts) (EnterpriseLeadsTagUserUpdateRsp, *_nethttp.Response, error) {
@@ -519,7 +528,7 @@ func (a *EnterpriseApiService) EnterpriseLeadsTagUserUpdate(ctx _context.Context
 	localVarQueryParams.Add("access_token", parameterToString(accessToken, ""))
 	localVarQueryParams.Add("open_id", parameterToString(openId, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"multipart/form-data"}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -535,15 +544,15 @@ func (a *EnterpriseApiService) EnterpriseLeadsTagUserUpdate(ctx _context.Context
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if localVarOptionals != nil && localVarOptionals.Bind.IsSet() {
-		localVarFormParams.Add("bind", parameterToString(localVarOptionals.Bind.Value(), ""))
+	// body params
+	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
+		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(EnterpriseLeadsTagUserUpdateReq)
+		if !localVarOptionalBodyok {
+			return localVarReturnValue, nil, reportError("body should be EnterpriseLeadsTagUserUpdateReq")
+		}
+		localVarPostBody = &localVarOptionalBody
 	}
-	if localVarOptionals != nil && localVarOptionals.TagId.IsSet() {
-		localVarFormParams.Add("tag_id", parameterToString(localVarOptionals.TagId.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.UserId.IsSet() {
-		localVarFormParams.Add("user_id", parameterToString(localVarOptionals.UserId.Value(), ""))
-	}
+
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

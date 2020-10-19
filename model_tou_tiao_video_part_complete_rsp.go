@@ -11,6 +11,6 @@ package douyin
 
 // TouTiaoVideoPartCompleteRsp
 type TouTiaoVideoPartCompleteRsp struct {
-	Data  TouTiaoVideoPartCompleteRspData `json:"data,omitempty"`
-	Extra FollowingListRspDataExtra       `json:"extra,omitempty"`
+	Data  DouyinVideoPartCompleteRspData `json:"data,omitempty"`
+	Extra FollowingListRspDataExtra      `json:"extra,omitempty"`
 }

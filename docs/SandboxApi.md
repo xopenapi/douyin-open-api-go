@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## SandboxWebhookEventSend
 
-> SandboxWebhookEventEendRsp SandboxWebhookEventSend(ctx, accessToken, optional)
+> SandboxWebhookEventEendRsp SandboxWebhookEventSend(ctx, accessToken, body)
 
 模拟webhook事件
 
@@ -23,17 +23,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **accessToken** | **string**| 调用/oauth/client_token/生成的token，此token不需要用户授权 | 
- **optional** | ***SandboxWebhookEventSendOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-
-Optional parameters are passed through a pointer to a SandboxWebhookEventSendOpts struct
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **eventType** | **optional.String**| 需要mock的事件类型, 开放平台会通过webhook发送一条mock数据给你 | 
+**body** | [**SandboxWebhookEventEendReq**](SandboxWebhookEventEendReq.md)|  | 
 
 ### Return type
 
@@ -45,7 +35,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: multipart/form-data
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

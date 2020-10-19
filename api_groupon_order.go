@@ -391,7 +391,7 @@ func (a *GrouponOrderApiService) EnterpriseGrouponOrderRefundApplyList(ctx _cont
 
 // EnterpriseGrouponOrderRefundConfirmOpts Optional parameters for the method 'EnterpriseGrouponOrderRefundConfirm'
 type EnterpriseGrouponOrderRefundConfirmOpts struct {
-	OrderId optional.String
+	Body optional.Interface
 }
 
 /*
@@ -401,7 +401,7 @@ EnterpriseGrouponOrderRefundConfirm 确认退款
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
  * @param openId 通过/oauth/access_token/获取，用户唯一标志
  * @param optional nil or *EnterpriseGrouponOrderRefundConfirmOpts - Optional Parameters:
- * @param "OrderId" (optional.String) -  团购活动订单Id
+ * @param "Body" (optional.Interface of EnterpriseGrouponOrderRefundConfirmReq) -
 @return EnterpriseGrouponOrderRefundConfirmRsp
 */
 func (a *GrouponOrderApiService) EnterpriseGrouponOrderRefundConfirm(ctx _context.Context, accessToken string, openId string, localVarOptionals *EnterpriseGrouponOrderRefundConfirmOpts) (EnterpriseGrouponOrderRefundConfirmRsp, *_nethttp.Response, error) {
@@ -423,7 +423,7 @@ func (a *GrouponOrderApiService) EnterpriseGrouponOrderRefundConfirm(ctx _contex
 	localVarQueryParams.Add("access_token", parameterToString(accessToken, ""))
 	localVarQueryParams.Add("open_id", parameterToString(openId, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"multipart/form-data"}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -439,9 +439,15 @@ func (a *GrouponOrderApiService) EnterpriseGrouponOrderRefundConfirm(ctx _contex
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if localVarOptionals != nil && localVarOptionals.OrderId.IsSet() {
-		localVarFormParams.Add("order_id", parameterToString(localVarOptionals.OrderId.Value(), ""))
+	// body params
+	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
+		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(EnterpriseGrouponOrderRefundConfirmReq)
+		if !localVarOptionalBodyok {
+			return localVarReturnValue, nil, reportError("body should be EnterpriseGrouponOrderRefundConfirmReq")
+		}
+		localVarPostBody = &localVarOptionalBody
 	}
+
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

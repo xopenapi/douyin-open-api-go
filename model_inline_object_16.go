@@ -11,6 +11,8 @@ package douyin
 
 // InlineObject16 struct for InlineObject16
 type InlineObject16 struct {
-	// 标签id
-	TagId int64 `json:"tag_id,omitempty"`
+	// 客服id
+	PersonaId string `json:"persona_id,omitempty"`
+	// 会话对方的open_id
+	ToUserId string `json:"to_user_id,omitempty"`
 }

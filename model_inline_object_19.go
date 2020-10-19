@@ -11,6 +11,6 @@ package douyin
 
 // InlineObject19 struct for InlineObject19
 type InlineObject19 struct {
-	// 客服id
-	PersonaId string `json:"persona_id,omitempty"`
+	// 团购活动Id
+	GrouponId string `json:"groupon_id,omitempty"`
 }

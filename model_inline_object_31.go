@@ -11,19 +11,26 @@ package douyin
 
 // InlineObject31 struct for InlineObject31
 type InlineObject31 struct {
-	// SPU描述
-	Description string `json:"description,omitempty"`
-	// SPU名称
-	Name string `json:"name,omitempty"`
-	// SPU展示顺序,降序
-	Order int64 `json:"order,omitempty"`
-	// 接入方SPU ID
-	SpuExtId string `json:"spu_ext_id,omitempty"`
-	// spu类型号，1-酒店民宿房型，90-景区门票，91-团购券 20 电商实体商品 21 电商虚拟商品
-	SpuType int64 `json:"spu_type,omitempty"`
-	// 在线状态 1 - 在线; 2 - 下线
+	// 订单支付状态。0 - 未支付, 1 - 已支付
 	Status int64 `json:"status,omitempty"`
-	// 接入方店铺ID
-	SupplierExtId string      `json:"supplier_ext_id,omitempty"`
-	Attributes    PoiSupplier `json:"attributes,omitempty"`
+	// 入住时间 yyyyMMdd
+	CheckIn string `json:"check_in,omitempty"`
+	// 离店时间 yyyyMMdd
+	CheckOut string `json:"check_out,omitempty"`
+	// 预订人姓名
+	CustomerName string `json:"customer_name,omitempty"`
+	// 预订人电话
+	CustomerPhone int64 `json:"customer_phone,omitempty"`
+	// 抖音订单号
+	OrderId string `json:"order_id,omitempty"`
+	// 备注
+	Remark string `json:"remark,omitempty"`
+	// 总价, 单位人民币分
+	TotalPrice int64 `json:"total_price,omitempty"`
+	// 预定数量
+	ReserveAmount int64 `json:"reserve_amount,omitempty"`
+	// 接入方房型ID
+	SpuExtId     string                               `json:"spu_ext_id,omitempty"`
+	DatePrice    []PoiExtHotelOrderCommitDatePrice    `json:"date_price,omitempty"`
+	CustomerList []PoiExtHotelOrderCommitCustomerList `json:"customer_list,omitempty"`
 }

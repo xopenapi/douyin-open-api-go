@@ -11,44 +11,8 @@ package douyin
 
 // InlineObject22 struct for InlineObject22
 type InlineObject22 struct {
-	// 实际金额(单位分)
-	ActualAmount int64 `json:"actual_amount,omitempty"`
-	// 0券码生成的方式;1系统生成;2自定义上传
-	CodeType int64 `json:"code_type,omitempty"`
-	// 团购活动详情页链接
-	H5Url string `json:"h5_url,omitempty"`
-	// 单用户购买数量上限
-	OrderLimit int64 `json:"order_limit,omitempty"`
-	// 审核失败原因
-	AuditMsg string `json:"audit_msg,omitempty"`
-	// 团购活动Id，审核失败修改用
+	// 券码的列表
+	Code []string `json:"code,omitempty"`
+	// 团购活动的Id
 	GrouponId string `json:"groupon_id,omitempty"`
-	// 活动开始时间 unix time
-	StartTime int64 `json:"start_time,omitempty"`
-	// 团购活动库存总数
-	Stock int64 `json:"stock,omitempty"`
-	// 卡券标题
-	Title string `json:"title,omitempty"`
-	// 活动截止时间 unix time
-	EndTime int64 `json:"end_time,omitempty"`
-	// 商户名称
-	MerchantName string `json:"merchant_name,omitempty"`
-	// 联系电话
-	ServiceNumber string `json:"service_number,omitempty"`
-	// 活动状态 创建时可以忽略 1有效 2审核中 3审核失败 4中止
-	Status int64 `json:"status,omitempty"`
-	// 团购须知
-	Notification string `json:"notification,omitempty"`
-	// 原价(单位分)
-	OriginalAmount int64 `json:"original_amount,omitempty"`
-	// 已售出数量
-	SoldCount int64 `json:"sold_count,omitempty"`
-	// 团购使用方式 1 到店核销
-	UseType int64 `json:"use_type,omitempty"`
-	// 团购商品
-	GrouponGoods []EnterpriseGrouponSaveGrouponGoods `json:"groupon_goods,omitempty"`
-	// 封面图
-	CoverImages []string `json:"cover_images,omitempty"`
-	// 绑定的POI 列表 默认展示全部门店
-	PoiIds []string `json:"poi_ids,omitempty"`
 }

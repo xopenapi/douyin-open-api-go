@@ -4,8 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**MatchType** | **int64** | 匹配类型，0-离线匹配 1-实时匹配。离线匹配，不会实时返回结果，最大上传1w个数据，通过/poi/supplier/match/query/接口查询匹配结果； 在线匹配，实时返回结果，最大上传100个数据，需要申请授权。 | [optional] 
-**MatchDataList** | [**[]PoiSupplierMatchMatchDataList**](_poi_supplier_match_match_data_list.md) |  | [optional] 
+**TransCode** | **string** | 交易场景码，SEND_MONEY_REDPACKET 红包转账 SEND_VCOIN_REDPACKET 抖币转账 | [optional] 
+**Amount** | **int64** | 数目 | [optional] 
+**BizOrderNo** | **string** | 外部订单号，由调用方生成，长度小于64 | [optional] 
+**LiveId** | **int64** | 业务id | [optional] 
+**MerchantId** | **int64** | 商户id | [optional] 
+**OrderDesc** | **string** | 订单描述，长度小于256 | [optional] 
+**OrderName** | **string** | 订单名称，长度小于64 | [optional] 
+**Remark** | **string** | 标记，长度小于512 | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

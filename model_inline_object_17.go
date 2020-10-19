@@ -11,10 +11,8 @@ package douyin
 
 // InlineObject17 struct for InlineObject17
 type InlineObject17 struct {
-	// 是否绑定
-	Bind bool `json:"bind,omitempty"`
-	// 标签id
-	TagId int64 `json:"tag_id,omitempty"`
-	// 用户openid
-	UserId string `json:"user_id,omitempty"`
+	// 客服id
+	PersonaId string `json:"persona_id,omitempty"`
+	// 会话对方的open_id
+	ToUserId string `json:"to_user_id,omitempty"`
 }

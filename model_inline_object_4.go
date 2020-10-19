@@ -11,5 +11,5 @@ package douyin
 
 // InlineObject4 struct for InlineObject4
 type InlineObject4 struct {
-	ItemIds []string `json:"item_ids,omitempty"`
+	Video []string `json:"video,omitempty"`
 }

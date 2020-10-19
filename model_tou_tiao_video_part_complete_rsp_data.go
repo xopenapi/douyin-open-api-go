@@ -14,6 +14,6 @@ type TouTiaoVideoPartCompleteRspData struct {
 	// 错误码
 	ErrorCode int64 `json:"error_code,omitempty"`
 	// 错误码描述
-	Description string                         `json:"description,omitempty"`
-	Video       ToutiaoVideoUploadRspDataVideo `json:"video,omitempty"`
+	Description string                               `json:"description,omitempty"`
+	Video       TouTiaoVideoPartCompleteRspDataVideo `json:"video,omitempty"`
 }
