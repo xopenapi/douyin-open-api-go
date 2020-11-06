@@ -11,6 +11,6 @@ package douyin
 
 // EnterpriseLeadsUserListRspDataTagList struct for EnterpriseLeadsUserListRspDataTagList
 type EnterpriseLeadsUserListRspDataTagList struct {
-	TagId   string `json:"tag_id,omitempty"`
+	TagId   int64  `json:"tag_id,omitempty"`
 	TagName string `json:"tag_name,omitempty"`
 }

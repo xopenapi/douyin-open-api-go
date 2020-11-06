@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Age** | **string** |  | [optional] 
+**Age** | **int64** |  | [optional] 
 **Avatar** | **string** |  | [optional] 
 **City** | **string** |  | [optional] 
 **Gender** | **int32** |  | [optional] 

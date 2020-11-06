@@ -3,6 +3,7 @@ package douyin_test
 import (
 	"bytes"
 	"context"
+	"encoding/json"
 	"fmt"
 	"github.com/xopenapi/douyin-open-api-go"
 	"io/ioutil"
@@ -12,15 +13,26 @@ import (
 	"net/url"
 	"os"
 	"testing"
+	"time"
 	"unsafe"
 )
 
-var clientKey = "awpamlod9sp7tgqv"
-var clientSecret = "2050893f72b14fbf2d16dbf63e236553"
-var openId = "3100890d-de49-4906-aefe-77ea8652afcb"
-var code = "ZHWHvbCIhweyVTSn7eFsV10gRMrdAzrRYFJf"
-var accessToken = "act.646888359106e8ffdf98308d72e58715a7oDDAVwCgEFWRj4A3Pb1jjIDWZC"
-var refreshToken = "rft.af541724878c7a7d282c1e93a8db41c3i7r1LIO8af0kIaBcN51rKXV5zkwB"
+var clientKey1 = "awpamlod9sp7tgqv"
+var clientSecret1 = "2050893f72b14fbf2d16dbf63e236553"
+var openId1 = "3100890d-de49-4906-aefe-77ea8652afcb"
+var code1 = "ZHWHvbCIhweyVTSn7eFsV10gRMrdAzrRYFJf"
+var accessToken1 = "act.646888359106e8ffdf98308d72e58715a7oDDAVwCgEFWRj4A3Pb1jjIDWZC"
+
+var clientKey = "awustlseg02cmzdb"
+var clientSecret = "da6277aa187c17369919a991c2f95940"
+var openId = "79c367dd-1a8f-4587-9bcc-210906ae0481"
+var code = "DdsJkTr7L25cYtnKioAjvAzv6c2Nk2Pi83EH"
+var accessToken = "act.5f6be9d0e225707354b86582900ea3c8cSETBPKhXsjskmHpV4OblyEpV6Vx"
+
+// qiqi 抖音号
+var to_openId = "28637e5d-a462-4c96-92d1-533b9d0df93b"
+
+var refreshToken = "rft.bac75f7df8678f22432283be3a8a4c37dKmsX49rM0CMew98R730BY3XGBaq"
 var scope = "user_info"
 var grantType = "authorization_code"
 var responseType = "code"
@@ -170,7 +182,8 @@ func TestCommentApiClient(t *testing.T) {
 	t.Log(r)
 	t.Log(rsp2)
 
-	rsp3, r, err := client.CommentApi.ItemCommentReply(context.Background(), openId, accessToken, nil)
+	var body douyin.ItemCommentReplyReq
+	rsp3, r, err := client.CommentApi.ItemCommentReply(context.Background(), openId, accessToken, body)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -415,7 +428,7 @@ func TestDevtoolApiClient(t *testing.T) {
 
 }
 
-// 21
+// 21 企业号开放能力-管理意向用户	测试通过
 func TestEnterpriseApiClient(t *testing.T) {
 	//TestLauchHttpServer()
 
@@ -423,17 +436,21 @@ func TestEnterpriseApiClient(t *testing.T) {
 	client := douyin.NewAPIClient(cfg)
 
 	startTime := int64(1)
-	endTime := int64(1)
+	endTime := time.Now().UnixNano()
 	actionType := int64(1)
-	userId := ""
+	var userId = ""
 	tagId := int64(1)
+	// 获取意向用户列表
 	rsp1, r, err := client.EnterpriseApi.EnterpriseLeadsUserList(context.Background(), accessToken, openId, count, startTime, endTime, actionType, nil)
 	if err != nil {
 		t.Fatal(err)
 	}
 	t.Log(r)
-	t.Log(rsp1)
+	t.Log(rsp1.Data.List)
+	t.Log(rsp1.Data.Users[1].OpenId)
 
+	// 获取意向用户详情
+	userId = rsp1.Data.Users[1].OpenId
 	rsp2, r, err := client.EnterpriseApi.EnterpriseLeadsUserDetail(context.Background(), accessToken, openId, userId)
 	if err != nil {
 		t.Fatal(err)
@@ -441,6 +458,7 @@ func TestEnterpriseApiClient(t *testing.T) {
 	t.Log(r)
 	t.Log(rsp2)
 
+	// 获取意向用户互动记录
 	rsp3, r, err := client.EnterpriseApi.EnterpriseLeadsUserActionList(context.Background(), accessToken, openId, count, userId, nil)
 	if err != nil {
 		t.Fatal(err)
@@ -448,6 +466,7 @@ func TestEnterpriseApiClient(t *testing.T) {
 	t.Log(r)
 	t.Log(rsp3)
 
+	// 获取标签列表
 	rsp4, r, err := client.EnterpriseApi.EnterpriseLeadsTagList(context.Background(), accessToken, openId, count, nil)
 	if err != nil {
 		t.Fatal(err)
@@ -455,6 +474,8 @@ func TestEnterpriseApiClient(t *testing.T) {
 	t.Log(r)
 	t.Log(rsp4)
 
+	// 获取打标签的用户列表
+	tagId = 71783
 	rsp5, r, err := client.EnterpriseApi.EnterpriseLeadsTagUserList(context.Background(), accessToken, openId, count, tagId, nil)
 	if err != nil {
 		t.Fatal(err)
@@ -462,33 +483,49 @@ func TestEnterpriseApiClient(t *testing.T) {
 	t.Log(r)
 	t.Log(rsp5)
 
-	rsp6, r, err := client.EnterpriseApi.EnterpriseLeadsTagCreate(context.Background(), accessToken, openId, nil)
+	// 创建标签
+	var enterpriseLeadsTagCreateReq douyin.EnterpriseLeadsTagCreateReq
+	enterpriseLeadsTagCreateReq.TagName = "美女"
+	rsp6, r, err := client.EnterpriseApi.EnterpriseLeadsTagCreate(context.Background(), accessToken, openId, enterpriseLeadsTagCreateReq)
 	if err != nil {
 		t.Fatal(err)
 	}
 	t.Log(r)
-	t.Log(rsp6)
+	t.Log(rsp6.Data.TagId)
+	tagId = rsp6.Data.TagId
 
-	rsp7, r, err := client.EnterpriseApi.EnterpriseLeadsTagUpdate(context.Background(), accessToken, openId, nil)
+	// 编辑标签
+	var enterpriseLeadsTagUpdateReq douyin.EnterpriseLeadsTagUpdateReq
+	enterpriseLeadsTagUpdateReq.TagName = "美女啊1"
+	enterpriseLeadsTagUpdateReq.TagId = tagId
+	rsp7, r, err := client.EnterpriseApi.EnterpriseLeadsTagUpdate(context.Background(), accessToken, openId, enterpriseLeadsTagUpdateReq)
 	if err != nil {
 		t.Fatal(err)
 	}
 	t.Log(r)
 	t.Log(rsp7)
 
-	rsp8, r, err := client.EnterpriseApi.EnterpriseLeadsTagDelete(context.Background(), accessToken, openId, nil)
-	if err != nil {
-		t.Fatal(err)
-	}
-	t.Log(r)
-	t.Log(rsp8)
-
-	rsp9, r, err := client.EnterpriseApi.EnterpriseLeadsTagUserUpdate(context.Background(), accessToken, openId, nil)
+	// 给用户设置标签
+	var enterpriseLeadsTagUserUpdateReq douyin.EnterpriseLeadsTagUserUpdateReq
+	enterpriseLeadsTagUserUpdateReq.TagId = tagId
+	enterpriseLeadsTagUserUpdateReq.UserId = to_openId
+	enterpriseLeadsTagUserUpdateReq.Bind = true
+	rsp9, r, err := client.EnterpriseApi.EnterpriseLeadsTagUserUpdate(context.Background(), accessToken, openId, enterpriseLeadsTagUserUpdateReq)
 	if err != nil {
 		t.Fatal(err)
 	}
 	t.Log(r)
 	t.Log(rsp9)
+
+	// 删除标签
+	var enterpriseLeadsTagDeleteReq douyin.EnterpriseLeadsTagDeleteReq
+	enterpriseLeadsTagDeleteReq.TagId = tagId
+	rsp8, r, err := client.EnterpriseApi.EnterpriseLeadsTagDelete(context.Background(), accessToken, openId, enterpriseLeadsTagDeleteReq)
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Log(r)
+	t.Log(rsp8)
 
 }
 
@@ -536,40 +573,56 @@ func TestEnterpriseImApiClient(t *testing.T) {
 	cfg := douyin.NewConfiguration()
 	client := douyin.NewAPIClient(cfg)
 
-	rsp1, r, err := client.EnterpriseImApi.EnterpriseImPersonCreate(context.Background(), accessToken, openId, nil)
+	// 创建客服
+	var enterpriseImPersonCreateReq douyin.EnterpriseImPersonCreateReq
+	enterpriseImPersonCreateReq.Nickname = "白天鹅"
+	rsp1, r, err := client.EnterpriseImApi.EnterpriseImPersonCreate(context.Background(), accessToken, openId, enterpriseImPersonCreateReq)
 	if err != nil {
 		t.Fatal(err)
 	}
 	t.Log(r)
-	t.Log(rsp1)
+	t.Log(rsp1.Data.PersonaId)
+	var personaId = rsp1.Data.PersonaId
 
-	rsp2, r, err := client.EnterpriseImApi.EnterpriseImPersonDelete(context.Background(), accessToken, openId, nil)
-	if err != nil {
-		t.Fatal(err)
-	}
-	t.Log(r)
-	t.Log(rsp2)
-
+	// 获取客服列表
 	rsp3, r, err := client.EnterpriseImApi.EnterpriseImPersonList(context.Background(), accessToken, openId, cursor, count)
 	if err != nil {
 		t.Fatal(err)
 	}
 	t.Log(r)
-	t.Log(rsp3)
+	t.Log(rsp3.Data.Personas)
 
-	rsp4, r, err := client.EnterpriseImApi.EnterpriseImPersonConversationCreate(context.Background(), accessToken, openId, nil)
+	//创建客服会话
+	var enterpriseImPersonConversationCreateReq douyin.EnterpriseImPersonConversationCreateReq
+	enterpriseImPersonConversationCreateReq.PersonaId = personaId
+	enterpriseImPersonConversationCreateReq.ToUserId = to_openId
+	rsp4, r, err := client.EnterpriseImApi.EnterpriseImPersonConversationCreate(context.Background(), accessToken, openId, enterpriseImPersonConversationCreateReq)
 	if err != nil {
 		t.Fatal(err)
 	}
 	t.Log(r)
-	t.Log(rsp4)
+	t.Log(rsp4.Data.ErrorCode)
 
-	rsp5, r, err := client.EnterpriseImApi.EnterpriseImPersonConversationDelete(context.Background(), accessToken, openId, nil)
+	// 客服会话结束
+	var enterpriseImPersonConversationDeleteReq douyin.EnterpriseImPersonConversationDeleteReq
+	enterpriseImPersonConversationDeleteReq.PersonaId = personaId
+	enterpriseImPersonConversationDeleteReq.ToUserId = to_openId
+	rsp5, r, err := client.EnterpriseImApi.EnterpriseImPersonConversationDelete(context.Background(), accessToken, openId, enterpriseImPersonConversationDeleteReq)
 	if err != nil {
 		t.Fatal(err)
 	}
 	t.Log(r)
 	t.Log(rsp5)
+
+	//删除客服
+	var enterpriseImPersonDeleteReq douyin.EnterpriseImPersonDeleteReq
+	enterpriseImPersonDeleteReq.PersonaId = personaId
+	rsp2, r, err := client.EnterpriseImApi.EnterpriseImPersonDelete(context.Background(), accessToken, openId, enterpriseImPersonDeleteReq)
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Log(r)
+	t.Log(rsp2)
 
 }
 
@@ -682,14 +735,64 @@ func TestHotsearchApiClient(t *testing.T) {
 
 }
 
-// 1
+// 2-3-1	测试通过，视频和文字通过，但是 图片没通过
 func TestImApiClient(t *testing.T) {
 	//TestLauchHttpServer()
 
 	cfg := douyin.NewConfiguration()
 	client := douyin.NewAPIClient(cfg)
 
-	rsp1, r, err := client.ImApi.EnterpriseImMessageSend(context.Background(), openId, accessToken, nil)
+	var body douyin.EnterpriseImMessageSendReq
+	//item_id: @9VwRxeeeT8w3byWibcI5Qs783WLuOvGHP5N2rA2lK1AWb/n960zdRmYqig357zEB+t0DB6zzc5FI301LfBxA/Q==
+	//media_id:tos-cn-i-0813/8fde29664f5a4b6e8bc0aed7afbc3175
+	//text:
+	type image struct {
+		MediaId string `json:"media_id"`
+	}
+	//转换成JSON字符串
+	// @9VwRxeeeT8w3byWibcI5Qs783W3hP/+BOZxyrQmiJlUbZvb+60zdRmYqig357zEB1Fe4IiK/1Kcqd1+ELA7AWw==
+	// tos-cn-i-0813/d4198b72a6c4476e95b9345a874e5992
+	imageTest := image{
+		MediaId: "tos-cn-i-0813/d4198b72a6c4476e95b9345a874e5992",
+	}
+	imagejsons, errs := json.Marshal(imageTest) //转换成JSON返回的是byte[]
+	if errs != nil {
+		fmt.Println(errs.Error())
+	}
+	fmt.Println(string(imagejsons)) //byte[]转换成string 输出
+
+	// 视频
+	type video struct {
+		ItemId string `json:"item_id"`
+	}
+	//转换成JSON字符串
+	videoTest := video{
+		ItemId: "@9VwRxeeeT8w3byWibcI5Qs783WLuOvGHP5N2rA2lK1AWb/n960zdRmYqig357zEB+t0DB6zzc5FI301LfBxA/Q==",
+	}
+	videojsons, errs := json.Marshal(videoTest) //转换成JSON返回的是byte[]
+	if errs != nil {
+		fmt.Println(errs.Error())
+	}
+	fmt.Println(string(videojsons)) //byte[]转换成string 输出
+
+	// 文字
+	type text struct {
+		Text string `json:"text"`
+	}
+	//转换成JSON字符串
+	textTest := text{
+		Text: "ssssssss",
+	}
+	textjsons, errs := json.Marshal(textTest) //转换成JSON返回的是byte[]
+	if errs != nil {
+		fmt.Println(errs.Error())
+	}
+	fmt.Println(string(textjsons)) //byte[]转换成string 输出
+
+	body.Content = string(imagejsons)
+	body.MessageType = "image"
+	body.ToUserId = to_openId
+	rsp1, r, err := client.ImApi.EnterpriseImMessageSend(context.Background(), openId, accessToken, body)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -774,7 +877,8 @@ func TestMediaApiClient(t *testing.T) {
 	t.Log(r)
 	t.Log(rsp3)
 
-	rsp4, r, err := client.MediaApi.EnterpriseMediaDelete(context.Background(), accessToken, openId, nil)
+	var body douyin.EnterpriseMediaDeleteReq
+	rsp4, r, err := client.MediaApi.EnterpriseMediaDelete(context.Background(), accessToken, openId, body)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -792,7 +896,8 @@ func TestPayApiClient(t *testing.T) {
 	merchantId := int64(1)
 	liveId := int64(1)
 
-	rsp1, r, err := client.PayApi.DouyinPayAccountTrans(context.Background(), openId, accessToken, nil)
+	var body douyin.DouyinPayAccountTransReq
+	rsp1, r, err := client.PayApi.DouyinPayAccountTrans(context.Background(), openId, accessToken, body)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -869,28 +974,32 @@ func TestPoiOrderApiClient(t *testing.T) {
 	cfg := douyin.NewConfiguration()
 	client := douyin.NewAPIClient(cfg)
 
-	rsp1, r, err := client.PoiOrderApi.PoiOrderStatus(context.Background(), accessToken, nil)
+	var body1 douyin.PoiOrderStatusReq
+	rsp1, r, err := client.PoiOrderApi.PoiOrderStatus(context.Background(), accessToken, body1)
 	if err != nil {
 		t.Fatal(err)
 	}
 	t.Log(r)
 	t.Log(rsp1)
 
-	rsp2, r, err := client.PoiOrderApi.PoiExtHotelOrderCommit(context.Background(), nil)
+	var body2 douyin.PoiExtHotelOrderCommitReq
+	rsp2, r, err := client.PoiOrderApi.PoiExtHotelOrderCommit(context.Background(), body2)
 	if err != nil {
 		t.Fatal(err)
 	}
 	t.Log(r)
 	t.Log(rsp2)
 
-	rsp3, r, err := client.PoiOrderApi.PoiExtHotelOrderStatus(context.Background(), nil)
+	var poiExtHotelOrderStatusReq douyin.PoiExtHotelOrderStatusReq
+	rsp3, r, err := client.PoiOrderApi.PoiExtHotelOrderStatus(context.Background(), poiExtHotelOrderStatusReq)
 	if err != nil {
 		t.Fatal(err)
 	}
 	t.Log(r)
 	t.Log(rsp3)
 
-	rsp4, r, err := client.PoiOrderApi.PoiExtHotelOrderCancel(context.Background(), nil)
+	var poiExtHotelOrderCancelReq douyin.PoiExtHotelOrderCancelReq
+	rsp4, r, err := client.PoiOrderApi.PoiExtHotelOrderCancel(context.Background(), poiExtHotelOrderCancelReq)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -938,7 +1047,8 @@ func TestSandboxApiClient(t *testing.T) {
 	cfg := douyin.NewConfiguration()
 	client := douyin.NewAPIClient(cfg)
 
-	rsp1, r, err := client.SandboxApi.SandboxWebhookEventSend(context.Background(), accessToken, nil)
+	var sandboxWebhookEventEendReq douyin.SandboxWebhookEventEendReq
+	rsp1, r, err := client.SandboxApi.SandboxWebhookEventSend(context.Background(), accessToken, sandboxWebhookEventEendReq)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1437,7 +1547,8 @@ func TestVideoSearchApiClient(t *testing.T) {
 	t.Log(r)
 	t.Log(rsp2)
 
-	rsp3, r, err := client.VideoSearchApi.VideoSearchCommentReply(context.Background(), accessToken, openId, nil)
+	var videoSearchCommentReplyReq douyin.VideoSearchCommentReplyReq
+	rsp3, r, err := client.VideoSearchApi.VideoSearchCommentReply(context.Background(), accessToken, openId, videoSearchCommentReplyReq)
 	if err != nil {
 		t.Fatal(err)
 	}

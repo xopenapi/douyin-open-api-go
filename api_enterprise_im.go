@@ -11,7 +11,6 @@ package douyin
 
 import (
 	_context "context"
-	"github.com/antihax/optional"
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
@@ -25,22 +24,16 @@ var (
 // EnterpriseImApiService EnterpriseImApi service
 type EnterpriseImApiService service
 
-// EnterpriseImPersonConversationCreateOpts Optional parameters for the method 'EnterpriseImPersonConversationCreate'
-type EnterpriseImPersonConversationCreateOpts struct {
-	Body optional.Interface
-}
-
 /*
 EnterpriseImPersonConversationCreate 主动创建客服会话
 主动创建客服会话
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
  * @param openId 通过/oauth/access_token/获取，用户唯一标志
- * @param optional nil or *EnterpriseImPersonConversationCreateOpts - Optional Parameters:
- * @param "Body" (optional.Interface of EnterpriseImPersonConversationCreateReq) -
+ * @param body
 @return EnterpriseImPersonConversationCreateRsp
 */
-func (a *EnterpriseImApiService) EnterpriseImPersonConversationCreate(ctx _context.Context, accessToken string, openId string, localVarOptionals *EnterpriseImPersonConversationCreateOpts) (EnterpriseImPersonConversationCreateRsp, *_nethttp.Response, error) {
+func (a *EnterpriseImApiService) EnterpriseImPersonConversationCreate(ctx _context.Context, accessToken string, openId string, body EnterpriseImPersonConversationCreateReq) (EnterpriseImPersonConversationCreateRsp, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -76,14 +69,7 @@ func (a *EnterpriseImApiService) EnterpriseImPersonConversationCreate(ctx _conte
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
-		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(EnterpriseImPersonConversationCreateReq)
-		if !localVarOptionalBodyok {
-			return localVarReturnValue, nil, reportError("body should be EnterpriseImPersonConversationCreateReq")
-		}
-		localVarPostBody = &localVarOptionalBody
-	}
-
+	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -120,22 +106,16 @@ func (a *EnterpriseImApiService) EnterpriseImPersonConversationCreate(ctx _conte
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-// EnterpriseImPersonConversationDeleteOpts Optional parameters for the method 'EnterpriseImPersonConversationDelete'
-type EnterpriseImPersonConversationDeleteOpts struct {
-	Body optional.Interface
-}
-
 /*
 EnterpriseImPersonConversationDelete 删除客服会话
 删除客服会话
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
  * @param openId 通过/oauth/access_token/获取，用户唯一标志
- * @param optional nil or *EnterpriseImPersonConversationDeleteOpts - Optional Parameters:
- * @param "Body" (optional.Interface of EnterpriseImPersonConversationDeleteReq) -
+ * @param body
 @return EnterpriseImPersonConversationDeleteRsp
 */
-func (a *EnterpriseImApiService) EnterpriseImPersonConversationDelete(ctx _context.Context, accessToken string, openId string, localVarOptionals *EnterpriseImPersonConversationDeleteOpts) (EnterpriseImPersonConversationDeleteRsp, *_nethttp.Response, error) {
+func (a *EnterpriseImApiService) EnterpriseImPersonConversationDelete(ctx _context.Context, accessToken string, openId string, body EnterpriseImPersonConversationDeleteReq) (EnterpriseImPersonConversationDeleteRsp, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -171,14 +151,7 @@ func (a *EnterpriseImApiService) EnterpriseImPersonConversationDelete(ctx _conte
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
-		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(EnterpriseImPersonConversationDeleteReq)
-		if !localVarOptionalBodyok {
-			return localVarReturnValue, nil, reportError("body should be EnterpriseImPersonConversationDeleteReq")
-		}
-		localVarPostBody = &localVarOptionalBody
-	}
-
+	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -215,22 +188,16 @@ func (a *EnterpriseImApiService) EnterpriseImPersonConversationDelete(ctx _conte
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-// EnterpriseImPersonCreateOpts Optional parameters for the method 'EnterpriseImPersonCreate'
-type EnterpriseImPersonCreateOpts struct {
-	Body optional.Interface
-}
-
 /*
 EnterpriseImPersonCreate 客服账号
 客服账号
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
  * @param openId 通过/oauth/access_token/获取，用户唯一标志
- * @param optional nil or *EnterpriseImPersonCreateOpts - Optional Parameters:
- * @param "Body" (optional.Interface of EnterpriseImPersonCreateReq) -
+ * @param body
 @return EnterpriseImPersonCreateRsp
 */
-func (a *EnterpriseImApiService) EnterpriseImPersonCreate(ctx _context.Context, accessToken string, openId string, localVarOptionals *EnterpriseImPersonCreateOpts) (EnterpriseImPersonCreateRsp, *_nethttp.Response, error) {
+func (a *EnterpriseImApiService) EnterpriseImPersonCreate(ctx _context.Context, accessToken string, openId string, body EnterpriseImPersonCreateReq) (EnterpriseImPersonCreateRsp, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -266,14 +233,7 @@ func (a *EnterpriseImApiService) EnterpriseImPersonCreate(ctx _context.Context, 
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
-		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(EnterpriseImPersonCreateReq)
-		if !localVarOptionalBodyok {
-			return localVarReturnValue, nil, reportError("body should be EnterpriseImPersonCreateReq")
-		}
-		localVarPostBody = &localVarOptionalBody
-	}
-
+	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -310,22 +270,16 @@ func (a *EnterpriseImApiService) EnterpriseImPersonCreate(ctx _context.Context, 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-// EnterpriseImPersonDeleteOpts Optional parameters for the method 'EnterpriseImPersonDelete'
-type EnterpriseImPersonDeleteOpts struct {
-	Body optional.Interface
-}
-
 /*
 EnterpriseImPersonDelete 删除客服账号
 删除客服账号
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
  * @param openId 通过/oauth/access_token/获取，用户唯一标志
- * @param optional nil or *EnterpriseImPersonDeleteOpts - Optional Parameters:
- * @param "Body" (optional.Interface of EnterpriseImPersonDeleteReq) -
+ * @param body
 @return EnterpriseImPersonDeleteRsp
 */
-func (a *EnterpriseImApiService) EnterpriseImPersonDelete(ctx _context.Context, accessToken string, openId string, localVarOptionals *EnterpriseImPersonDeleteOpts) (EnterpriseImPersonDeleteRsp, *_nethttp.Response, error) {
+func (a *EnterpriseImApiService) EnterpriseImPersonDelete(ctx _context.Context, accessToken string, openId string, body EnterpriseImPersonDeleteReq) (EnterpriseImPersonDeleteRsp, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -361,14 +315,7 @@ func (a *EnterpriseImApiService) EnterpriseImPersonDelete(ctx _context.Context, 
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
-		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(EnterpriseImPersonDeleteReq)
-		if !localVarOptionalBodyok {
-			return localVarReturnValue, nil, reportError("body should be EnterpriseImPersonDeleteReq")
-		}
-		localVarPostBody = &localVarOptionalBody
-	}
-
+	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

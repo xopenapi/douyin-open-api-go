@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ErrorCode** | **int64** | 错误码 | [optional] 
 **Description** | **string** | 错误码描述 | [optional] 
-**Age** | **string** |  | [optional] 
+**Age** | **int64** |  | [optional] 
 **Avatar** | **string** |  | [optional] 
 **City** | **string** |  | [optional] 
 **Gender** | **int32** |  | [optional] 

@@ -15,7 +15,7 @@ type EnterpriseLeadsUserDetailRspData struct {
 	ErrorCode int64 `json:"error_code,omitempty"`
 	// 错误码描述
 	Description string                                  `json:"description,omitempty"`
-	Age         string                                  `json:"age,omitempty"`
+	Age         int64                                   `json:"age,omitempty"`
 	Avatar      string                                  `json:"avatar,omitempty"`
 	City        string                                  `json:"city,omitempty"`
 	Gender      int32                                   `json:"gender,omitempty"`

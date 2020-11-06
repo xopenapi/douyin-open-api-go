@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 ## EnterpriseLeadsTagCreate
 
-> EnterpriseLeadsTagCreateRsp EnterpriseLeadsTagCreate(ctx, accessToken, openId, optional)
+> EnterpriseLeadsTagCreateRsp EnterpriseLeadsTagCreate(ctx, accessToken, openId, body)
 
 创建标签
 
@@ -32,18 +32,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **accessToken** | **string**| 调用/oauth/access_token/生成的token，此token需要用户授权。 | 
 **openId** | **string**| 通过/oauth/access_token/获取，用户唯一标志 | 
- **optional** | ***EnterpriseLeadsTagCreateOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-
-Optional parameters are passed through a pointer to a EnterpriseLeadsTagCreateOpts struct
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **body** | [**optional.Interface of EnterpriseLeadsTagCreateReq**](EnterpriseLeadsTagCreateReq.md)|  | 
+**body** | [**EnterpriseLeadsTagCreateReq**](EnterpriseLeadsTagCreateReq.md)|  | 
 
 ### Return type
 
@@ -65,7 +54,7 @@ No authorization required
 
 ## EnterpriseLeadsTagDelete
 
-> EnterpriseLeadsTagDeleteRsp EnterpriseLeadsTagDelete(ctx, accessToken, openId, optional)
+> EnterpriseLeadsTagDeleteRsp EnterpriseLeadsTagDelete(ctx, accessToken, openId, body)
 
 删除标签
 
@@ -79,18 +68,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **accessToken** | **string**| 调用/oauth/access_token/生成的token，此token需要用户授权。 | 
 **openId** | **string**| 通过/oauth/access_token/获取，用户唯一标志 | 
- **optional** | ***EnterpriseLeadsTagDeleteOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-
-Optional parameters are passed through a pointer to a EnterpriseLeadsTagDeleteOpts struct
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **body** | [**optional.Interface of EnterpriseLeadsTagDeleteReq**](EnterpriseLeadsTagDeleteReq.md)|  | 
+**body** | [**EnterpriseLeadsTagDeleteReq**](EnterpriseLeadsTagDeleteReq.md)|  | 
 
 ### Return type
 
@@ -161,7 +139,7 @@ No authorization required
 
 ## EnterpriseLeadsTagUpdate
 
-> EnterpriseLeadsTagUpdateRsp EnterpriseLeadsTagUpdate(ctx, accessToken, openId, optional)
+> EnterpriseLeadsTagUpdateRsp EnterpriseLeadsTagUpdate(ctx, accessToken, openId, body)
 
 编辑标签
 
@@ -175,18 +153,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **accessToken** | **string**| 调用/oauth/access_token/生成的token，此token需要用户授权。 | 
 **openId** | **string**| 通过/oauth/access_token/获取，用户唯一标志 | 
- **optional** | ***EnterpriseLeadsTagUpdateOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-
-Optional parameters are passed through a pointer to a EnterpriseLeadsTagUpdateOpts struct
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **body** | [**optional.Interface of EnterpriseLeadsTagUpdateReq**](EnterpriseLeadsTagUpdateReq.md)|  | 
+**body** | [**EnterpriseLeadsTagUpdateReq**](EnterpriseLeadsTagUpdateReq.md)|  | 
 
 ### Return type
 
@@ -259,7 +226,7 @@ No authorization required
 
 ## EnterpriseLeadsTagUserUpdate
 
-> EnterpriseLeadsTagUserUpdateRsp EnterpriseLeadsTagUserUpdate(ctx, accessToken, openId, optional)
+> EnterpriseLeadsTagUserUpdateRsp EnterpriseLeadsTagUserUpdate(ctx, accessToken, openId, body)
 
 给用户设置标签
 
@@ -273,18 +240,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **accessToken** | **string**| 调用/oauth/access_token/生成的token，此token需要用户授权。 | 
 **openId** | **string**| 通过/oauth/access_token/获取，用户唯一标志 | 
- **optional** | ***EnterpriseLeadsTagUserUpdateOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-
-Optional parameters are passed through a pointer to a EnterpriseLeadsTagUserUpdateOpts struct
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **body** | [**optional.Interface of EnterpriseLeadsTagUserUpdateReq**](EnterpriseLeadsTagUserUpdateReq.md)|  | 
+**body** | [**EnterpriseLeadsTagUserUpdateReq**](EnterpriseLeadsTagUserUpdateReq.md)|  | 
 
 ### Return type
 

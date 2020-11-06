@@ -15,7 +15,7 @@ type EnterpriseLeadsUserActionListRspData struct {
 	ErrorCode int64 `json:"error_code,omitempty"`
 	// 错误码描述
 	Description string                                     `json:"description,omitempty"`
-	Cursor      int64                                      `json:"cursor,omitempty"`
+	Cursor      string                                     `json:"cursor,omitempty"`
 	HasMore     bool                                       `json:"has_more,omitempty"`
 	List        []EnterpriseLeadsUserActionListRspDataList `json:"list,omitempty"`
 }

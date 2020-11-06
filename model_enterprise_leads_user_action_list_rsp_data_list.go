@@ -11,9 +11,9 @@ package douyin
 
 // EnterpriseLeadsUserActionListRspDataList struct for EnterpriseLeadsUserActionListRspDataList
 type EnterpriseLeadsUserActionListRspDataList struct {
-	ActionFlag   string `json:"action_flag,omitempty"`
+	ActionFlag   int64  `json:"action_flag,omitempty"`
 	ActionSource string `json:"action_source,omitempty"`
-	ActionType   string `json:"action_type,omitempty"`
-	CreateTime   string `json:"create_time,omitempty"`
+	ActionType   int64  `json:"action_type,omitempty"`
+	CreateTime   int64  `json:"create_time,omitempty"`
 	UserId       string `json:"user_id,omitempty"`
 }

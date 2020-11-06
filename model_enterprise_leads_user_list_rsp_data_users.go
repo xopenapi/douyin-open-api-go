@@ -11,7 +11,7 @@ package douyin
 
 // EnterpriseLeadsUserListRspDataUsers struct for EnterpriseLeadsUserListRspDataUsers
 type EnterpriseLeadsUserListRspDataUsers struct {
-	Age        string                                  `json:"age,omitempty"`
+	Age        int64                                   `json:"age,omitempty"`
 	Avatar     string                                  `json:"avatar,omitempty"`
 	City       string                                  `json:"city,omitempty"`
 	Gender     int32                                   `json:"gender,omitempty"`

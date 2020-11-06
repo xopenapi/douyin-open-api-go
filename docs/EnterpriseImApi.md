@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## EnterpriseImPersonConversationCreate
 
-> EnterpriseImPersonConversationCreateRsp EnterpriseImPersonConversationCreate(ctx, accessToken, openId, optional)
+> EnterpriseImPersonConversationCreateRsp EnterpriseImPersonConversationCreate(ctx, accessToken, openId, body)
 
 主动创建客服会话
 
@@ -28,18 +28,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **accessToken** | **string**| 调用/oauth/access_token/生成的token，此token需要用户授权。 | 
 **openId** | **string**| 通过/oauth/access_token/获取，用户唯一标志 | 
- **optional** | ***EnterpriseImPersonConversationCreateOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-
-Optional parameters are passed through a pointer to a EnterpriseImPersonConversationCreateOpts struct
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **body** | [**optional.Interface of EnterpriseImPersonConversationCreateReq**](EnterpriseImPersonConversationCreateReq.md)|  | 
+**body** | [**EnterpriseImPersonConversationCreateReq**](EnterpriseImPersonConversationCreateReq.md)|  | 
 
 ### Return type
 
@@ -61,7 +50,7 @@ No authorization required
 
 ## EnterpriseImPersonConversationDelete
 
-> EnterpriseImPersonConversationDeleteRsp EnterpriseImPersonConversationDelete(ctx, accessToken, openId, optional)
+> EnterpriseImPersonConversationDeleteRsp EnterpriseImPersonConversationDelete(ctx, accessToken, openId, body)
 
 删除客服会话
 
@@ -75,18 +64,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **accessToken** | **string**| 调用/oauth/access_token/生成的token，此token需要用户授权。 | 
 **openId** | **string**| 通过/oauth/access_token/获取，用户唯一标志 | 
- **optional** | ***EnterpriseImPersonConversationDeleteOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-
-Optional parameters are passed through a pointer to a EnterpriseImPersonConversationDeleteOpts struct
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **body** | [**optional.Interface of EnterpriseImPersonConversationDeleteReq**](EnterpriseImPersonConversationDeleteReq.md)|  | 
+**body** | [**EnterpriseImPersonConversationDeleteReq**](EnterpriseImPersonConversationDeleteReq.md)|  | 
 
 ### Return type
 
@@ -108,7 +86,7 @@ No authorization required
 
 ## EnterpriseImPersonCreate
 
-> EnterpriseImPersonCreateRsp EnterpriseImPersonCreate(ctx, accessToken, openId, optional)
+> EnterpriseImPersonCreateRsp EnterpriseImPersonCreate(ctx, accessToken, openId, body)
 
 客服账号
 
@@ -122,18 +100,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **accessToken** | **string**| 调用/oauth/access_token/生成的token，此token需要用户授权。 | 
 **openId** | **string**| 通过/oauth/access_token/获取，用户唯一标志 | 
- **optional** | ***EnterpriseImPersonCreateOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-
-Optional parameters are passed through a pointer to a EnterpriseImPersonCreateOpts struct
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **body** | [**optional.Interface of EnterpriseImPersonCreateReq**](EnterpriseImPersonCreateReq.md)|  | 
+**body** | [**EnterpriseImPersonCreateReq**](EnterpriseImPersonCreateReq.md)|  | 
 
 ### Return type
 
@@ -155,7 +122,7 @@ No authorization required
 
 ## EnterpriseImPersonDelete
 
-> EnterpriseImPersonDeleteRsp EnterpriseImPersonDelete(ctx, accessToken, openId, optional)
+> EnterpriseImPersonDeleteRsp EnterpriseImPersonDelete(ctx, accessToken, openId, body)
 
 删除客服账号
 
@@ -169,18 +136,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **accessToken** | **string**| 调用/oauth/access_token/生成的token，此token需要用户授权。 | 
 **openId** | **string**| 通过/oauth/access_token/获取，用户唯一标志 | 
- **optional** | ***EnterpriseImPersonDeleteOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-
-Optional parameters are passed through a pointer to a EnterpriseImPersonDeleteOpts struct
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **body** | [**optional.Interface of EnterpriseImPersonDeleteReq**](EnterpriseImPersonDeleteReq.md)|  | 
+**body** | [**EnterpriseImPersonDeleteReq**](EnterpriseImPersonDeleteReq.md)|  | 
 
 ### Return type
 

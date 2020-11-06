@@ -2851,7 +2851,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/EnterpriseLeadsTagCreateReq'
-        required: false
+        required: true
       responses:
         "200":
           content:
@@ -2885,7 +2885,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/EnterpriseLeadsTagUpdateReq'
-        required: false
+        required: true
       responses:
         "200":
           content:
@@ -2919,7 +2919,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/EnterpriseLeadsTagDeleteReq'
-        required: false
+        required: true
       responses:
         "200":
           content:
@@ -2953,7 +2953,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/EnterpriseLeadsTagUserUpdateReq'
-        required: false
+        required: true
       responses:
         "200":
           content:
@@ -2987,7 +2987,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/EnterpriseImPersonCreateReq'
-        required: false
+        required: true
       responses:
         "200":
           content:
@@ -3021,7 +3021,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/EnterpriseImPersonDeleteReq'
-        required: false
+        required: true
       responses:
         "200":
           content:
@@ -3096,7 +3096,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/EnterpriseImPersonConversationCreateReq'
-        required: false
+        required: true
       responses:
         "200":
           content:
@@ -3130,7 +3130,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/EnterpriseImPersonConversationDeleteReq'
-        required: false
+        required: true
       responses:
         "200":
           content:
@@ -6957,34 +6957,34 @@ components:
           - list
           users:
           - is_follow: true
-            gender: 1
+            gender: 5
             city: city
             open_id: open_id
             tag_list:
             - tag_name: tag_name
-              tag_id: tag_id
+              tag_id: 2
             - tag_name: tag_name
-              tag_id: tag_id
+              tag_id: 2
             nickname: nickname
             wechat: wechat
             telephone: telephone
             avatar: avatar
-            age: age
+            age: 1
             leads_level: 5
           - is_follow: true
-            gender: 1
+            gender: 5
             city: city
             open_id: open_id
             tag_list:
             - tag_name: tag_name
-              tag_id: tag_id
+              tag_id: 2
             - tag_name: tag_name
-              tag_id: tag_id
+              tag_id: 2
             nickname: nickname
             wechat: wechat
             telephone: telephone
             avatar: avatar
-            age: age
+            age: 1
             leads_level: 5
         extra:
           sub_error_code: 1
@@ -7005,7 +7005,7 @@ components:
       example:
         data:
           is_follow: true
-          gender: 6
+          gender: 1
           city: city
           open_id: open_id
           wechat: wechat
@@ -7014,13 +7014,13 @@ components:
           avatar: avatar
           tag_list:
           - tag_name: tag_name
-            tag_id: tag_id
+            tag_id: 2
           - tag_name: tag_name
-            tag_id: tag_id
+            tag_id: 2
           nickname: nickname
           error_code: 0
-          age: age
-          leads_level: 1
+          age: 6
+          leads_level: 5
         extra:
           sub_error_code: 1
           sub_description: sub_description
@@ -7042,21 +7042,21 @@ components:
       description: ""
       example:
         data:
-          cursor: 6
+          cursor: cursor
           description: description
           error_code: 0
           has_more: true
           list:
           - action_source: action_source
-            create_time: create_time
-            action_type: action_type
+            create_time: 5
+            action_type: 1
             user_id: user_id
-            action_flag: action_flag
+            action_flag: 6
           - action_source: action_source
-            create_time: create_time
-            action_type: action_type
+            create_time: 5
+            action_type: 1
             user_id: user_id
-            action_flag: action_flag
+            action_flag: 6
         extra:
           sub_error_code: 1
           sub_description: sub_description
@@ -7081,9 +7081,9 @@ components:
           has_more: true
           list:
           - tag_name: tag_name
-            tag_id: tag_id
+            tag_id: 2
           - tag_name: tag_name
-            tag_id: tag_id
+            tag_id: 2
         extra:
           sub_error_code: 1
           sub_description: sub_description
@@ -11904,32 +11904,34 @@ components:
     EnterpriseLeadsUserListRsp_data_tag_list:
       example:
         tag_name: tag_name
-        tag_id: tag_id
+        tag_id: 2
       properties:
         tag_id:
-          type: string
+          format: int64
+          type: integer
         tag_name:
           type: string
     EnterpriseLeadsUserListRsp_data_users:
       example:
         is_follow: true
-        gender: 1
+        gender: 5
         city: city
         open_id: open_id
         tag_list:
         - tag_name: tag_name
-          tag_id: tag_id
+          tag_id: 2
         - tag_name: tag_name
-          tag_id: tag_id
+          tag_id: 2
         nickname: nickname
         wechat: wechat
         telephone: telephone
         avatar: avatar
-        age: age
+        age: 1
         leads_level: 5
       properties:
         age:
-          type: string
+          format: int64
+          type: integer
         avatar:
           type: string
         city:
@@ -11965,34 +11967,34 @@ components:
         - list
         users:
         - is_follow: true
-          gender: 1
+          gender: 5
           city: city
           open_id: open_id
           tag_list:
           - tag_name: tag_name
-            tag_id: tag_id
+            tag_id: 2
           - tag_name: tag_name
-            tag_id: tag_id
+            tag_id: 2
           nickname: nickname
           wechat: wechat
           telephone: telephone
           avatar: avatar
-          age: age
+          age: 1
           leads_level: 5
         - is_follow: true
-          gender: 1
+          gender: 5
           city: city
           open_id: open_id
           tag_list:
           - tag_name: tag_name
-            tag_id: tag_id
+            tag_id: 2
           - tag_name: tag_name
-            tag_id: tag_id
+            tag_id: 2
           nickname: nickname
           wechat: wechat
           telephone: telephone
           avatar: avatar
-          age: age
+          age: 1
           leads_level: 5
       properties:
         error_code:
@@ -12018,7 +12020,7 @@ components:
     EnterpriseLeadsUserDetailRsp_data:
       example:
         is_follow: true
-        gender: 6
+        gender: 1
         city: city
         open_id: open_id
         wechat: wechat
@@ -12027,13 +12029,13 @@ components:
         avatar: avatar
         tag_list:
         - tag_name: tag_name
-          tag_id: tag_id
+          tag_id: 2
         - tag_name: tag_name
-          tag_id: tag_id
+          tag_id: 2
         nickname: nickname
         error_code: 0
-        age: age
-        leads_level: 1
+        age: 6
+        leads_level: 5
       properties:
         error_code:
           description: 错误码
@@ -12043,7 +12045,8 @@ components:
           description: 错误码描述
           type: string
         age:
-          type: string
+          format: int64
+          type: integer
         avatar:
           type: string
         city:
@@ -12071,38 +12074,41 @@ components:
     EnterpriseLeadsUserActionListRsp_data_list:
       example:
         action_source: action_source
-        create_time: create_time
-        action_type: action_type
+        create_time: 5
+        action_type: 1
         user_id: user_id
-        action_flag: action_flag
+        action_flag: 6
       properties:
         action_flag:
-          type: string
+          format: int64
+          type: integer
         action_source:
           type: string
         action_type:
-          type: string
+          format: int64
+          type: integer
         create_time:
-          type: string
+          format: int64
+          type: integer
         user_id:
           type: string
     EnterpriseLeadsUserActionListRsp_data:
       example:
-        cursor: 6
+        cursor: cursor
         description: description
         error_code: 0
         has_more: true
         list:
         - action_source: action_source
-          create_time: create_time
-          action_type: action_type
+          create_time: 5
+          action_type: 1
           user_id: user_id
-          action_flag: action_flag
+          action_flag: 6
         - action_source: action_source
-          create_time: create_time
-          action_type: action_type
+          create_time: 5
+          action_type: 1
           user_id: user_id
-          action_flag: action_flag
+          action_flag: 6
       properties:
         error_code:
           description: 错误码
@@ -12112,8 +12118,7 @@ components:
           description: 错误码描述
           type: string
         cursor:
-          format: int64
-          type: integer
+          type: string
         has_more:
           type: boolean
         list:
@@ -12128,9 +12133,9 @@ components:
         has_more: true
         list:
         - tag_name: tag_name
-          tag_id: tag_id
+          tag_id: 2
         - tag_name: tag_name
-          tag_id: tag_id
+          tag_id: 2
       properties:
         error_code:
           description: 错误码

@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ErrorCode** | **int64** | 错误码 | [optional] 
 **Description** | **string** | 错误码描述 | [optional] 
-**Cursor** | **int64** |  | [optional] 
+**Cursor** | **string** |  | [optional] 
 **HasMore** | **bool** |  | [optional] 
 **List** | [**[]EnterpriseLeadsUserActionListRspDataList**](EnterpriseLeadsUserActionListRsp_data_list.md) |  | [optional] 
 
