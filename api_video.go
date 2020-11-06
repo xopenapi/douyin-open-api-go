@@ -706,7 +706,6 @@ func (a *VideoApiService) DouyinVideoPositionSearch(ctx _context.Context, access
 
 // DouyinVideoShareIdOpts Optional parameters for the method 'DouyinVideoShareId'
 type DouyinVideoShareIdOpts struct {
-	NeedCallback   optional.Bool
 	SourceStyleId  optional.String
 	DefaultHashtag optional.String
 	LinkParam      optional.String
@@ -717,14 +716,14 @@ DouyinVideoShareId 获取share-id
 获取share-id
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param accessToken 调用/oauth/client_token/生成的token，此token不需要用户授权。
+ * @param needCallback 如果需要知道视频分享成功的结果，need_callback设置为true
  * @param optional nil or *DouyinVideoShareIdOpts - Optional Parameters:
- * @param "NeedCallback" (optional.Bool) -  如果需要知道视频分享成功的结果，need_callback设置为true
  * @param "SourceStyleId" (optional.String) -  多来源样式id（暂未开放）。
  * @param "DefaultHashtag" (optional.String) -  追踪分享默认hashtag
  * @param "LinkParam" (optional.String) -  分享来源url附加参数（暂未开放）。
 @return DouyinVideoShareIdRsp
 */
-func (a *VideoApiService) DouyinVideoShareId(ctx _context.Context, accessToken string, localVarOptionals *DouyinVideoShareIdOpts) (DouyinVideoShareIdRsp, *_nethttp.Response, error) {
+func (a *VideoApiService) DouyinVideoShareId(ctx _context.Context, accessToken string, needCallback bool, localVarOptionals *DouyinVideoShareIdOpts) (DouyinVideoShareIdRsp, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
@@ -741,9 +740,7 @@ func (a *VideoApiService) DouyinVideoShareId(ctx _context.Context, accessToken s
 	localVarFormParams := _neturl.Values{}
 
 	localVarQueryParams.Add("access_token", parameterToString(accessToken, ""))
-	if localVarOptionals != nil && localVarOptionals.NeedCallback.IsSet() {
-		localVarQueryParams.Add("need_callback", parameterToString(localVarOptionals.NeedCallback.Value(), ""))
-	}
+	localVarQueryParams.Add("need_callback", parameterToString(needCallback, ""))
 	if localVarOptionals != nil && localVarOptionals.SourceStyleId.IsSet() {
 		localVarQueryParams.Add("source_style_id", parameterToString(localVarOptionals.SourceStyleId.Value(), ""))
 	}

@@ -14,8 +14,8 @@ type EnterpriseMediaListRspData struct {
 	// 错误描述
 	Description string `json:"description,omitempty"`
 	// 返回错误码
-	ErrorCode int64                           `json:"error_code,omitempty"`
-	HasMore   bool                            `json:"has_more,omitempty"`
-	Cursor    int64                           `json:"cursor,omitempty"`
-	Media     EnterpriseMediaListRspDataMedia `json:"media,omitempty"`
+	ErrorCode int64                              `json:"error_code,omitempty"`
+	HasMore   bool                               `json:"has_more,omitempty"`
+	Cursor    int64                              `json:"cursor,omitempty"`
+	Medias    []EnterpriseMediaListRspDataMedias `json:"medias,omitempty"`
 }

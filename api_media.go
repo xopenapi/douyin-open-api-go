@@ -15,6 +15,7 @@ import (
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
+	"os"
 )
 
 // Linger please
@@ -207,7 +208,7 @@ EnterpriseMediaTempUpload 上传临时素材
  * @param media
 @return EnterpriseMediaTempUploadRsp
 */
-func (a *MediaApiService) EnterpriseMediaTempUpload(ctx _context.Context, accessToken string, openId string, media []string) (EnterpriseMediaTempUploadRsp, *_nethttp.Response, error) {
+func (a *MediaApiService) EnterpriseMediaTempUpload(ctx _context.Context, accessToken string, openId string, media *os.File) (EnterpriseMediaTempUploadRsp, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -242,7 +243,14 @@ func (a *MediaApiService) EnterpriseMediaTempUpload(ctx _context.Context, access
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	localVarFormParams.Add("media", parameterToString(media, "csv"))
+	localVarFormFileName = "media"
+	localVarFile := media
+	if localVarFile != nil {
+		fbs, _ := _ioutil.ReadAll(localVarFile)
+		localVarFileBytes = fbs
+		localVarFileName = localVarFile.Name()
+		localVarFile.Close()
+	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -288,7 +296,7 @@ EnterpriseMediaUpload 上传素材
  * @param media
 @return EnterpriseMediaUploadRsp
 */
-func (a *MediaApiService) EnterpriseMediaUpload(ctx _context.Context, accessToken string, openId string, media []string) (EnterpriseMediaUploadRsp, *_nethttp.Response, error) {
+func (a *MediaApiService) EnterpriseMediaUpload(ctx _context.Context, accessToken string, openId string, media *os.File) (EnterpriseMediaUploadRsp, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -323,7 +331,14 @@ func (a *MediaApiService) EnterpriseMediaUpload(ctx _context.Context, accessToke
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	localVarFormParams.Add("media", parameterToString(media, "csv"))
+	localVarFormFileName = "media"
+	localVarFile := media
+	if localVarFile != nil {
+		fbs, _ := _ioutil.ReadAll(localVarFile)
+		localVarFileBytes = fbs
+		localVarFileName = localVarFile.Name()
+		localVarFile.Close()
+	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

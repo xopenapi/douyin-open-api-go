@@ -802,6 +802,7 @@ paths:
       - description: 如果需要知道视频分享成功的结果，need_callback设置为true
         in: query
         name: need_callback
+        required: true
         schema:
           type: boolean
       - description: 多来源样式id（暂未开放）。
@@ -4466,11 +4467,8 @@ paths:
             schema:
               properties:
                 media:
-                  items:
-                    format: byte
-                    pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
-                    type: string
-                  type: array
+                  format: binary
+                  type: string
               required:
               - media
         required: true
@@ -4507,11 +4505,8 @@ paths:
             schema:
               properties:
                 media:
-                  items:
-                    format: byte
-                    pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
-                    type: string
-                  type: array
+                  format: binary
+                  type: string
               required:
               - media
         required: true
@@ -9468,15 +9463,20 @@ components:
       example:
         data:
           cursor: 6
-          description: description
-          error_code: 0
-          has_more: true
-          media:
-            url_list:
+          medias:
+          - url_list:
             - url_list
             - url_list
             media_id: media_id
             status: status
+          - url_list:
+            - url_list
+            - url_list
+            media_id: media_id
+            status: status
+          description: description
+          error_code: 0
+          has_more: true
         extra:
           sub_error_code: 1
           sub_description: sub_description
@@ -14285,7 +14285,7 @@ components:
           type: integer
         media:
           $ref: '#/components/schemas/EnterpriseMediaUploadRsp_data_media'
-    EnterpriseMediaListRsp_data_media:
+    EnterpriseMediaListRsp_data_medias:
       example:
         url_list:
         - url_list
@@ -14304,15 +14304,20 @@ components:
     EnterpriseMediaListRsp_data:
       example:
         cursor: 6
-        description: description
-        error_code: 0
-        has_more: true
-        media:
-          url_list:
+        medias:
+        - url_list:
           - url_list
           - url_list
           media_id: media_id
           status: status
+        - url_list:
+          - url_list
+          - url_list
+          media_id: media_id
+          status: status
+        description: description
+        error_code: 0
+        has_more: true
       properties:
         description:
           description: 错误描述
@@ -14326,8 +14331,10 @@ components:
         cursor:
           format: int64
           type: integer
-        media:
-          $ref: '#/components/schemas/EnterpriseMediaListRsp_data_media'
+        medias:
+          items:
+            $ref: '#/components/schemas/EnterpriseMediaListRsp_data_medias'
+          type: array
     EnterpriseMediaDeleteRsp_data:
       example:
         description: description

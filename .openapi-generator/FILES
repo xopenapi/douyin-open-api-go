@@ -227,7 +227,7 @@ docs/EnterpriseMediaDeleteRsp.md
 docs/EnterpriseMediaDeleteRspData.md
 docs/EnterpriseMediaListRsp.md
 docs/EnterpriseMediaListRspData.md
-docs/EnterpriseMediaListRspDataMedia.md
+docs/EnterpriseMediaListRspDataMedias.md
 docs/EnterpriseMediaTempUploadRsp.md
 docs/EnterpriseMediaUploadRsp.md
 docs/EnterpriseMediaUploadRspData.md
@@ -587,7 +587,7 @@ model_enterprise_media_delete_rsp.go
 model_enterprise_media_delete_rsp_data.go
 model_enterprise_media_list_rsp.go
 model_enterprise_media_list_rsp_data.go
-model_enterprise_media_list_rsp_data_media.go
+model_enterprise_media_list_rsp_data_medias.go
 model_enterprise_media_temp_upload_rsp.go
 model_enterprise_media_upload_rsp.go
 model_enterprise_media_upload_rsp_data.go

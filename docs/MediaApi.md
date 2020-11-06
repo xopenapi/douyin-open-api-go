@@ -112,7 +112,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **accessToken** | **string**| 调用/oauth/client_token/生成的token，此token不需要用户授权 | 
 **openId** | **string**| 通过/oauth/access_token/获取，用户唯一标志 | 
-**media** | [**[]string**](string.md)|  | 
+**media** | ***os.File*****os.File**|  | 
 
 ### Return type
 
@@ -148,7 +148,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **accessToken** | **string**| 调用/oauth/client_token/生成的token，此token不需要用户授权 | 
 **openId** | **string**| 通过/oauth/access_token/获取，用户唯一标志 | 
-**media** | [**[]string**](string.md)|  | 
+**media** | ***os.File*****os.File**|  | 
 
 ### Return type
 

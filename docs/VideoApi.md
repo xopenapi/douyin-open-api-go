@@ -349,7 +349,7 @@ No authorization required
 
 ## DouyinVideoShareId
 
-> DouyinVideoShareIdRsp DouyinVideoShareId(ctx, accessToken, optional)
+> DouyinVideoShareIdRsp DouyinVideoShareId(ctx, accessToken, needCallback, optional)
 
 获取share-id
 
@@ -362,6 +362,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **accessToken** | **string**| 调用/oauth/client_token/生成的token，此token不需要用户授权。 | 
+**needCallback** | **bool**| 如果需要知道视频分享成功的结果，need_callback设置为true | 
  **optional** | ***DouyinVideoShareIdOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -372,7 +373,7 @@ Optional parameters are passed through a pointer to a DouyinVideoShareIdOpts str
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **needCallback** | **optional.Bool**| 如果需要知道视频分享成功的结果，need_callback设置为true | 
+
  **sourceStyleId** | **optional.String**| 多来源样式id（暂未开放）。 | 
  **defaultHashtag** | **optional.String**| 追踪分享默认hashtag | 
  **linkParam** | **optional.String**| 分享来源url附加参数（暂未开放）。 | 

@@ -25,22 +25,16 @@ var (
 // EnterpriseApiService EnterpriseApi service
 type EnterpriseApiService service
 
-// EnterpriseLeadsTagCreateOpts Optional parameters for the method 'EnterpriseLeadsTagCreate'
-type EnterpriseLeadsTagCreateOpts struct {
-	Body optional.Interface
-}
-
 /*
 EnterpriseLeadsTagCreate 创建标签
 创建标签
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
  * @param openId 通过/oauth/access_token/获取，用户唯一标志
- * @param optional nil or *EnterpriseLeadsTagCreateOpts - Optional Parameters:
- * @param "Body" (optional.Interface of EnterpriseLeadsTagCreateReq) -
+ * @param body
 @return EnterpriseLeadsTagCreateRsp
 */
-func (a *EnterpriseApiService) EnterpriseLeadsTagCreate(ctx _context.Context, accessToken string, openId string, localVarOptionals *EnterpriseLeadsTagCreateOpts) (EnterpriseLeadsTagCreateRsp, *_nethttp.Response, error) {
+func (a *EnterpriseApiService) EnterpriseLeadsTagCreate(ctx _context.Context, accessToken string, openId string, body EnterpriseLeadsTagCreateReq) (EnterpriseLeadsTagCreateRsp, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -76,14 +70,7 @@ func (a *EnterpriseApiService) EnterpriseLeadsTagCreate(ctx _context.Context, ac
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
-		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(EnterpriseLeadsTagCreateReq)
-		if !localVarOptionalBodyok {
-			return localVarReturnValue, nil, reportError("body should be EnterpriseLeadsTagCreateReq")
-		}
-		localVarPostBody = &localVarOptionalBody
-	}
-
+	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -120,22 +107,16 @@ func (a *EnterpriseApiService) EnterpriseLeadsTagCreate(ctx _context.Context, ac
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-// EnterpriseLeadsTagDeleteOpts Optional parameters for the method 'EnterpriseLeadsTagDelete'
-type EnterpriseLeadsTagDeleteOpts struct {
-	Body optional.Interface
-}
-
 /*
 EnterpriseLeadsTagDelete 删除标签
 删除标签
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
  * @param openId 通过/oauth/access_token/获取，用户唯一标志
- * @param optional nil or *EnterpriseLeadsTagDeleteOpts - Optional Parameters:
- * @param "Body" (optional.Interface of EnterpriseLeadsTagDeleteReq) -
+ * @param body
 @return EnterpriseLeadsTagDeleteRsp
 */
-func (a *EnterpriseApiService) EnterpriseLeadsTagDelete(ctx _context.Context, accessToken string, openId string, localVarOptionals *EnterpriseLeadsTagDeleteOpts) (EnterpriseLeadsTagDeleteRsp, *_nethttp.Response, error) {
+func (a *EnterpriseApiService) EnterpriseLeadsTagDelete(ctx _context.Context, accessToken string, openId string, body EnterpriseLeadsTagDeleteReq) (EnterpriseLeadsTagDeleteRsp, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -171,14 +152,7 @@ func (a *EnterpriseApiService) EnterpriseLeadsTagDelete(ctx _context.Context, ac
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
-		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(EnterpriseLeadsTagDeleteReq)
-		if !localVarOptionalBodyok {
-			return localVarReturnValue, nil, reportError("body should be EnterpriseLeadsTagDeleteReq")
-		}
-		localVarPostBody = &localVarOptionalBody
-	}
-
+	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -306,22 +280,16 @@ func (a *EnterpriseApiService) EnterpriseLeadsTagList(ctx _context.Context, acce
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-// EnterpriseLeadsTagUpdateOpts Optional parameters for the method 'EnterpriseLeadsTagUpdate'
-type EnterpriseLeadsTagUpdateOpts struct {
-	Body optional.Interface
-}
-
 /*
 EnterpriseLeadsTagUpdate 编辑标签
 编辑标签
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
  * @param openId 通过/oauth/access_token/获取，用户唯一标志
- * @param optional nil or *EnterpriseLeadsTagUpdateOpts - Optional Parameters:
- * @param "Body" (optional.Interface of EnterpriseLeadsTagUpdateReq) -
+ * @param body
 @return EnterpriseLeadsTagUpdateRsp
 */
-func (a *EnterpriseApiService) EnterpriseLeadsTagUpdate(ctx _context.Context, accessToken string, openId string, localVarOptionals *EnterpriseLeadsTagUpdateOpts) (EnterpriseLeadsTagUpdateRsp, *_nethttp.Response, error) {
+func (a *EnterpriseApiService) EnterpriseLeadsTagUpdate(ctx _context.Context, accessToken string, openId string, body EnterpriseLeadsTagUpdateReq) (EnterpriseLeadsTagUpdateRsp, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -357,14 +325,7 @@ func (a *EnterpriseApiService) EnterpriseLeadsTagUpdate(ctx _context.Context, ac
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
-		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(EnterpriseLeadsTagUpdateReq)
-		if !localVarOptionalBodyok {
-			return localVarReturnValue, nil, reportError("body should be EnterpriseLeadsTagUpdateReq")
-		}
-		localVarPostBody = &localVarOptionalBody
-	}
-
+	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -494,22 +455,16 @@ func (a *EnterpriseApiService) EnterpriseLeadsTagUserList(ctx _context.Context, 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-// EnterpriseLeadsTagUserUpdateOpts Optional parameters for the method 'EnterpriseLeadsTagUserUpdate'
-type EnterpriseLeadsTagUserUpdateOpts struct {
-	Body optional.Interface
-}
-
 /*
 EnterpriseLeadsTagUserUpdate 给用户设置标签
 给用户设置标签
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param accessToken 调用/oauth/access_token/生成的token，此token需要用户授权。
  * @param openId 通过/oauth/access_token/获取，用户唯一标志
- * @param optional nil or *EnterpriseLeadsTagUserUpdateOpts - Optional Parameters:
- * @param "Body" (optional.Interface of EnterpriseLeadsTagUserUpdateReq) -
+ * @param body
 @return EnterpriseLeadsTagUserUpdateRsp
 */
-func (a *EnterpriseApiService) EnterpriseLeadsTagUserUpdate(ctx _context.Context, accessToken string, openId string, localVarOptionals *EnterpriseLeadsTagUserUpdateOpts) (EnterpriseLeadsTagUserUpdateRsp, *_nethttp.Response, error) {
+func (a *EnterpriseApiService) EnterpriseLeadsTagUserUpdate(ctx _context.Context, accessToken string, openId string, body EnterpriseLeadsTagUserUpdateReq) (EnterpriseLeadsTagUserUpdateRsp, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -545,14 +500,7 @@ func (a *EnterpriseApiService) EnterpriseLeadsTagUserUpdate(ctx _context.Context
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
-		localVarOptionalBody, localVarOptionalBodyok := localVarOptionals.Body.Value().(EnterpriseLeadsTagUserUpdateReq)
-		if !localVarOptionalBodyok {
-			return localVarReturnValue, nil, reportError("body should be EnterpriseLeadsTagUserUpdateReq")
-		}
-		localVarPostBody = &localVarOptionalBody
-	}
-
+	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

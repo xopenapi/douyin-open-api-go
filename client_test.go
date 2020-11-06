@@ -5,6 +5,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/antihax/optional"
 	"github.com/xopenapi/douyin-open-api-go"
 	"io/ioutil"
 	"log"
@@ -160,21 +161,22 @@ func TestUserinfoApiClient(t *testing.T) {
 
 }
 
-// 7	4	互动管理
+// 7	4	互动管理	评论管理（普通用户）	测试通过
 func TestCommentApiClient(t *testing.T) {
 	//TestLauchHttpServer()
 
 	cfg := douyin.NewConfiguration()
 	client := douyin.NewAPIClient(cfg)
 
+	itemId = "@9VwRxeeeT8w3byWibcI5Qs783WzoNPGFPJx0qQyhLlEXa/P660zdRmYqig357zEBaHA377QPTe+/dH3iP7hRVA=="
 	rsp1, r, err := client.CommentApi.ItemCommentList(context.Background(), openId, accessToken, count, itemId, nil)
 	if err != nil {
 		t.Fatal(err)
 	}
 	t.Log(r)
-	t.Log(rsp1)
+	t.Log(rsp1.Data.List[0].CommentId)
 
-	commentId := ""
+	commentId := rsp1.Data.List[0].CommentId
 	rsp2, r, err := client.CommentApi.ItemCommentReplyList(context.Background(), openId, accessToken, count, itemId, commentId, nil)
 	if err != nil {
 		t.Fatal(err)
@@ -183,6 +185,9 @@ func TestCommentApiClient(t *testing.T) {
 	t.Log(rsp2)
 
 	var body douyin.ItemCommentReplyReq
+	body.CommentId = rsp1.Data.List[0].CommentId
+	body.Content = "我爱你"
+	body.ItemId = itemId
 	rsp3, r, err := client.CommentApi.ItemCommentReply(context.Background(), openId, accessToken, body)
 	if err != nil {
 		t.Fatal(err)
@@ -245,56 +250,56 @@ func TestCommentEnterprise(t *testing.T) {
 	t.Log(rsp7)
 }
 
-// 13
+// 13	用户数据
 func TestDataApiClient(t *testing.T) {
 	//TestLauchHttpServer()
 
 	cfg := douyin.NewConfiguration()
 	client := douyin.NewAPIClient(cfg)
 
-	dateType := int64(1)
+	dateType := int64(7)
 	endDate := ""
 	rsp1, r, err := client.DataApi.DataExternalUserItem(context.Background(), accessToken, openId, dateType)
 	if err != nil {
 		t.Fatal(err)
 	}
 	t.Log(r)
-	t.Log(rsp1)
+	t.Log(rsp1.Data.ResultList)
 
 	rsp2, r, err := client.DataApi.DataExternalUserFans(context.Background(), accessToken, openId, dateType)
 	if err != nil {
 		t.Fatal(err)
 	}
 	t.Log(r)
-	t.Log(rsp2)
+	t.Log(rsp2.Data.ResultList)
 
 	rsp3, r, err := client.DataApi.DataExternalUserLike(context.Background(), accessToken, openId, dateType)
 	if err != nil {
 		t.Fatal(err)
 	}
 	t.Log(r)
-	t.Log(rsp3)
+	t.Log(rsp3.Data.ResultList)
 
 	rsp4, r, err := client.DataApi.DataExternalUserComment(context.Background(), accessToken, openId, dateType)
 	if err != nil {
 		t.Fatal(err)
 	}
 	t.Log(r)
-	t.Log(rsp4)
+	t.Log(rsp4.Data.ResultList)
 
 	rsp5, r, err := client.DataApi.DataExternalUserShare(context.Background(), accessToken, openId, dateType)
 	if err != nil {
 		t.Fatal(err)
 	}
 	t.Log(r)
-	t.Log(rsp5)
+	t.Log(rsp5.Data.ResultList)
 
 	rsp6, r, err := client.DataApi.DataExternalUserProfile(context.Background(), accessToken, openId, dateType)
 	if err != nil {
 		t.Fatal(err)
 	}
 	t.Log(r)
-	t.Log(rsp6)
+	t.Log(rsp6.Data.ResultList)
 
 	rsp7, r, err := client.DataApi.DataExternalItemBase(context.Background(), accessToken, openId, itemId)
 	if err != nil {
@@ -331,6 +336,7 @@ func TestDataApiClient(t *testing.T) {
 	t.Log(r)
 	t.Log(rsp11)
 
+	// 通过
 	rsp12, r, err := client.DataApi.FansData(context.Background(), accessToken, openId)
 	if err != nil {
 		t.Fatal(err)
@@ -704,7 +710,7 @@ func TestGroupOrderApiClient(t *testing.T) {
 
 }
 
-// 3
+// 3	数据开放服务	热点视频数据
 func TestHotsearchApiClient(t *testing.T) {
 	//TestLauchHttpServer()
 
@@ -735,7 +741,7 @@ func TestHotsearchApiClient(t *testing.T) {
 
 }
 
-// 2-3-1	测试通过，视频和文字通过，但是 图片没通过
+// 2-3-1	测试通过，视频和文字、图片 通过
 func TestImApiClient(t *testing.T) {
 	//TestLauchHttpServer()
 
@@ -753,7 +759,7 @@ func TestImApiClient(t *testing.T) {
 	// @9VwRxeeeT8w3byWibcI5Qs783W3hP/+BOZxyrQmiJlUbZvb+60zdRmYqig357zEB1Fe4IiK/1Kcqd1+ELA7AWw==
 	// tos-cn-i-0813/d4198b72a6c4476e95b9345a874e5992
 	imageTest := image{
-		MediaId: "tos-cn-i-0813/d4198b72a6c4476e95b9345a874e5992",
+		MediaId: "8SPjP5rgbJAoRxZnmHqfjXK7njTYNhAW8yPHupjsCXO2xcffdxr2Wfr6d6o=",
 	}
 	imagejsons, errs := json.Marshal(imageTest) //转换成JSON返回的是byte[]
 	if errs != nil {
@@ -849,35 +855,42 @@ func TestJsApiClient(t *testing.T) {
 
 }
 
-// 4
+// 4 测试通过	素材
 func TestMediaApiClient(t *testing.T) {
 	//TestLauchHttpServer()
 
 	cfg := douyin.NewConfiguration()
 	client := douyin.NewAPIClient(cfg)
 
-	rsp1, r, err := client.MediaApi.EnterpriseMediaUpload(context.Background(), accessToken, openId, nil)
+	filename := "/Users/mac/Downloads/111111111.png"
+	media, err := os.Open(filename)
 	if err != nil {
-		t.Fatal(err)
+		t.Log(err)
 	}
-	t.Log(r)
-	t.Log(rsp1)
 
-	rsp2, r, err := client.MediaApi.EnterpriseMediaTempUpload(context.Background(), accessToken, openId, nil)
+	rsp1, r, err := client.MediaApi.EnterpriseMediaUpload(context.Background(), accessToken, openId, media)
 	if err != nil {
 		t.Fatal(err)
 	}
 	t.Log(r)
-	t.Log(rsp2)
+	t.Log(rsp1.Data.Media.MediaId)
+
+	rsp2, r, err := client.MediaApi.EnterpriseMediaTempUpload(context.Background(), accessToken, openId, media)
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Log(r)
+	t.Log(rsp2.Data.Media.MediaId)
 
 	rsp3, r, err := client.MediaApi.EnterpriseMediaList(context.Background(), accessToken, openId, count, nil)
 	if err != nil {
 		t.Fatal(err)
 	}
 	t.Log(r)
-	t.Log(rsp3)
+	t.Log(rsp3.Data.Medias[0].MediaId)
 
 	var body douyin.EnterpriseMediaDeleteReq
+	body.MediaId = ""
 	rsp4, r, err := client.MediaApi.EnterpriseMediaDelete(context.Background(), accessToken, openId, body)
 	if err != nil {
 		t.Fatal(err)
@@ -1388,6 +1401,54 @@ func TestTouTiaoPublishVideoOnce(t *testing.T) {
 	t.Log(rsp5_0.Data.ItemId)
 }
 
+// 头条 单次发布视频，视频文件小 测试中
+func TestDouyinVideoShareId(t *testing.T) {
+	cfg := douyin.NewConfiguration()
+	client := douyin.NewAPIClient(cfg)
+
+	filename := "/Users/mac/Downloads/2.mp4"
+	video, err := os.Open(filename)
+	if err != nil {
+		t.Log(err)
+	}
+
+	// 单次上传并发布，测试通过
+	rsp1, r, err := client.VideoApi.ToutiaoVideoUpload(context.Background(), openId, accessToken, video)
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Log(r)
+	videoId := rsp1.Data.Video.VideoId
+	t.Log(rsp1.Data.Video.VideoId)
+	var body douyin.DouyinVideoCreateReq
+	body.VideoId = string(videoId)
+	// 发布
+	rsp5_0, r, err := client.VideoApi.ToutiaoVideoCreate(context.Background(), openId, accessToken, body)
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Log(rsp5_0.Data.ItemId)
+
+	/*	var needCallback = true
+		rsp9, r, err := client.VideoApi.DouyinVideoShareId(context.Background(), accessToken, needCallback, nil)
+		if err != nil {
+			t.Fatal(err)
+		}
+		t.Log(r)
+		t.Log(rsp9)*/
+
+	keyword := "美食"
+	var localOptions *douyin.DouyinVideoPositionSearchOpts
+	(localOptions.City) = optional.NewString("北京")
+	rsp10, r, err := client.VideoApi.DouyinVideoPositionSearch(context.Background(), accessToken, count, keyword, nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Log(r)
+	t.Log(rsp10)
+
+}
+
 // 21	视频测试
 func TestVideoApiClient(t *testing.T) {
 	// 抖音 单次发布视频
@@ -1402,23 +1463,11 @@ func TestVideoApiClient(t *testing.T) {
 	//删除单个视频
 	TestDeleteVideos(t)
 
+	//视频分享结果、位置信息
+	TestDouyinVideoShareId(t)
+
 	cfg := douyin.NewConfiguration()
 	client := douyin.NewAPIClient(cfg)
-
-	rsp9, r, err := client.VideoApi.DouyinVideoShareId(context.Background(), accessToken, nil)
-	if err != nil {
-		t.Fatal(err)
-	}
-	t.Log(r)
-	t.Log(rsp9)
-
-	keyword := ""
-	rsp10, r, err := client.VideoApi.DouyinVideoPositionSearch(context.Background(), accessToken, count, keyword, nil)
-	if err != nil {
-		t.Fatal(err)
-	}
-	t.Log(r)
-	t.Log(rsp10)
 
 	rsp11, r, err := client.VideoApi.ToutiaoVideoUpload(context.Background(), openId, accessToken, nil)
 	if err != nil {
@@ -1522,24 +1571,25 @@ func TestVideoApiClient(t *testing.T) {
 
 }
 
-// 4
+// 4	搜索管理
 func TestVideoSearchApiClient(t *testing.T) {
 	//TestLauchHttpServer()
 
 	cfg := douyin.NewConfiguration()
 	client := douyin.NewAPIClient(cfg)
 
-	keyword := "前"
-	commentId := ""
+	keyword := "爱"
+	commentId := "@9VwRxeeeT8w3byWibcI5Qs783WzoNPGKPZxyrg2gJlETb/H060zdRmYqig357zEBO1xTQcVkr0z4CLgIEuBWRA=="
 
 	rsp1, r, err := client.VideoSearchApi.VideoSearch(context.Background(), openId, accessToken, count, keyword, nil)
 	if err != nil {
 		t.Fatal(err)
 	}
 	t.Log(r)
-	t.Log(rsp1.Data.List[0].SecItemId)
+	t.Log(rsp1)
+	//t.Log(rsp1.Data.List[0].SecItemId)
 
-	var secItemId = rsp1.Data.List[0].SecItemId
+	var secItemId = "@9VwRxeeeT8w3byWibcI5Qs783WzoNPGFPJx0qQyhLlEXa/P660zdRmYqig357zEBaHA377QPTe+/dH3iP7hRVA=="
 	rsp2, r, err := client.VideoSearchApi.VideoSearchCommentList(context.Background(), secItemId, accessToken, count, nil)
 	if err != nil {
 		t.Fatal(err)

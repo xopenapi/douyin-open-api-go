@@ -352,7 +352,7 @@ Class | Method | HTTP request | Description
  - [EnterpriseMediaDeleteRspData](docs/EnterpriseMediaDeleteRspData.md)
  - [EnterpriseMediaListRsp](docs/EnterpriseMediaListRsp.md)
  - [EnterpriseMediaListRspData](docs/EnterpriseMediaListRspData.md)
- - [EnterpriseMediaListRspDataMedia](docs/EnterpriseMediaListRspDataMedia.md)
+ - [EnterpriseMediaListRspDataMedias](docs/EnterpriseMediaListRspDataMedias.md)
  - [EnterpriseMediaTempUploadRsp](docs/EnterpriseMediaTempUploadRsp.md)
  - [EnterpriseMediaUploadRsp](docs/EnterpriseMediaUploadRsp.md)
  - [EnterpriseMediaUploadRspData](docs/EnterpriseMediaUploadRspData.md)
